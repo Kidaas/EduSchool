@@ -16,6 +16,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ErreurMultiplicationActivity"
+            android:label="@string/title_activity_erreur_multiplication" >
+        </activity>
+        <activity
+            android:name=".FelicitationMultiplicationActivity"
+            android:label="@string/title_activity_felicitation_multiplication" >
+        </activity>
+        <activity
+            android:name=".MultiplicationActivity"
+            android:label="@string/title_activity_multiplication" >
+        </activity>
+        <activity
+            android:name=".MultiplicationCalculActivity"
+            android:label="@string/title_activity_multiplication_calcul" >
+        </activity>
     </application>
 
 </manifest>

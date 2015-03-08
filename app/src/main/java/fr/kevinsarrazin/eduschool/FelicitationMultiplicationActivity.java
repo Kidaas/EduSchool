@@ -6,25 +6,23 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 
-public class MainActivity extends Activity {
+public class FelicitationMultiplicationActivity extends Activity {
 
-    // ID REQUETES
-    public final static int MULTIPLICATION_ACTIVITY_REQUEST = 1;
+    public final static int MULTIPLICATION_RETOUR_REQUEST = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_felicitation_multiplication);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_felicitation_multiplication, menu);
         return true;
     }
 
@@ -43,22 +41,19 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onMultiplicationClick(View view) {
-        // Création d'une intention
+    public void onClickChoisirTable (View vue) {
+        // Création d'un intention
         Intent intent = new Intent(this, MultiplicationActivity.class);
-        // Lancement de la demande de changement d'activité
-        startActivityForResult(intent, MULTIPLICATION_ACTIVITY_REQUEST);
+        // lancement de la demande de changement d'activité
+        // FLAG_ACTIVITY_CLEAR_TOP empeche du coup de revenir a la page de félicitation
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent, MULTIPLICATION_RETOUR_REQUEST);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        // Vérification du retour à l'aide du code requête
-        if (requestCode == MULTIPLICATION_ACTIVITY_REQUEST) {
-            // Afficher une notification
-            String notification =  "Retour exercice 5";
-            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
-
-        }
+    public void onClickChoisirExercice (View vue) {
+        // Création d'un intention
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

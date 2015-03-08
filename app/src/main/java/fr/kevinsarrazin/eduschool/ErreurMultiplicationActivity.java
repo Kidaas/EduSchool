@@ -6,25 +6,30 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 
-public class MainActivity extends Activity {
+public class ErreurMultiplicationActivity extends Activity {
 
-    // ID REQUETES
-    public final static int MULTIPLICATION_ACTIVITY_REQUEST = 1;
+    public final static int MULTIPLICATION_RETOUR_REQUEST = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_erreur_multiplication);
+
+        int erreur = getIntent().getIntExtra(MultiplicationCalculActivity.MULTIPLICATION_NBERREUR, 0);
+
+        TextView txtViewErreur = (TextView) findViewById(R.id.txtViewErreur);
+        txtViewErreur.setText("Nombre d'erreur : " + erreur);
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_erreur_multiplication, menu);
         return true;
     }
 
@@ -43,22 +48,17 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onMultiplicationClick(View view) {
-        // Création d'une intention
+    public void onClickCorrigerErreur (View vue) {
+        setResult(RESULT_OK);
+        super.finish();
+    }
+
+    public void onClickChoisirTable (View vue) {
+        // Création d'un intention
         Intent intent = new Intent(this, MultiplicationActivity.class);
-        // Lancement de la demande de changement d'activité
-        startActivityForResult(intent, MULTIPLICATION_ACTIVITY_REQUEST);
+        // lancement de la demande de changement d'activité
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent, MULTIPLICATION_RETOUR_REQUEST);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        // Vérification du retour à l'aide du code requête
-        if (requestCode == MULTIPLICATION_ACTIVITY_REQUEST) {
-            // Afficher une notification
-            String notification =  "Retour exercice 5";
-            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
-
-        }
-    }
 }
