@@ -32,6 +32,10 @@
             android:name=".MultiplicationCalculActivity"
             android:label="@string/title_activity_multiplication_calcul" >
         </activity>
+        <activity
+            android:name=".AdditionActivity"
+            android:label="@string/title_activity_addition" >
+        </activity>
     </application>
 
 </manifest>

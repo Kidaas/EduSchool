@@ -27,7 +27,7 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="110dip"
+            android:layout_width="100dip"
             android:layout_height="wrap_content"
             android:id="@+id/LinearLayoutMultiplication"
             android:clickable="true"
@@ -52,33 +52,33 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="110dip"
+            android:layout_width="100dip"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/LinearLayoutMultiplication"
             android:layout_below="@+id/textViewPresentation"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            >
+            android:onClick="onAdditionClick">
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButton2"
                 android:src="@drawable/btn"
                 android:layout_gravity="center_horizontal"
-                />
+                android:onClick="onAdditionClick" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Français"
+                android:text="Addition"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView3" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="110dip"
+            android:layout_width="100dip"
             android:layout_height="fill_parent">
 
             <ImageButton

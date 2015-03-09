@@ -13,6 +13,7 @@ public class MainActivity extends Activity {
 
     // ID REQUETES
     public final static int MULTIPLICATION_ACTIVITY_REQUEST = 1;
+    public final static int ADDITION_ACTIVITY_REQUEST = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +51,20 @@ public class MainActivity extends Activity {
         startActivityForResult(intent, MULTIPLICATION_ACTIVITY_REQUEST);
     }
 
+    public void onAdditionClick(View view) {
+        // Création d'une intention
+        Intent intent = new Intent(this, AdditionActivity.class);
+        // Lancement de la demande de changement d'activité
+        startActivityForResult(intent, ADDITION_ACTIVITY_REQUEST);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // Vérification du retour à l'aide du code requête
         if (requestCode == MULTIPLICATION_ACTIVITY_REQUEST) {
             // Afficher une notification
-            String notification =  "Retour exercice 5";
+            String notification =  "Retour";
             Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
 
         }

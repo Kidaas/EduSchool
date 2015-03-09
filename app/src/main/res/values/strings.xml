@@ -6,4 +6,7 @@
     <string name="title_activity_felicitation_multiplication">FelicitationMultiplicationActivity</string>
     <string name="title_activity_multiplication">MultiplicationActivity</string>
     <string name="title_activity_multiplication_calcul">MultiplicationCalculActivity</string>
+    <string name="title_activity_addition">AdditionActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

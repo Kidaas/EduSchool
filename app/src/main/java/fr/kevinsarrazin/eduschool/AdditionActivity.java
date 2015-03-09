@@ -14,30 +14,38 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 
-public class MultiplicationCalculActivity extends Activity {
 
-    public static int multiplicateur = 0;
-    public final static int MULTIPLICATION_FELICITATION_REQUEST = 0;
-    public final static int MULTIPLICATION_ERREUR_REQUEST = 0;
-    public static final String MULTIPLICATION_NBERREUR = "erreurs";
+public class AdditionActivity extends Activity {
+
+    public final static int ADDITION_FELICITATION_REQUEST = 0;
+    public final static int ADDITION_ERREUR_REQUEST = 0;
+    public static final String ACTIVITE_NBERREUR = "erreurs";
+
+    int val1 = 0;
+    int val2 = 0;
+
+    ArrayList tabResultat = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_multiplication_calcul);
+        setContentView(R.layout.activity_addition);
 
-        multiplicateur = getIntent().getIntExtra(MultiplicationActivity.MULTIPLICATEUR_MULTIPLICATEUR, 1);
+        LinearLayout firstlayout = (LinearLayout) findViewById(R.id.lLayoutAddition);
 
-        LinearLayout firstlayout = (LinearLayout) findViewById(R.id.lLayoutNumber);
-        firstlayout.setTag("firstlayout");
-
-        for (int i = 1; i<=10; i++){
+        for (int i = 1; i<=1; i++){
             LinearLayout lLayout = new LinearLayout(this);
             TextView txtView = new TextView(this);
             EditText editTextReponse = new EditText(this);
 
-            txtView.setText(i + " x " + multiplicateur + " = ");
+            val1 = randNb(1, 25);
+            val2 = randNb(1, 25);
+
+            tabResultat.add(i-1, val1 + val2);
+
+            txtView.setText(val1 + " + "+ val2 + " = ");
             editTextReponse.setHint(" ? "); // = Placeholder
             editTextReponse.setInputType(InputType.TYPE_CLASS_NUMBER);
 
@@ -45,14 +53,23 @@ public class MultiplicationCalculActivity extends Activity {
             lLayout.addView(editTextReponse);
             firstlayout.addView(lLayout);
         }
-
     }
 
+    /**
+     * Renvoie un nombre aléatoire compris entre min et max
+     * @param min
+     * @param max
+     * @return int res
+     */
+    public int randNb(int min, int max) {
+        int res = min + (int)(Math.random() * ((max - min) + 1));
+        return res;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_multiplication_calcul, menu);
+        getMenuInflater().inflate(R.menu.menu_addition, menu);
         return true;
     }
 
@@ -73,7 +90,7 @@ public class MultiplicationCalculActivity extends Activity {
 
     public void validerResultat(View vue) {
 
-        LinearLayout lLayoutNumber = (LinearLayout) findViewById(R.id.lLayoutNumber);
+        LinearLayout lLayoutNumber = (LinearLayout) findViewById(R.id.lLayoutAddition);
         Button btn = (Button) findViewById(R.id.btnValiderResult);
         int erreur = 0;
 
@@ -86,10 +103,10 @@ public class MultiplicationCalculActivity extends Activity {
             if (TextUtils.isEmpty(e.getText())){
                 erreur++;
             }else {
-                int multi = (i + 1) * multiplicateur;
+                int addition = Integer.valueOf(tabResultat.get(i).toString());
                 int result = Integer.valueOf(e.getText().toString());
 
-                if (multi == result){
+                if (addition == result){
                     Log.d("result", "ok");
                 }else {
                     Log.d("result","ko");
@@ -103,16 +120,15 @@ public class MultiplicationCalculActivity extends Activity {
             Intent intent = new Intent(this, FelicitationMultiplicationActivity.class);
             // lancement de la demande de changement d'activité
             // EXERCICE_4_HELLO_REQUEST est le numéro de la requete
-            startActivityForResult(intent, MULTIPLICATION_FELICITATION_REQUEST);
+            startActivityForResult(intent, ADDITION_FELICITATION_REQUEST);
         }else {
             // Création d'un intention
             Intent intent = new Intent(this, ErreurMultiplicationActivity.class);
             // Ajout de la chaine de nom à l'intent
-            intent.putExtra(MULTIPLICATION_NBERREUR, erreur);
+            intent.putExtra(ACTIVITE_NBERREUR, erreur);
             // lancement de la demande de changement d'activité
             // EXERCICE_4_HELLO_REQUEST est le numéro de la requete
-            startActivityForResult(intent, MULTIPLICATION_ERREUR_REQUEST);
+            startActivityForResult(intent, ADDITION_ERREUR_REQUEST);
         }
     }
-
 }
