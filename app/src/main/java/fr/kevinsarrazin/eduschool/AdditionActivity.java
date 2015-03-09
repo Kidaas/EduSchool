@@ -35,7 +35,7 @@ public class AdditionActivity extends Activity {
 
         LinearLayout firstlayout = (LinearLayout) findViewById(R.id.lLayoutAddition);
 
-        for (int i = 1; i<=1; i++){
+        for (int i = 1; i<=10; i++){
             LinearLayout lLayout = new LinearLayout(this);
             TextView txtView = new TextView(this);
             EditText editTextReponse = new EditText(this);

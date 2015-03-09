@@ -21,13 +21,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewPresentation"
         android:layout_gravity="center"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
         >
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="100dip"
+            android:layout_width="110dip"
             android:layout_height="wrap_content"
             android:id="@+id/LinearLayoutMultiplication"
             android:clickable="true"
@@ -52,7 +50,7 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="100dip"
+            android:layout_width="110dip"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/LinearLayoutMultiplication"
             android:layout_below="@+id/textViewPresentation"
@@ -78,7 +76,7 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="100dip"
+            android:layout_width="110dip"
             android:layout_height="fill_parent">
 
             <ImageButton
@@ -93,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
+                android:text="Autre"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView"
                 />

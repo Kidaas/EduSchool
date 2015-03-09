@@ -60,9 +60,8 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         // Vérification du retour à l'aide du code requête
-        if (requestCode == MULTIPLICATION_ACTIVITY_REQUEST) {
+        if (requestCode == MULTIPLICATION_ACTIVITY_REQUEST || requestCode == ADDITION_ACTIVITY_REQUEST) {
             // Afficher une notification
             String notification =  "Retour";
             Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();

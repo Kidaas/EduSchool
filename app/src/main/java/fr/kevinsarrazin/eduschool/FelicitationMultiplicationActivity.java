@@ -56,4 +56,15 @@ public class FelicitationMultiplicationActivity extends Activity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+    /**
+     * Le bouton retour renvoi à l'accueil
+     */
+    @Override
+    public void onBackPressed() {
+        // Création d'un intention
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }
