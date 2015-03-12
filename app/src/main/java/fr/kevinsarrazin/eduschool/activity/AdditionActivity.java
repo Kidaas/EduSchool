@@ -1,4 +1,4 @@
-package fr.kevinsarrazin.eduschool;
+package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,12 +16,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import fr.kevinsarrazin.eduschool.R;
+
 
 public class AdditionActivity extends Activity {
 
     public final static int ADDITION_FELICITATION_REQUEST = 0;
     public final static int ADDITION_ERREUR_REQUEST = 0;
-    public static final String ACTIVITE_NBERREUR = "erreurs";
+    public static final String ADDITION_NBERREUR = "erreurs";
 
     int val1 = 0;
     int val2 = 0;
@@ -125,7 +127,8 @@ public class AdditionActivity extends Activity {
             // Création d'un intention
             Intent intent = new Intent(this, ErreurMultiplicationActivity.class);
             // Ajout de la chaine de nom à l'intent
-            intent.putExtra(ACTIVITE_NBERREUR, erreur);
+            intent.putExtra(ADDITION_NBERREUR, erreur);
+            intent.putExtra("caller", "AdditionActivity");
             // lancement de la demande de changement d'activité
             // EXERCICE_4_HELLO_REQUEST est le numéro de la requete
             startActivityForResult(intent, ADDITION_ERREUR_REQUEST);

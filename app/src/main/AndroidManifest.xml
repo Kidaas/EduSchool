@@ -17,23 +17,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ErreurMultiplicationActivity"
+            android:name=".activity.ErreurMultiplicationActivity"
             android:label="@string/title_activity_erreur_multiplication" >
         </activity>
         <activity
-            android:name=".FelicitationMultiplicationActivity"
+            android:name=".activity.FelicitationMultiplicationActivity"
             android:label="@string/title_activity_felicitation_multiplication" >
         </activity>
         <activity
-            android:name=".MultiplicationActivity"
+            android:name=".activity.MultiplicationActivity"
             android:label="@string/title_activity_multiplication" >
         </activity>
         <activity
-            android:name=".MultiplicationCalculActivity"
+            android:name=".activity.MultiplicationCalculActivity"
             android:label="@string/title_activity_multiplication_calcul" >
         </activity>
         <activity
-            android:name=".AdditionActivity"
+            android:name=".activity.AdditionActivity"
             android:label="@string/title_activity_addition" >
         </activity>
     </application>

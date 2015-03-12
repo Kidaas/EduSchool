@@ -1,4 +1,4 @@
-package fr.kevinsarrazin.eduschool;
+package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import fr.kevinsarrazin.eduschool.MainActivity;
+import fr.kevinsarrazin.eduschool.R;
 
 
 public class FelicitationMultiplicationActivity extends Activity {
@@ -62,7 +65,7 @@ public class FelicitationMultiplicationActivity extends Activity {
      */
     @Override
     public void onBackPressed() {
-        // Création d'un intention
+        // Création d'une intention
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

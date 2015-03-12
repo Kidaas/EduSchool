@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewPresentation"
         android:layout_gravity="center"
-        >
+        android:id="@+id/LinearLayoutMenu">
 
         <LinearLayout
             android:orientation="vertical"
@@ -95,7 +95,55 @@
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView"
                 />
+
         </LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/LinearLayoutMenu"
+        android:id="@+id/LinearLogin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Connectez vous !"
+            android:id="@+id/textView5" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/editTxtLogin" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editTxtPassword"
+            android:text="password" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connexion"
+            android:id="@+id/btnLogin"
+            android:onClick="onConnexionClick" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/LinearDeconnexion"></LinearLayout>
 
 </RelativeLayout>

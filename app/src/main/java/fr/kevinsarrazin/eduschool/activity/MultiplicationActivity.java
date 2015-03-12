@@ -1,4 +1,4 @@
-package fr.kevinsarrazin.eduschool;
+package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
+
+import fr.kevinsarrazin.eduschool.R;
 
 
 public class MultiplicationActivity extends Activity {

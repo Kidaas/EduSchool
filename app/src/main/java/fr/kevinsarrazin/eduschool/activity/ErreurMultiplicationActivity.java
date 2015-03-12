@@ -1,4 +1,4 @@
-package fr.kevinsarrazin.eduschool;
+package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,21 +8,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import fr.kevinsarrazin.eduschool.R;
+
 
 public class ErreurMultiplicationActivity extends Activity {
 
     public final static int MULTIPLICATION_RETOUR_REQUEST = 0;
+    public final static int MULTIPLICATION_ERREUR_REQUEST = 1;
+    public final static int ADDITION_ERREUR_REQUEST = 2;
+     int erreur =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_erreur_multiplication);
 
-        int erreur = getIntent().getIntExtra(MultiplicationCalculActivity.MULTIPLICATION_NBERREUR, 0);
+        String caller = getIntent().getStringExtra("caller");
+
+        if (caller.equals("MultiplicationActivity")){
+            erreur = getIntent().getIntExtra(MultiplicationCalculActivity.MULTIPLICATION_NBERREUR, 0);
+        }else if (caller.equals("AdditionActivity")){
+            erreur = getIntent().getIntExtra(AdditionActivity.ADDITION_NBERREUR, 0);
+        }
 
         TextView txtViewErreur = (TextView) findViewById(R.id.txtViewErreur);
         txtViewErreur.setText("Nombre d'erreur : " + erreur);
-
     }
 
 

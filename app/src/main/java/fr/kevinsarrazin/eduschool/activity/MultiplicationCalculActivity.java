@@ -1,4 +1,4 @@
-package fr.kevinsarrazin.eduschool;
+package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,18 +9,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import fr.kevinsarrazin.eduschool.R;
 
 
 public class MultiplicationCalculActivity extends Activity {
 
     public static int multiplicateur = 0;
-    public final static int MULTIPLICATION_FELICITATION_REQUEST = 0;
-    public final static int MULTIPLICATION_ERREUR_REQUEST = 0;
-    public static final String MULTIPLICATION_NBERREUR = "erreurs";
+    public final static int MULTIPLICATION_FELICITATION_REQUEST = 1;
+    public final static int MULTIPLICATION_ERREUR_REQUEST = 1;
+    public static final String MULTIPLICATION_NBERREUR = "MultiErreurs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,6 @@ public class MultiplicationCalculActivity extends Activity {
     public void validerResultat(View vue) {
 
         LinearLayout lLayoutNumber = (LinearLayout) findViewById(R.id.lLayoutNumber);
-        Button btn = (Button) findViewById(R.id.btnValiderResult);
         int erreur = 0;
 
         for (int i = 0; i < lLayoutNumber.getChildCount(); i++){
@@ -102,16 +102,17 @@ public class MultiplicationCalculActivity extends Activity {
             // Création d'un intention
             Intent intent = new Intent(this, FelicitationMultiplicationActivity.class);
             // lancement de la demande de changement d'activité
-            // EXERCICE_4_HELLO_REQUEST est le numéro de la requete
-            startActivityForResult(intent, MULTIPLICATION_FELICITATION_REQUEST);
+            startActivity(intent);
+            //startActivityForResult(intent, MULTIPLICATION_FELICITATION_REQUEST);
         }else {
             // Création d'un intention
             Intent intent = new Intent(this, ErreurMultiplicationActivity.class);
             // Ajout de la chaine de nom à l'intent
             intent.putExtra(MULTIPLICATION_NBERREUR, erreur);
+            intent.putExtra("caller", "MultiplicationActivity");
             // lancement de la demande de changement d'activité
-            // EXERCICE_4_HELLO_REQUEST est le numéro de la requete
-            startActivityForResult(intent, MULTIPLICATION_ERREUR_REQUEST);
+            startActivity(intent);
+            //startActivityForResult(intent, MULTIPLICATION_ERREUR_REQUEST);
         }
     }
 
