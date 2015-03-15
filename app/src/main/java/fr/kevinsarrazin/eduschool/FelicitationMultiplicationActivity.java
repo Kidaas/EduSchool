@@ -1,4 +1,4 @@
-package fr.kevinsarrazin.eduschool.activity;
+package fr.kevinsarrazin.eduschool;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.view.View;
 
 import fr.kevinsarrazin.eduschool.MainActivity;
 import fr.kevinsarrazin.eduschool.R;
+import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
 
 
 public class FelicitationMultiplicationActivity extends Activity {

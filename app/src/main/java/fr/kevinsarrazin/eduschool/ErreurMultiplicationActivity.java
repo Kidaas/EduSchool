@@ -1,4 +1,4 @@
-package fr.kevinsarrazin.eduschool.activity;
+package fr.kevinsarrazin.eduschool;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import fr.kevinsarrazin.eduschool.R;
+import fr.kevinsarrazin.eduschool.activity.AdditionActivity;
+import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
+import fr.kevinsarrazin.eduschool.activity.MultiplicationCalculActivity;
 
 
 public class ErreurMultiplicationActivity extends Activity {

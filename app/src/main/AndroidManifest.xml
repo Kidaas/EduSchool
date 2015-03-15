@@ -17,11 +17,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ErreurMultiplicationActivity"
+            android:name=".ErreurMultiplicationActivity"
             android:label="@string/title_activity_erreur_multiplication" >
         </activity>
         <activity
-            android:name=".activity.FelicitationMultiplicationActivity"
+            android:name=".FelicitationMultiplicationActivity"
             android:label="@string/title_activity_felicitation_multiplication" >
         </activity>
         <activity
@@ -35,6 +35,10 @@
         <activity
             android:name=".activity.AdditionActivity"
             android:label="@string/title_activity_addition" >
+        </activity>
+        <activity
+            android:name=".activity.CulturegGeoActivity"
+            android:label="@string/title_activity_cultureg" >
         </activity>
     </application>
 

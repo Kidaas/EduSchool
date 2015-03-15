@@ -2,7 +2,6 @@ package fr.kevinsarrazin.eduschool;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fr.kevinsarrazin.eduschool.activity.AdditionActivity;
+import fr.kevinsarrazin.eduschool.activity.CulturegGeoActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
+import fr.kevinsarrazin.eduschool.data.Cultureg;
+import fr.kevinsarrazin.eduschool.data.CulturegDAO;
 import fr.kevinsarrazin.eduschool.data.User;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
 
@@ -25,16 +27,37 @@ public class MainActivity extends Activity {
     // ID REQUETES
     public final static int MULTIPLICATION_ACTIVITY_REQUEST = 1;
     public final static int ADDITION_ACTIVITY_REQUEST = 2;
-
+    public final static int CULTUREG_GEO_ACTIVITY_REQUEST = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UserDAO uDAO = new UserDAO(this);
-        // Ajout d'un user (test)
-        User user = new User("login", "password");
-        uDAO.ajouter(user);
+        /****************************************
+         * Ajout base Culture G
+         ***************************************/
+        CulturegDAO cDAO = new CulturegDAO(this);
+        Cultureg c1 = new Cultureg("Geographie", "Capitale de la France ? ", "Paris");
+        Cultureg c2 = new Cultureg("Geographie", "Capitale de l'Espagne ? ", "Madrid");
+        Cultureg c3 = new Cultureg("Geographie", "Capitale de la Belgique ? ", "Bruxelles");
+        Cultureg c4 = new Cultureg("Geographie", "Capitale des Etats Unis ? ", "Washington");
+        Cultureg c5 = new Cultureg("Geographie", "Capitale de la Chine ? ", "Pékin");
+        Cultureg c6 = new Cultureg("Geographie", "Capitale du Japon ? ", "Tokyo");
+
+        cDAO.ajouter(c1);
+        cDAO.ajouter(c2);
+        cDAO.ajouter(c3);
+        cDAO.ajouter(c4);
+        cDAO.ajouter(c5);
+        cDAO.ajouter(c6);
+        /****************************************
+         * Fin ajout base Culture G
+         ***************************************/
+
+        EditText EditTxtLogin = (EditText) findViewById(R.id.editTxtLogin);
+        EditText EditTxtPassword = (EditText) findViewById(R.id.editTxtPassword);
+        EditTxtLogin.setHint("Login");
+        EditTxtPassword.setHint("Password");
 
     }
 
@@ -66,6 +89,7 @@ public class MainActivity extends Activity {
         LinearLayout linearConnexion = (LinearLayout) findViewById(R.id.LinearLogin);
         EditText EditTxtLogin = (EditText) findViewById(R.id.editTxtLogin);
         EditText EditTxtPassword = (EditText) findViewById(R.id.editTxtPassword);
+
         String login = EditTxtLogin.getText().toString();
         String password = EditTxtPassword.getText().toString();
 
@@ -80,13 +104,14 @@ public class MainActivity extends Activity {
             linearConnexion.addView(txtViewError);
         }
 
-        if (password == user.getPassword()){
+        if (password.equals(user.getPassword())){
             // Masque le LinearLayout de cconnexion
             linearConnexion.setVisibility(LinearLayout.INVISIBLE);
             // Récupère le LinearLayout de deconnexion
             LinearLayout linearDeconnexion = (LinearLayout) findViewById(R.id.LinearDeconnexion);
             // Créer un bouton de deconnexion
             Button btnDeconnexion = new Button(this);
+            btnDeconnexion.setText("Deconnexion");
             // Ajoute le btn de deconnexion au linearLayout de deconnexion
             linearDeconnexion.addView(btnDeconnexion);
         }else {
@@ -95,7 +120,6 @@ public class MainActivity extends Activity {
             txtViewError.setTextColor(Color.rgb(128, 0,0));
             linearConnexion.addView(txtViewError);
         }
-
 
     }
 
@@ -113,12 +137,19 @@ public class MainActivity extends Activity {
         startActivityForResult(intent, ADDITION_ACTIVITY_REQUEST);
     }
 
+    public void onGeographieClick(View view) {
+        // Création d'une intention
+        Intent intent = new Intent(this, CulturegGeoActivity.class);
+        // Lancement de la demande de changement d'activité + demande de retour
+        startActivityForResult(intent, CULTUREG_GEO_ACTIVITY_REQUEST);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Vérification du retour à l'aide du code requête
-        if (requestCode == MULTIPLICATION_ACTIVITY_REQUEST || requestCode == ADDITION_ACTIVITY_REQUEST) {
+        if (requestCode == MULTIPLICATION_ACTIVITY_REQUEST || requestCode == ADDITION_ACTIVITY_REQUEST || requestCode == CULTUREG_GEO_ACTIVITY_REQUEST) {
             // Afficher une notification
-            String notification =  "Retour";
+            String notification =  "Retour à l'activité principale";
             Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
 
         }

@@ -77,7 +77,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="110dip"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:onClick="onGeographieClick">
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -85,13 +86,13 @@
                 android:id="@+id/imageButton3"
                 android:src="@drawable/btn"
                 android:layout_gravity="center_horizontal"
-                />
+                android:onClick="onGeographieClick" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Autre"
+                android:text="Geographie"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView"
                 />
@@ -119,7 +120,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Name"
             android:ems="10"
             android:id="@+id/editTxtLogin" />
 
@@ -128,8 +128,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/editTxtPassword"
-            android:text="password" />
+            android:id="@+id/editTxtPassword"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -137,13 +136,16 @@
             android:text="Connexion"
             android:id="@+id/btnLogin"
             android:onClick="onConnexionClick" />
-
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/LinearDeconnexion"></LinearLayout>
+        android:id="@+id/LinearDeconnexion"
+        android:gravity="center|bottom"
+        >
+
+    </LinearLayout>
 
 </RelativeLayout>

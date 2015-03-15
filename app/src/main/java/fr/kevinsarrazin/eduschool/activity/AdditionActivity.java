@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import fr.kevinsarrazin.eduschool.ErreurMultiplicationActivity;
+import fr.kevinsarrazin.eduschool.FelicitationMultiplicationActivity;
 import fr.kevinsarrazin.eduschool.R;
 
 

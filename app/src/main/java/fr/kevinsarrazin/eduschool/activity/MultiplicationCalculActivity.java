@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import fr.kevinsarrazin.eduschool.ErreurMultiplicationActivity;
+import fr.kevinsarrazin.eduschool.FelicitationMultiplicationActivity;
 import fr.kevinsarrazin.eduschool.R;
 
 
