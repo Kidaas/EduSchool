@@ -24,14 +24,14 @@ import fr.kevinsarrazin.eduschool.data.CulturegDAO;
 public class CulturegGeoActivity extends Activity {
 
     public static final String GEO_NBERREUR = "GeoErreurs";
-    public String tag = "geographie";
-    public int nbQuestion = 1;
+    public static String tag = "geographie";
+    public static final int nbQuestion = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cultureg);
-
+        Question();
         tag = getIntent().getStringExtra("caller");
     }
 
@@ -39,8 +39,9 @@ public class CulturegGeoActivity extends Activity {
      * Renvoie l'activité de question sur la catégorie données
      */
     public void Question(){
+
         CulturegDAO cDAO = new CulturegDAO(this);
-        List<Cultureg> listQuestion = cDAO.getAllCulturegByTag(tag);
+        //List<Cultureg> listQuestion = cDAO.getAllCulturegByTag(tag);
 
         LinearLayout firstlayout = (LinearLayout) findViewById(R.id.layoutquestion);
 
@@ -49,7 +50,7 @@ public class CulturegGeoActivity extends Activity {
             TextView txtView = new TextView(this);
             EditText editTextReponse = new EditText(this);
 
-            Cultureg c = listQuestion.get(i);
+            Cultureg c = cDAO.getQuestion(i);
 
             txtView.setText(c.getQuestion());
             editTextReponse.setHint(" ? "); // = Placeholder
@@ -63,7 +64,7 @@ public class CulturegGeoActivity extends Activity {
 
     public void validerResultat(View vue) {
         CulturegDAO cDAO = new CulturegDAO(this);
-        List<Cultureg> listQuestion = cDAO.getAllCulturegByTag(tag);
+        //List<Cultureg> listQuestion = cDAO.getAllCulturegByTag(tag);
 
         LinearLayout lLayoutNumber = (LinearLayout) findViewById(R.id.layoutquestion);
         int erreur = 0;
@@ -78,7 +79,9 @@ public class CulturegGeoActivity extends Activity {
                 erreur++;
             }else {
                 String result = e.getText().toString().toLowerCase();
-                if (listQuestion.get(i+1).getReponse().toLowerCase().equals(result)){
+                int j = i+1;
+                String q = cDAO.getQuestion(j).getReponse().toLowerCase();
+                if (q.equals(result)){
                     Log.d("result", "ok");
                 }else {
                     Log.d("result","ko");

@@ -2,6 +2,7 @@ package fr.kevinsarrazin.eduschool;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public abstract class DAOBase {
     // Nous sommes à la première version de la base

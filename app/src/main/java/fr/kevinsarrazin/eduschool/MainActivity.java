@@ -1,9 +1,13 @@
 package fr.kevinsarrazin.eduschool;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fr.kevinsarrazin.eduschool.activity.AdditionActivity;
+import fr.kevinsarrazin.eduschool.activity.AnglaisActivity;
 import fr.kevinsarrazin.eduschool.activity.CulturegGeoActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
 import fr.kevinsarrazin.eduschool.data.Cultureg;
@@ -28,65 +33,90 @@ public class MainActivity extends Activity {
     public final static int MULTIPLICATION_ACTIVITY_REQUEST = 1;
     public final static int ADDITION_ACTIVITY_REQUEST = 2;
     public final static int CULTUREG_GEO_ACTIVITY_REQUEST = 3;
+    public final static int QCM_ANGLAIS_ACTIVITY_REQUEST = 4;
+
+    // Variable de stockage local
+    SharedPreferences sharedpreferences;
+    public static final String MesPreferences = "Preference" ;
+    public static final String nom = "login";
+    public static final String mdp = "mdp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /****************************************
-         * Ajout base Culture G
-         ***************************************/
-/*      CulturegDAO cDAO = new CulturegDAO(this);
-        Cultureg c1 = new Cultureg("Geographie", "Capitale de la France ? ", "Paris");
-        Cultureg c2 = new Cultureg("Geographie", "Capitale de l'Espagne ? ", "Madrid");
-        Cultureg c3 = new Cultureg("Geographie", "Capitale de la Belgique ? ", "Bruxelles");
-        Cultureg c4 = new Cultureg("Geographie", "Capitale des Etats Unis ? ", "Washington");
-        Cultureg c5 = new Cultureg("Geographie", "Capitale de la Chine ? ", "Pekin");
-        Cultureg c6 = new Cultureg("Geographie", "Capitale du Japon ? ", "Tokyo");
 
-        cDAO.ajouter(c1);
-        cDAO.ajouter(c2);
-        cDAO.ajouter(c3);
-        cDAO.ajouter(c4);
-        cDAO.ajouter(c5);
-        cDAO.ajouter(c6);*/
-        /****************************************
-         * Fin ajout base Culture G
-         ***************************************/
-
-        EditText EditTxtLogin = (EditText) findViewById(R.id.editTxtLogin);
-        EditText EditTxtPassword = (EditText) findViewById(R.id.editTxtPassword);
-        EditTxtLogin.setHint("Login");
-        EditTxtPassword.setHint("Password");
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        sharedpreferences = getSharedPreferences(MesPreferences, Context.MODE_PRIVATE);
+        // Test si le login & mdp sont stocké en local, si c'est le cas, on n'affichera pas de champ login/inscription
+        // Et on le connectera automatiquement
+        if (sharedpreferences.contains(nom) && sharedpreferences.contains(mdp))
+        {
+            LinearLayout linearConnexion = (LinearLayout) findViewById(R.id.lLayoutCoIns);
+            // Masque le LinearLayout de connexion
+            linearConnexion.setVisibility(LinearLayout.INVISIBLE);
+            // Récupère le LinearLayout de deconnexion
+            LinearLayout linearDeconnexion = (LinearLayout) findViewById(R.id.LinearDeconnexion);
+            // Créer un bouton de deconnexion
+            Button btnDeconnexion = new Button(this);
+            btnDeconnexion.setText("Deconnexion " + sharedpreferences.getString(nom, "login"));
+            btnDeconnexion.setOnClickListener(new Button.OnClickListener() {
+                public void onClick(View v) {
+                    onDeconnexionClick(v);
+                }
+            });
+            // Ajoute le btn de deconnexion au linearLayout de deconnexion
+            linearDeconnexion.addView(btnDeconnexion);
+        // Sinon affiche login/inscription (et place les placeholder)
+        }else {
+            EditText EditTxtLogin = (EditText) findViewById(R.id.editTxtLogin);
+            EditText EditTxtPassword = (EditText) findViewById(R.id.editTxtPassword);
+            EditText EditTxtInscriptionLogin = (EditText) findViewById(R.id.editTxtInscriptionLogin);
+            EditText EditTxtInscriptionPassword = (EditText) findViewById(R.id.editTxtInscriptionPassword);
+            EditTxtLogin.setHint("Login");
+            EditTxtPassword.setHint("Password");
+            EditTxtInscriptionLogin.setHint("Login");
+            EditTxtInscriptionPassword.setHint("Password");
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Fonction d'inscription
+     * @param view
+     */
+    public void onInscriptionClick(View view) {
+        EditText EditTxtInscriptionLogin = (EditText) findViewById(R.id.editTxtInscriptionLogin);
+        EditText EditTxtInscriptionPassword = (EditText) findViewById(R.id.editTxtInscriptionPassword);
+
+        // Vérifie que les champs ne sont pas vident
+        if (!TextUtils.isEmpty(EditTxtInscriptionLogin.getText()) && !TextUtils.isEmpty(EditTxtInscriptionPassword.getText())){
+            UserDAO uDao = new UserDAO(this);
+            User u = new User(EditTxtInscriptionLogin.getText().toString(), EditTxtInscriptionPassword.getText().toString());
+            uDao.ajouter(u);
+            EditTxtInscriptionLogin.getText().clear();
+            EditTxtInscriptionPassword.getText().clear();
+
+            // Affiche une notification
+            String notification =  "Vous pouvez désormais vous authentifier";
+            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
+
+        // Sinon ne fait rien et affiche un message a l'user
+        }else {
+            // Affiche une notification
+            String notification =  "Veuillez remplir tout les champs";
+            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    /**
+     * Fonction de Connexion
+     * @param view
+     */
     public void onConnexionClick(View view) {
+        sharedpreferences = getSharedPreferences(MesPreferences, Context.MODE_PRIVATE);
+
         // Récupère le LinearLayout de connexion
-        LinearLayout linearConnexion = (LinearLayout) findViewById(R.id.LinearLogin);
+        LinearLayout linearConnexion = (LinearLayout) findViewById(R.id.lLayoutCoIns);
         EditText EditTxtLogin = (EditText) findViewById(R.id.editTxtLogin);
         EditText EditTxtPassword = (EditText) findViewById(R.id.editTxtPassword);
 
@@ -95,34 +125,69 @@ public class MainActivity extends Activity {
 
         User user = new User();
         UserDAO uDAO = new UserDAO(this);
+        // Si l'user est en base, le récupère
         if (uDAO.getUserByLogin(login) != null){
-            user = uDAO.getUserByLogin(login);
-        } else {
-            TextView txtViewError = new TextView(this);
-            txtViewError.setText("Erreur de Login");
-            txtViewError.setTextColor(Color.rgb(128, 0,0));
-            linearConnexion.addView(txtViewError);
-        }
 
-        if (password.equals(user.getPassword())){
-            // Masque le LinearLayout de cconnexion
-            linearConnexion.setVisibility(LinearLayout.INVISIBLE);
-            // Récupère le LinearLayout de deconnexion
-            LinearLayout linearDeconnexion = (LinearLayout) findViewById(R.id.LinearDeconnexion);
-            // Créer un bouton de deconnexion
-            Button btnDeconnexion = new Button(this);
-            btnDeconnexion.setText("Deconnexion");
-            // Ajoute le btn de deconnexion au linearLayout de deconnexion
-            linearDeconnexion.addView(btnDeconnexion);
-        }else {
-            TextView txtViewError = new TextView(this);
-            txtViewError.setText("Erreur de Mdp");
-            txtViewError.setTextColor(Color.rgb(128, 0,0));
-            linearConnexion.addView(txtViewError);
+            user = uDAO.getUserByLogin(login);
+
+            // Test si le mot de passe correspond à celui en base
+            if (password.equals(user.getPassword())){
+                // Sauvegarde le login et le mot de passe en local
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString(nom, user.getLogin());
+                editor.putString(mdp, user.getPassword());
+                editor.commit();
+
+                // Masque le LinearLayout de connexion
+                linearConnexion.setVisibility(LinearLayout.INVISIBLE);
+                // Récupère le LinearLayout de deconnexion
+                LinearLayout linearDeconnexion = (LinearLayout) findViewById(R.id.LinearDeconnexion);
+                // Créer un bouton de deconnexion
+                Button btnDeconnexion = new Button(this);
+                btnDeconnexion.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        onDeconnexionClick(v);
+                    }
+                });
+                btnDeconnexion.setText("Deconnexion de " + user.getLogin());
+                // Ajoute le btn de deconnexion au linearLayout de deconnexion
+                linearDeconnexion.addView(btnDeconnexion);
+
+                // Affiche une notification
+                String notification =  "Vous êtes connecté";
+                Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
+            // Sinon averti l'utilisateur
+            }else {
+                // Affiche une notification
+                String notification =  "Mauvais mot de passe";
+                Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
+            }
+        // Sinon averti l'utilisateur
+        } else {
+            // Affiche une notification
+            String notification =  "Mauvais login";
+            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
         }
 
     }
 
+    /**
+     * Fonction de Deconnexion
+     */
+    public void onDeconnexionClick(View v) {
+        // Récupère les préferences et les effaces
+        sharedpreferences = getSharedPreferences(MesPreferences, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.commit();
+
+        LinearLayout linearConnexion = (LinearLayout) findViewById(R.id.lLayoutCoIns);
+        // Masque le LinearLayout de connexion
+        linearConnexion.setVisibility(LinearLayout.VISIBLE);
+        // Récupère le LinearLayout de deconnexion
+        LinearLayout linearDeconnexion = (LinearLayout) findViewById(R.id.LinearDeconnexion);
+        linearDeconnexion.setVisibility(LinearLayout.INVISIBLE);
+    }
     /**
      * Lance l'activité multiplication
      * @param view
@@ -169,14 +234,47 @@ public class MainActivity extends Activity {
         startActivityForResult(intent, CULTUREG_GEO_ACTIVITY_REQUEST);
     }
 
+    /**
+     * Lance l'activité QCM anglais
+     * @param view
+     */
+    public void onQCMAnglaisClick(View view) {
+        // Création d'une intention
+        Intent intent = new Intent(this, AnglaisActivity.class);
+        // Lancement de la demande de changement d'activité + demande de retour
+        startActivityForResult(intent, QCM_ANGLAIS_ACTIVITY_REQUEST);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Vérification du retour à l'aide du code requête
-        if (requestCode == MULTIPLICATION_ACTIVITY_REQUEST || requestCode == ADDITION_ACTIVITY_REQUEST || requestCode == CULTUREG_GEO_ACTIVITY_REQUEST) {
+        if (requestCode == MULTIPLICATION_ACTIVITY_REQUEST || requestCode == ADDITION_ACTIVITY_REQUEST || requestCode == CULTUREG_GEO_ACTIVITY_REQUEST || requestCode == QCM_ANGLAIS_ACTIVITY_REQUEST) {
             // Afficher une notification
             String notification =  "Retour à l'activité principale";
             Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

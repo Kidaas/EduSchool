@@ -141,7 +141,8 @@
             android:layout_below="@+id/textViewPresentation"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            android:onClick="onAdditionClick" >
+            android:onClick="onQCMAnglaisClick"
+            android:nestedScrollingEnabled="false">
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -149,13 +150,14 @@
                 android:id="@+id/imageButton5"
                 android:src="@drawable/btn"
                 android:layout_gravity="center_horizontal"
-                android:onClick="onAdditionClick" />
+                android:onClick="onQCMAnglaisClick"
+                android:nestedScrollingEnabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Autre"
+                android:text="QCM Anglais"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView7" />
         </LinearLayout>
@@ -185,42 +187,92 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@id/linearLayoutMenu2"
-        android:id="@+id/LinearLogin">
+        android:id="@+id/lLayoutCoIns">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Connectez vous !"
-            android:id="@+id/textView5" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:id="@+id/LinearLogin">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/editTxtLogin" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Connexion"
+                android:id="@+id/textView5" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/editTxtPassword"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editTxtLogin" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Connexion"
-            android:id="@+id/btnLogin"
-            android:onClick="onConnexionClick" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/editTxtPassword"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Connexion"
+                android:id="@+id/btnLogin"
+                android:onClick="onConnexionClick" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:layout_below="@id/linearLayoutMenu2"
+            android:id="@+id/LinearInscription">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Inscription"
+                android:id="@+id/txtView" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editTxtInscriptionLogin" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/editTxtInscriptionPassword"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inscription"
+                android:id="@+id/btnInscription"
+                android:onClick="onInscriptionClick" />
+        </LinearLayout>
     </LinearLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"

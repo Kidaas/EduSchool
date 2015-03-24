@@ -19,11 +19,36 @@ public class UserDAO extends DAOBase {
 
     public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
+    // Tableau de données (login, password)
+    private static final String[] DATA = new String[] {
+            "'user', 'user'",
+            "'kidaas', 'kidaas'"
+    };
+
     public UserDAO(Context pContext) {
         super(pContext);
         open();
     }
 
+    /**
+     *
+     * @return liste de chaînes de caractères représentant les instructions SQL d'insertion de données dans la table
+     */
+    public static String[] getInsertSQL() {
+        String insertSQL = "INSERT INTO " + TABLE_NAME + "("
+                + LOGIN + ", "
+                + PASSWORD + ") VALUES ";
+
+        String[] liste = new String[DATA.length];
+        int i = 0;
+        for (String questionReponse : DATA) {
+            // Instruction SQL INSERT
+            liste[i] = insertSQL + "(" + questionReponse + ")";
+            i++;
+        }
+
+        return liste;
+    }
     /**
      * @param u la question à ajouter à la base
      */

@@ -24,13 +24,20 @@ public class AnglaisDAO extends DAOBase {
 
     public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
+    // Tableau de données (tag, question, reponse)
+    private static final String[] DATA = new String[] {
+            "'Partir, laisser quitter', 'Leave, left, left', 'Left, leave, leave', 'Left, leave, left'",
+            "'Voir', 'see, saw, seen', 'seen, saw, see', 'saw, seen, see'"
+    };
+
+
     public AnglaisDAO(Context pContext) {
         super(pContext);
         open();
     }
 
     /**
-     * @param c la question à ajouter à la base
+     * @param a la question à ajouter à la base
      */
     public void ajouter(Anglais a) {
         ContentValues value = new ContentValues();
@@ -49,6 +56,29 @@ public class AnglaisDAO extends DAOBase {
     public void supprimer(long id) {
         mDb.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
     }
+
+    /**
+     *
+     * @return liste de chaînes de caractères représentant les instructions SQL d'insertion de données dans la table
+     */
+    public static String[] getInsertSQL() {
+        String insertSQL = "INSERT INTO " + TABLE_NAME + "("
+                + QUESTION + ", "
+                + REPONSE + ", "
+                + MAUVAISE_REPONSE + ", "
+                + MAUVAISE_REPONSE1 + ") VALUES ";
+
+        String[] liste = new String[DATA.length];
+        int i = 0;
+        for (String questionReponse : DATA) {
+            // Instruction SQL INSERT
+            liste[i] = insertSQL + "(" + questionReponse + ")";
+            i++;
+        }
+
+        return liste;
+    }
+
 
     /**
      * @param a la question à modifié
