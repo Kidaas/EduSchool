@@ -101,12 +101,96 @@
     </LinearLayout>
 
     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LinearLayoutMenu"
+        android:layout_gravity="center"
+        android:id="@+id/linearLayoutMenu2" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="110dip"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout"
+            android:clickable="true"
+            android:onClick="onFrançaisClick" >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton4"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/btn"
+                android:onClick="onFrançaisClick" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Français"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/textView6" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="110dip"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/linearLayout"
+            android:layout_below="@+id/textViewPresentation"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:onClick="onAdditionClick" >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton5"
+                android:src="@drawable/btn"
+                android:layout_gravity="center_horizontal"
+                android:onClick="onAdditionClick" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Autre"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/textView7" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="110dip"
+            android:layout_height="fill_parent"
+            android:onClick="onGeographieClick" >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton6"
+                android:src="@drawable/btn"
+                android:layout_gravity="center_horizontal"
+                android:onClick="onGeographieClick" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Autre"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/textView8" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/LinearLayoutMenu"
+        android:layout_below="@id/linearLayoutMenu2"
         android:id="@+id/LinearLogin">
 
         <TextView

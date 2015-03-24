@@ -40,6 +40,10 @@
             android:name=".activity.CulturegGeoActivity"
             android:label="@string/title_activity_cultureg" >
         </activity>
+        <activity
+            android:name=".activity.AnglaisActivity"
+            android:label="@string/title_activity_anglais" >
+        </activity>
     </application>
 
 </manifest>

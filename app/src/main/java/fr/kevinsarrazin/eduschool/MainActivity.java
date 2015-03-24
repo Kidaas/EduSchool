@@ -36,12 +36,12 @@ public class MainActivity extends Activity {
         /****************************************
          * Ajout base Culture G
          ***************************************/
-        CulturegDAO cDAO = new CulturegDAO(this);
+/*      CulturegDAO cDAO = new CulturegDAO(this);
         Cultureg c1 = new Cultureg("Geographie", "Capitale de la France ? ", "Paris");
         Cultureg c2 = new Cultureg("Geographie", "Capitale de l'Espagne ? ", "Madrid");
         Cultureg c3 = new Cultureg("Geographie", "Capitale de la Belgique ? ", "Bruxelles");
         Cultureg c4 = new Cultureg("Geographie", "Capitale des Etats Unis ? ", "Washington");
-        Cultureg c5 = new Cultureg("Geographie", "Capitale de la Chine ? ", "Pékin");
+        Cultureg c5 = new Cultureg("Geographie", "Capitale de la Chine ? ", "Pekin");
         Cultureg c6 = new Cultureg("Geographie", "Capitale du Japon ? ", "Tokyo");
 
         cDAO.ajouter(c1);
@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
         cDAO.ajouter(c3);
         cDAO.ajouter(c4);
         cDAO.ajouter(c5);
-        cDAO.ajouter(c6);
+        cDAO.ajouter(c6);*/
         /****************************************
          * Fin ajout base Culture G
          ***************************************/
@@ -123,6 +123,10 @@ public class MainActivity extends Activity {
 
     }
 
+    /**
+     * Lance l'activité multiplication
+     * @param view
+     */
     public void onMultiplicationClick(View view) {
         // Création d'une intention
         Intent intent = new Intent(this, MultiplicationActivity.class);
@@ -130,6 +134,10 @@ public class MainActivity extends Activity {
         startActivityForResult(intent, MULTIPLICATION_ACTIVITY_REQUEST);
     }
 
+    /**
+     * Lance l'activité Addition
+     * @param view
+     */
     public void onAdditionClick(View view) {
         // Création d'une intention
         Intent intent = new Intent(this, AdditionActivity.class);
@@ -137,10 +145,27 @@ public class MainActivity extends Activity {
         startActivityForResult(intent, ADDITION_ACTIVITY_REQUEST);
     }
 
+    /**
+     * Lance l'activité cultureg -> Geographie
+     * @param view
+     */
     public void onGeographieClick(View view) {
         // Création d'une intention
         Intent intent = new Intent(this, CulturegGeoActivity.class);
         // Lancement de la demande de changement d'activité + demande de retour
+        intent.putExtra("caller", "Geographie");
+        startActivityForResult(intent, CULTUREG_GEO_ACTIVITY_REQUEST);
+    }
+
+    /**
+     * Lance l'activité cultureg -> Français
+     * @param view
+     */
+    public void onFrançaisClick(View view) {
+        // Création d'une intention
+        Intent intent = new Intent(this, CulturegGeoActivity.class);
+        // Lancement de la demande de changement d'activité + demande de retour
+        intent.putExtra("caller", "Français");
         startActivityForResult(intent, CULTUREG_GEO_ACTIVITY_REQUEST);
     }
 

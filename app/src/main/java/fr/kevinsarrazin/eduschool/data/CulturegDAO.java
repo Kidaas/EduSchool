@@ -79,9 +79,31 @@ public class CulturegDAO extends DAOBase {
     /**
      *
      */
-    public ArrayList<Cultureg> getAllCultureg() {
+    public ArrayList<Cultureg> getAllCultureg(String tag) {
         ArrayList<Cultureg> listCultureg = new ArrayList<Cultureg>();
         Cursor c = mDb.rawQuery("select " + TAG +", " + QUESTION + ", " + REPONSE + " from " + TABLE_NAME, null);
+
+        // Si il ne retourne rien, => retourne null
+        if (c.getCount() == 0) {
+            return null;
+        }else {
+            while(c.moveToNext()){
+                Cultureg cultureg = new Cultureg();
+                //Question.setId(c.getLong(0));
+                cultureg.setTag(c.getString(0));
+                cultureg.setQuestion(c.getString(1));
+                cultureg.setReponse(c.getString(2));
+
+                listCultureg.add(cultureg);
+            }
+
+            return listCultureg;
+        }
+    }
+
+    public ArrayList<Cultureg> getAllCulturegByTag(String tag) {
+        ArrayList<Cultureg> listCultureg = new ArrayList<Cultureg>();
+        Cursor c = mDb.rawQuery("select " + TAG +", " + QUESTION + ", " + REPONSE + " from " + TABLE_NAME+ " where tag = ?", new String[] {tag});
 
         // Si il ne retourne rien, => retourne null
         if (c.getCount() == 0) {

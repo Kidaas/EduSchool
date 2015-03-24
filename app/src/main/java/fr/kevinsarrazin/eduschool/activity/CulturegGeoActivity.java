@@ -1,20 +1,120 @@
 package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import java.util.List;
+
+import fr.kevinsarrazin.eduschool.ErreurMultiplicationActivity;
+import fr.kevinsarrazin.eduschool.FelicitationMultiplicationActivity;
 import fr.kevinsarrazin.eduschool.R;
+import fr.kevinsarrazin.eduschool.data.Cultureg;
+import fr.kevinsarrazin.eduschool.data.CulturegDAO;
 
 public class CulturegGeoActivity extends Activity {
+
+    public static final String GEO_NBERREUR = "GeoErreurs";
+    public String tag = "geographie";
+    public int nbQuestion = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_culturegGeo);
+        setContentView(R.layout.activity_cultureg);
+
+        tag = getIntent().getStringExtra("caller");
     }
 
+    /**
+     * Renvoie l'activité de question sur la catégorie données
+     */
+    public void Question(){
+        CulturegDAO cDAO = new CulturegDAO(this);
+        List<Cultureg> listQuestion = cDAO.getAllCulturegByTag(tag);
+
+        LinearLayout firstlayout = (LinearLayout) findViewById(R.id.layoutquestion);
+
+        for (int i = 1; i<nbQuestion; i++){
+            LinearLayout lLayout = new LinearLayout(this);
+            TextView txtView = new TextView(this);
+            EditText editTextReponse = new EditText(this);
+
+            Cultureg c = listQuestion.get(i);
+
+            txtView.setText(c.getQuestion());
+            editTextReponse.setHint(" ? "); // = Placeholder
+            editTextReponse.setInputType(InputType.TYPE_CLASS_TEXT);
+            lLayout.addView(txtView);
+            lLayout.addView(editTextReponse);
+            firstlayout.addView(lLayout);
+        }
+
+    }
+
+    public void validerResultat(View vue) {
+        CulturegDAO cDAO = new CulturegDAO(this);
+        List<Cultureg> listQuestion = cDAO.getAllCulturegByTag(tag);
+
+        LinearLayout lLayoutNumber = (LinearLayout) findViewById(R.id.layoutquestion);
+        int erreur = 0;
+
+        for (int i = 0; i < lLayoutNumber.getChildCount(); i++){
+            // Récupère le layout i du layout principal
+            LinearLayout l = (LinearLayout)lLayoutNumber.getChildAt(i);
+            // Récupère le EditText du layout l, à la positon 1
+            EditText e = (EditText)l.getChildAt(1);
+
+            if (TextUtils.isEmpty(e.getText())){
+                erreur++;
+            }else {
+                String result = e.getText().toString().toLowerCase();
+                if (listQuestion.get(i+1).getReponse().toLowerCase().equals(result)){
+                    Log.d("result", "ok");
+                }else {
+                    Log.d("result","ko");
+                    erreur++;
+                }
+            }
+        }
+
+        if (erreur == 0){
+            // Création d'un intention
+            Intent intent = new Intent(this, FelicitationMultiplicationActivity.class);
+            // lancement de la demande de changement d'activité
+            startActivity(intent);
+            //startActivityForResult(intent, MULTIPLICATION_FELICITATION_REQUEST);
+        }else {
+            // Création d'un intention
+            Intent intent = new Intent(this, ErreurMultiplicationActivity.class);
+            // Ajout de la chaine de nom à l'intent
+            intent.putExtra(GEO_NBERREUR, erreur);
+            intent.putExtra("caller", "CulturegGeoActivity");
+            // lancement de la demande de changement d'activité
+            startActivity(intent);
+            //startActivityForResult(intent, MULTIPLICATION_ERREUR_REQUEST);
+        }
+    }
+
+    /**
+     * Renvoie un nombre aléatoire compris entre min et max
+     * @param min
+     * @param max
+     * @return int res
+     */
+    public int randNb(int min, int max) {
+        int res = min + (int)(Math.random() * ((max - min) + 1));
+        return res;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

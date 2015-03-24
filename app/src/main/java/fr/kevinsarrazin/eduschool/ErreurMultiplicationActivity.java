@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import fr.kevinsarrazin.eduschool.R;
 import fr.kevinsarrazin.eduschool.activity.AdditionActivity;
+import fr.kevinsarrazin.eduschool.activity.CulturegGeoActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationCalculActivity;
 
@@ -32,6 +33,8 @@ public class ErreurMultiplicationActivity extends Activity {
             erreur = getIntent().getIntExtra(MultiplicationCalculActivity.MULTIPLICATION_NBERREUR, 0);
         }else if (caller.equals("AdditionActivity")){
             erreur = getIntent().getIntExtra(AdditionActivity.ADDITION_NBERREUR, 0);
+        }else if (caller.equals("CulturegGeoActivity")) {
+            erreur = getIntent().getIntExtra(CulturegGeoActivity.GEO_NBERREUR, 0);
         }
 
         TextView txtViewErreur = (TextView) findViewById(R.id.txtViewErreur);

@@ -10,4 +10,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_cultureg">CulturegActivity</string>
+    <string name="title_activity_anglais">AnglaisActivity</string>
 </resources>
