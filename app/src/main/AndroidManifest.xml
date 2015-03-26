@@ -45,7 +45,7 @@
             android:label="@string/title_activity_cultureg" >
         </activity>
         <activity
-            android:name=".activity.QCMActivity"
+            android:name=".activity.QcmActivity"
             android:label="@string/title_activity_anglais" >
         </activity>
     </application>

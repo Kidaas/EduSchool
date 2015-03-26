@@ -3,7 +3,7 @@ package fr.kevinsarrazin.eduschool.data;
 /**
  * Created by Administrateur on 23/03/2015.
  */
-public class QCM {
+public class Qcm {
 
     private long id;
     private String tag;
@@ -12,11 +12,11 @@ public class QCM {
     private String mauvaiseReponse;
     private String mauvaiseReponse1;
 
-    public QCM() {
+    public Qcm() {
         super();
     }
 
-    public QCM(long id, String tag, String question, String reponse, String mauvaiseReponse, String mauvaiseReponse1) {
+    public Qcm(long id, String tag, String question, String reponse, String mauvaiseReponse, String mauvaiseReponse1) {
         this.id = id;
         this.tag = tag;
         this.question = question;
@@ -25,7 +25,7 @@ public class QCM {
         this.mauvaiseReponse1 = mauvaiseReponse1;
     }
 
-    public QCM(String tag, String question, String reponse, String mauvaiseReponse, String mauvaiseReponse1) {
+    public Qcm(String tag, String question, String reponse, String mauvaiseReponse, String mauvaiseReponse1) {
         this.tag = tag;
         this.question = question;
         this.reponse = reponse;

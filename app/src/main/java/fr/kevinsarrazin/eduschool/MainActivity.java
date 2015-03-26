@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import fr.kevinsarrazin.eduschool.activity.AdditionActivity;
-import fr.kevinsarrazin.eduschool.activity.QCMActivity;
+import fr.kevinsarrazin.eduschool.activity.QcmActivity;
 import fr.kevinsarrazin.eduschool.activity.CulturegActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
 import fr.kevinsarrazin.eduschool.data.User;
@@ -249,7 +249,7 @@ public class MainActivity extends Activity {
      */
     public void onQCMAnglaisClick(View view) {
         // Création d'une intention
-        Intent intent = new Intent(this, QCMActivity.class);
+        Intent intent = new Intent(this, QcmActivity.class);
         // Lancement de la demande de changement d'activité + demande de retour
         startActivityForResult(intent, QCM_ANGLAIS_ACTIVITY_REQUEST);
     }

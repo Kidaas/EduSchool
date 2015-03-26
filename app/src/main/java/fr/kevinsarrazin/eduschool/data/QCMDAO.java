@@ -11,7 +11,7 @@ import fr.kevinsarrazin.eduschool.DAOBase;
 /**
  * Created by Administrateur on 23/03/2015.
  */
-public class QCMDAO extends DAOBase {
+public class QcmDAO extends DAOBase {
 
     public static final String TABLE_NAME = "anglais";
     public static final String KEY = "id";
@@ -32,7 +32,7 @@ public class QCMDAO extends DAOBase {
     };
 
 
-    public QCMDAO(Context pContext) {
+    public QcmDAO(Context pContext) {
         super(pContext);
         open();
     }
@@ -40,16 +40,16 @@ public class QCMDAO extends DAOBase {
     /**
      * @param a la question à ajouter à la base
      */
-    public void ajouter(QCM a) {
+    public void ajouter(Qcm a) {
         ContentValues value = new ContentValues();
         // Set les données
-        value.put(QCMDAO.TAG, a.getTag());
-        value.put(QCMDAO.QUESTION, a.getQuestion());
-        value.put(QCMDAO.REPONSE, a.getReponse());
-        value.put(QCMDAO.MAUVAISE_REPONSE, a.getMauvaiseReponse());
-        value.put(QCMDAO.MAUVAISE_REPONSE1, a.getMauvaiseReponse1());
+        value.put(QcmDAO.TAG, a.getTag());
+        value.put(QcmDAO.QUESTION, a.getQuestion());
+        value.put(QcmDAO.REPONSE, a.getReponse());
+        value.put(QcmDAO.MAUVAISE_REPONSE, a.getMauvaiseReponse());
+        value.put(QcmDAO.MAUVAISE_REPONSE1, a.getMauvaiseReponse1());
         // Execute l'action
-        mDb.insert(QCMDAO.TABLE_NAME, null, value);
+        mDb.insert(QcmDAO.TABLE_NAME, null, value);
     }
 
     /**
@@ -86,7 +86,7 @@ public class QCMDAO extends DAOBase {
     /**
      * @param a la question à modifié
      */
-    public void modifier(QCM a) {
+    public void modifier(Qcm a) {
         ContentValues value = new ContentValues();
         value.put(TAG, a.getTag());
         value.put(QUESTION, a.getQuestion());
@@ -99,7 +99,7 @@ public class QCMDAO extends DAOBase {
     /**
      * @param id l'identifiant de la question à récupérer
      */
-    public QCM getQuestion(long id) {
+    public Qcm getQuestion(long id) {
         Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where id = ?", new String[] {String.valueOf(id)});
 
         // Si il ne retourne rien, => retourne null
@@ -108,7 +108,7 @@ public class QCMDAO extends DAOBase {
         }else {
             // On va sur le 1er élements
             c.moveToFirst();
-            QCM Question = new QCM();
+            Qcm Question = new Qcm();
             Question.setId(c.getLong(0));
             Question.setTag(c.getString(1));
             Question.setQuestion(c.getString(2));
@@ -122,8 +122,8 @@ public class QCMDAO extends DAOBase {
     /**
      *
      */
-    public ArrayList<QCM> getAllQuestion() {
-        ArrayList<QCM> listAnglais = new ArrayList<QCM>();
+    public ArrayList<Qcm> getAllQuestion() {
+        ArrayList<Qcm> listAnglais = new ArrayList<Qcm>();
         Cursor c = mDb.rawQuery("select * from " + TABLE_NAME, null);
 
         // Si il ne retourne rien, => retourne null
@@ -131,7 +131,7 @@ public class QCMDAO extends DAOBase {
             return null;
         }else {
             while(c.moveToNext()){
-                QCM Question = new QCM();
+                Qcm Question = new Qcm();
                 Question.setId(c.getLong(0));
                 Question.setTag(c.getString(1));
                 Question.setQuestion(c.getString(2));

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import fr.kevinsarrazin.eduschool.data.CulturegDAO;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
-import fr.kevinsarrazin.eduschool.data.QCMDAO;
+import fr.kevinsarrazin.eduschool.data.QcmDAO;
 
 /**
  * Created by Administrateur on 09/03/2015.
@@ -89,7 +89,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         // Insérer les données de la table User
-        for (String insert : QCMDAO.getInsertSQL()) {
+        for (String insert : QcmDAO.getInsertSQL()) {
             db.execSQL(insert);
         }
     }
