@@ -4,25 +4,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import fr.kevinsarrazin.eduschool.activity.AdditionActivity;
-import fr.kevinsarrazin.eduschool.activity.AnglaisActivity;
-import fr.kevinsarrazin.eduschool.activity.CulturegGeoActivity;
+import fr.kevinsarrazin.eduschool.activity.QCMActivity;
+import fr.kevinsarrazin.eduschool.activity.CulturegActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
-import fr.kevinsarrazin.eduschool.data.Cultureg;
-import fr.kevinsarrazin.eduschool.data.CulturegDAO;
 import fr.kevinsarrazin.eduschool.data.User;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
 
@@ -51,6 +46,15 @@ public class MainActivity extends Activity {
         // Et on le connectera automatiquement
         if (sharedpreferences.contains(nom) && sharedpreferences.contains(mdp))
         {
+            UserDAO userDAO = new UserDAO(this);
+            User u = new User();
+            // Récupère l'user via son login stocké en local
+            u = userDAO.getUserByLogin(sharedpreferences.getString(nom, "login"));
+            // Créer une instance de la classe variable globale
+            final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+            // Ajoute l'id de l'utilisateur à la variable globale
+            globalVariable.setId(u.getId());
+
             LinearLayout linearConnexion = (LinearLayout) findViewById(R.id.lLayoutCoIns);
             // Masque le LinearLayout de connexion
             linearConnexion.setVisibility(LinearLayout.INVISIBLE);
@@ -138,6 +142,11 @@ public class MainActivity extends Activity {
                 editor.putString(mdp, user.getPassword());
                 editor.commit();
 
+                // Créer une instance de la classe variable globale
+                final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+                // Ajoute l'id de l'utilisateur à la variable globale
+                globalVariable.setId(user.getId());
+
                 // Masque le LinearLayout de connexion
                 linearConnexion.setVisibility(LinearLayout.INVISIBLE);
                 // Récupère le LinearLayout de deconnexion
@@ -216,7 +225,7 @@ public class MainActivity extends Activity {
      */
     public void onGeographieClick(View view) {
         // Création d'une intention
-        Intent intent = new Intent(this, CulturegGeoActivity.class);
+        Intent intent = new Intent(this, CulturegActivity.class);
         // Lancement de la demande de changement d'activité + demande de retour
         intent.putExtra("caller", "Geographie");
         startActivityForResult(intent, CULTUREG_GEO_ACTIVITY_REQUEST);
@@ -228,7 +237,7 @@ public class MainActivity extends Activity {
      */
     public void onFrançaisClick(View view) {
         // Création d'une intention
-        Intent intent = new Intent(this, CulturegGeoActivity.class);
+        Intent intent = new Intent(this, CulturegActivity.class);
         // Lancement de la demande de changement d'activité + demande de retour
         intent.putExtra("caller", "Français");
         startActivityForResult(intent, CULTUREG_GEO_ACTIVITY_REQUEST);
@@ -240,7 +249,7 @@ public class MainActivity extends Activity {
      */
     public void onQCMAnglaisClick(View view) {
         // Création d'une intention
-        Intent intent = new Intent(this, AnglaisActivity.class);
+        Intent intent = new Intent(this, QCMActivity.class);
         // Lancement de la demande de changement d'activité + demande de retour
         startActivityForResult(intent, QCM_ANGLAIS_ACTIVITY_REQUEST);
     }
