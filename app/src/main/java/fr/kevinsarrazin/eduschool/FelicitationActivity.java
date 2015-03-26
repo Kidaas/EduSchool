@@ -12,7 +12,7 @@ import fr.kevinsarrazin.eduschool.R;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
 
 
-public class FelicitationMultiplicationActivity extends Activity {
+public class FelicitationActivity extends Activity {
 
     public final static int MULTIPLICATION_RETOUR_REQUEST = 0;
 

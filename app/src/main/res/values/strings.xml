@@ -1,14 +1,28 @@
 <resources>
     <string name="app_name">EduSchool</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_erreur_multiplication">ErreurMultiplicationActivity</string>
-    <string name="title_activity_felicitation_multiplication">FelicitationMultiplicationActivity</string>
-    <string name="title_activity_multiplication">MultiplicationActivity</string>
-    <string name="title_activity_multiplication_calcul">MultiplicationCalculActivity</string>
-    <string name="title_activity_addition">AdditionActivity</string>
+    <string name="action_settings">Parametres</string>
+    <string name="title_activity_erreur_multiplication">Erreur</string>
+    <string name="title_activity_felicitation_multiplication">Felicitation !</string>
+    <string name="title_activity_multiplication">Multiplication</string>
+    <string name="title_activity_multiplication_calcul">MultiplicationCalcul</string>
+    <string name="title_activity_addition">AdditionA</string>
+    <string name="title_activity_cultureg">Culture Générale</string>
+    <string name="title_activity_erreur">Erreur</string>
+    <string name="title_activity_felicitation">Felicitation !</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_cultureg">CulturegActivity</string>
-    <string name="title_activity_anglais">AnglaisActivity</string>
+    <!-- Boutons -->
+    <string name="connexion">Connexion</string>
+    <string name="inscription">Inscription</string>
+    <string name="valider">Valider</string>
+
+    <!-- Menu -->
+    <string name="defaut">Autre</string>
+    <string name="multiplication">Multiplication</string>
+    <string name="addition">Addition</string>
+    <string name="geographie">Geographie</string>
+    <string name="francais">Français</string>
+    <string name="anglais">Anglais QCM</string>
+
+
 </resources>

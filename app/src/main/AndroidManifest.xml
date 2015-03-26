@@ -21,11 +21,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ErreurMultiplicationActivity"
+            android:name=".ErreurActivity"
             android:label="@string/title_activity_erreur_multiplication" >
         </activity>
         <activity
-            android:name=".FelicitationMultiplicationActivity"
+            android:name=".FelicitationActivity"
             android:label="@string/title_activity_felicitation_multiplication" >
         </activity>
         <activity
@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".activity.QcmActivity"
-            android:label="@string/title_activity_anglais" >
+            android:label="@string/title_activity_QCM" >
         </activity>
     </application>
 

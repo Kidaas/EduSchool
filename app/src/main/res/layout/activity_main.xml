@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Multiplication"
+                android:text="@string/multiplication"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView2" />
         </LinearLayout>
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Addition"
+                android:text="@string/addition"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView3" />
         </LinearLayout>
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Geographie"
+                android:text="@string/geographie"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView"
                 />
@@ -128,7 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Français"
+                android:text="@string/francais"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView6" />
         </LinearLayout>
@@ -157,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="QCM Anglais"
+                android:text="@string/anglais"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView7" />
         </LinearLayout>
@@ -180,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Autre"
+                android:text="@string/defaut"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView8" />
         </LinearLayout>
@@ -207,7 +207,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Connexion"
+                android:text="@string/connexion"
                 android:id="@+id/textView5" />
 
             <EditText
@@ -227,7 +227,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Connexion"
+                android:text="@string/connexion"
                 android:id="@+id/btnLogin"
                 android:onClick="onConnexionClick" />
         </LinearLayout>
@@ -267,7 +267,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Inscription"
+                android:text="@string/inscription"
                 android:id="@+id/btnInscription"
                 android:onClick="onInscriptionClick" />
         </LinearLayout>

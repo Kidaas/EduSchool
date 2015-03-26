@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import fr.kevinsarrazin.eduschool.data.CulturegDAO;
+import fr.kevinsarrazin.eduschool.data.MatiereDAO;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
 import fr.kevinsarrazin.eduschool.data.QcmDAO;
 
@@ -48,35 +49,77 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String USER_TABLE_DROP = "DROP TABLE IF EXISTS " + USER_TABLE_NAME + ";";
 
     /*********************************************
-     *      Table ANGLAIS QCM
+     *      Table QCM
      ********************************************/
-    public static final String ANGLAIS_KEY = "id";
-    public static final String ANGLAIS_QUESTION = "question";
-    public static final String ANGLAIS_REPONSE = "reponse";
-    public static final String ANGLAIS_MAUVAISE_REPONSE = "mauvaise_reponse";
-    public static final String ANGLAIS_MAUVAISE_REPONSE1 = "mauvaise_reponse1";
+    public static final String QCM_KEY = "id";
+    public static final String QCM_QUESTION = "question";
+    public static final String QCM_REPONSE = "reponse";
+    public static final String QCM_MAUVAISE_REPONSE = "mauvaise_reponse";
+    public static final String QCM_MAUVAISE_REPONSE1 = "mauvaise_reponse1";
 
-    public static final String ANGLAIS_TABLE_NAME = "anglais";
-    public static final String ANGLAIS_TABLE_CREATE =
-            "CREATE TABLE " + ANGLAIS_TABLE_NAME + " (" +
-                    ANGLAIS_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    ANGLAIS_QUESTION + " TEXT, " +
-                    ANGLAIS_REPONSE + " TEXT, " +
-                    ANGLAIS_MAUVAISE_REPONSE + " TEXT, " +
-                    ANGLAIS_MAUVAISE_REPONSE1 + " TEXT);";
+    public static final String QCM_TABLE_NAME = "qcm";
+    public static final String QCM_TABLE_CREATE =
+            "CREATE TABLE " + QCM_TABLE_NAME + " (" +
+                    QCM_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    QCM_QUESTION + " TEXT, " +
+                    QCM_REPONSE + " TEXT, " +
+                    QCM_MAUVAISE_REPONSE + " TEXT, " +
+                    QCM_MAUVAISE_REPONSE1 + " TEXT);";
 
-    public static final String ANGLAIS_TABLE_DROP = "DROP TABLE IF EXISTS " + ANGLAIS_TABLE_NAME + ";";
+    public static final String QCM_TABLE_DROP = "DROP TABLE IF EXISTS " + QCM_TABLE_NAME + ";";
+
+    /*********************************************
+     *      Table Score
+     ********************************************/
+    public static final String SCORE_KEY = "id";
+    public static final String SCORE_IDUSER = "idUser";
+    public static final String SCORER_IDMATIERE = "idMatiere";
+    public static final String SCORE_SCORE = "score";
+
+    public static final String SCORE_TABLE_NAME = "score";
+    public static final String SCORE_TABLE_CREATE =
+            "CREATE TABLE " + SCORE_TABLE_NAME + " (" +
+                    SCORE_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    SCORE_IDUSER + " INTEGER, " +
+                    SCORER_IDMATIERE + " INTEGER, " +
+                    SCORE_SCORE + " INTEGER);";
+
+    public static final String SCORE_TABLE_DROP = "DROP TABLE IF EXISTS " + SCORE_TABLE_NAME + ";";
+
+    /*********************************************
+     *      Table Matiere
+     ********************************************/
+    public static final String MATIERE_KEY = "id";
+    public static final String MATIERE_LIBELLE = "libelle";
+
+    public static final String MATIERE_TABLE_NAME = "matiere";
+    public static final String MATIERE_TABLE_CREATE =
+            "CREATE TABLE " + MATIERE_TABLE_NAME + " (" +
+                    MATIERE_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    MATIERE_LIBELLE + " TEXT);";
+
+    public static final String MATIERE_TABLE_DROP = "DROP TABLE IF EXISTS " + MATIERE_TABLE_NAME + ";";
+
+    /*********************************************
+     *      DatabaseHandler
+     ********************************************/
 
     public DatabaseHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
+    /**
+     * Création des tables de la bdd et insertion des données
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Création des tables
         db.execSQL(CULTUREG_TABLE_CREATE);
         db.execSQL(USER_TABLE_CREATE);
-        db.execSQL(ANGLAIS_TABLE_CREATE);
+        db.execSQL(QCM_TABLE_CREATE);
+        db.execSQL(SCORE_TABLE_CREATE);
+        db.execSQL(MATIERE_TABLE_CREATE);
 
         // Insérer les données de la table CultureG
         for (String insert : CulturegDAO.getInsertSQL()) {
@@ -88,8 +131,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL(insert);
         }
 
-        // Insérer les données de la table User
+        // Insérer les données de la table QCM
         for (String insert : QcmDAO.getInsertSQL()) {
+            db.execSQL(insert);
+        }
+        // Insérer les données de la table Matiere
+        for (String insert : MatiereDAO.getInsertSQL()) {
             db.execSQL(insert);
         }
     }
@@ -98,7 +145,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(CULTUREG_TABLE_DROP);
         db.execSQL(USER_TABLE_DROP);
-        db.execSQL(ANGLAIS_TABLE_DROP);
+        db.execSQL(QCM_TABLE_DROP);
+        db.execSQL(SCORE_TABLE_DROP);
+        db.execSQL(MATIERE_TABLE_DROP);
         onCreate(db);
     }
 }

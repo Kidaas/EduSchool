@@ -13,10 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.List;
-
-import fr.kevinsarrazin.eduschool.ErreurMultiplicationActivity;
-import fr.kevinsarrazin.eduschool.FelicitationMultiplicationActivity;
+import fr.kevinsarrazin.eduschool.ErreurActivity;
+import fr.kevinsarrazin.eduschool.FelicitationActivity;
 import fr.kevinsarrazin.eduschool.R;
 import fr.kevinsarrazin.eduschool.data.Cultureg;
 import fr.kevinsarrazin.eduschool.data.CulturegDAO;
@@ -92,13 +90,13 @@ public class CulturegActivity extends Activity {
 
         if (erreur == 0){
             // Création d'un intention
-            Intent intent = new Intent(this, FelicitationMultiplicationActivity.class);
+            Intent intent = new Intent(this, FelicitationActivity.class);
             // lancement de la demande de changement d'activité
             startActivity(intent);
             //startActivityForResult(intent, MULTIPLICATION_FELICITATION_REQUEST);
         }else {
             // Création d'un intention
-            Intent intent = new Intent(this, ErreurMultiplicationActivity.class);
+            Intent intent = new Intent(this, ErreurActivity.class);
             // Ajout de la chaine de nom à l'intent
             intent.putExtra(GEO_NBERREUR, erreur);
             intent.putExtra("caller", "CulturegGeoActivity");

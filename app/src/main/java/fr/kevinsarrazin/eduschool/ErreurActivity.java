@@ -16,7 +16,7 @@ import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationCalculActivity;
 
 
-public class ErreurMultiplicationActivity extends Activity {
+public class ErreurActivity extends Activity {
 
     public final static int MULTIPLICATION_RETOUR_REQUEST = 0;
     public final static int MULTIPLICATION_ERREUR_REQUEST = 1;
