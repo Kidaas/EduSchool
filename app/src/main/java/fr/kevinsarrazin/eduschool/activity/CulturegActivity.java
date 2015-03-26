@@ -21,7 +21,7 @@ import fr.kevinsarrazin.eduschool.R;
 import fr.kevinsarrazin.eduschool.data.Cultureg;
 import fr.kevinsarrazin.eduschool.data.CulturegDAO;
 
-public class CulturegGeoActivity extends Activity {
+public class CulturegActivity extends Activity {
 
     public static final String GEO_NBERREUR = "GeoErreurs";
     public static String tag = "geographie";

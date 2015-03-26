@@ -8,12 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import fr.kevinsarrazin.eduschool.R;
 import fr.kevinsarrazin.eduschool.activity.AdditionActivity;
-import fr.kevinsarrazin.eduschool.activity.CulturegGeoActivity;
+import fr.kevinsarrazin.eduschool.activity.CulturegActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationCalculActivity;
 
@@ -47,7 +45,7 @@ public class ErreurMultiplicationActivity extends Activity {
         }else if (caller.equals("AdditionActivity")){
             erreur = getIntent().getIntExtra(AdditionActivity.ADDITION_NBERREUR, 0);
         }else if (caller.equals("CulturegGeoActivity")) {
-            erreur = getIntent().getIntExtra(CulturegGeoActivity.GEO_NBERREUR, 0);
+            erreur = getIntent().getIntExtra(CulturegActivity.GEO_NBERREUR, 0);
         }
 
         // Affiche le nombre d'erreur

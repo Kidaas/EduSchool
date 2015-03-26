@@ -3,11 +3,10 @@ package fr.kevinsarrazin.eduschool;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import fr.kevinsarrazin.eduschool.data.CulturegDAO;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
-import fr.kevinsarrazin.eduschool.data.AnglaisDAO;
+import fr.kevinsarrazin.eduschool.data.QCMDAO;
 
 /**
  * Created by Administrateur on 09/03/2015.
@@ -90,7 +89,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         // Insérer les données de la table User
-        for (String insert : AnglaisDAO.getInsertSQL()) {
+        for (String insert : QCMDAO.getInsertSQL()) {
             db.execSQL(insert);
         }
     }

@@ -7,19 +7,19 @@ import android.view.MenuItem;
 
 import fr.kevinsarrazin.eduschool.R;
 
-public class AnglaisActivity extends Activity {
+public class QCMActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anglais);
+        setContentView(R.layout.activity_QCMs);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_anglais, menu);
+        getMenuInflater().inflate(R.menu.menu_QCM, menu);
         return true;
     }
 

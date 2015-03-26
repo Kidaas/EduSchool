@@ -3,27 +3,30 @@ package fr.kevinsarrazin.eduschool.data;
 /**
  * Created by Administrateur on 23/03/2015.
  */
-public class Anglais {
+public class QCM {
 
     private long id;
+    private String tag;
     private String question;
     private String reponse;
     private String mauvaiseReponse;
     private String mauvaiseReponse1;
 
-    public Anglais() {
+    public QCM() {
         super();
     }
 
-    public Anglais(long id, String question, String reponse, String mauvaiseReponse, String mauvaiseReponse1) {
+    public QCM(long id, String tag, String question, String reponse, String mauvaiseReponse, String mauvaiseReponse1) {
         this.id = id;
+        this.tag = tag;
         this.question = question;
         this.reponse = reponse;
         this.mauvaiseReponse = mauvaiseReponse;
         this.mauvaiseReponse1 = mauvaiseReponse1;
     }
 
-    public Anglais(String question, String reponse, String mauvaiseReponse, String mauvaiseReponse1) {
+    public QCM(String tag, String question, String reponse, String mauvaiseReponse, String mauvaiseReponse1) {
+        this.tag = tag;
         this.question = question;
         this.reponse = reponse;
         this.mauvaiseReponse = mauvaiseReponse;
@@ -44,6 +47,14 @@ public class Anglais {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getQuestion() {
