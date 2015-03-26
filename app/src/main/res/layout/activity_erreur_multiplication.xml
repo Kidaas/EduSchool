@@ -11,7 +11,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/layoutErreur">
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,9 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Choisir une autre table"
-            android:id="@+id/btnChoisirTable"
+            android:id="@+id/btnRetourAccueil"
             android:layout_gravity="center_horizontal"
-            android:onClick="onClickChoisirTable" />
+            android:onClick="onClickChoisirExercice" />
     </LinearLayout>
 
 </RelativeLayout>
