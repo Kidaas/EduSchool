@@ -13,7 +13,7 @@ import fr.kevinsarrazin.eduschool.DAOBase;
  */
 public class QcmDAO extends DAOBase {
 
-    public static final String TABLE_NAME = "anglais";
+    public static final String TABLE_NAME = "qcm";
     public static final String KEY = "id";
     public static final String TAG = "tag";
     public static final String QUESTION = "question";

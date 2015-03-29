@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import fr.kevinsarrazin.eduschool.activity.AdditionActivity;
+import fr.kevinsarrazin.eduschool.activity.NiveauActivity;
 import fr.kevinsarrazin.eduschool.activity.QcmActivity;
 import fr.kevinsarrazin.eduschool.activity.CulturegActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
@@ -29,6 +30,7 @@ public class MainActivity extends Activity {
     public final static int ADDITION_ACTIVITY_REQUEST = 2;
     public final static int CULTUREG_GEO_ACTIVITY_REQUEST = 3;
     public final static int QCM_ANGLAIS_ACTIVITY_REQUEST = 4;
+    public final static int MATH_ACTIVITY_REQUEST = 5;
 
     // Variable de stockage local
     SharedPreferences sharedpreferences;
@@ -253,6 +255,18 @@ public class MainActivity extends Activity {
         // Lancement de la demande de changement d'activité + demande de retour
         startActivityForResult(intent, QCM_ANGLAIS_ACTIVITY_REQUEST);
     }
+
+    /**
+     * Lance l'activité mathematique
+     * @param view
+     */
+    public void onMathClick(View view) {
+        // Création d'une intention
+        Intent intent = new Intent(this, NiveauActivity.class);
+        // Lancement de la demande de changement d'activité + demande de retour
+        startActivityForResult(intent, MATH_ACTIVITY_REQUEST);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

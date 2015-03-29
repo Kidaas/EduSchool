@@ -14,7 +14,8 @@ import fr.kevinsarrazin.eduschool.R;
 public class MultiplicationActivity extends Activity {
 
     public static final String MULTIPLICATEUR_MULTIPLICATEUR = "multiplicateur";
-    public final static int MULTIPLICATION_HELLO_REQUEST = 0;
+    public static final String NIVEAU_NUMBER = "level";
+
     private NumberPicker nbPicker;
 
     @Override
@@ -54,12 +55,12 @@ public class MultiplicationActivity extends Activity {
         int multiplicateur = nbPicker.getValue();
 
         // Création d'un intention
-        Intent intent = new Intent(this, MultiplicationCalculActivity.class);
-        // Ajout du multiplicateur
+        Intent intent = new Intent(this, MathActivity.class);
+        // Ajout du niveau d'exercice
+        intent.putExtra(NIVEAU_NUMBER, 3);
         intent.putExtra(MULTIPLICATEUR_MULTIPLICATEUR, multiplicateur);
         // lancement de la demande de changement d'activité
-        // MULTIPLICATION_HELLO_REQUEST est le numéro de la requete
-        startActivityForResult(intent, MULTIPLICATION_HELLO_REQUEST);
+        startActivity(intent);
     }
 
 }

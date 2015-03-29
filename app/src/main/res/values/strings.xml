@@ -10,6 +10,14 @@
     <string name="title_activity_cultureg">Culture Générale</string>
     <string name="title_activity_erreur">Erreur</string>
     <string name="title_activity_felicitation">Felicitation !</string>
+    <string name="title_activity_QCM">QCM</string>
+    <string name="title_activity_niveau">Choisi ton niveau</string>
+    <string name="title_activity_math">Math</string>
+    <string name="title_activity_resultat">Resultat</string>
+
+    <!-- Defaut -->
+    <string name="defaut">autre</string>
+    <string name="hello_world">Hello world!</string>
 
     <!-- Boutons -->
     <string name="connexion">Connexion</string>
@@ -17,12 +25,17 @@
     <string name="valider">Valider</string>
 
     <!-- Menu -->
-    <string name="defaut">Autre</string>
-    <string name="multiplication">Multiplication</string>
     <string name="addition">Addition</string>
+    <string name="soustraction">Soustraction</string>
+    <string name="multiplication">Multiplication</string>
+    <string name="division">Division</string>
+    <string name="math">Math</string>
     <string name="geographie">Geographie</string>
     <string name="francais">Français</string>
     <string name="anglais">Anglais QCM</string>
 
+    <!-- Textes -->
+    <string name="resultat">Resultat : </string>
+    <string name="score">Score : </string>
 
 </resources>

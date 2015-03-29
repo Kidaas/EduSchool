@@ -166,7 +166,7 @@
             android:orientation="vertical"
             android:layout_width="110dip"
             android:layout_height="fill_parent"
-            android:onClick="onGeographieClick" >
+            android:onClick="onMathClick" >
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -174,13 +174,13 @@
                 android:id="@+id/imageButton6"
                 android:src="@drawable/btn"
                 android:layout_gravity="center_horizontal"
-                android:onClick="onGeographieClick" />
+                android:onClick="onMathClick" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/defaut"
+                android:text="@string/math"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView8" />
         </LinearLayout>
