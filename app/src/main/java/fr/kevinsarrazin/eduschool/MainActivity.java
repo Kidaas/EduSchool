@@ -98,7 +98,7 @@ public class MainActivity extends Activity {
         if (!TextUtils.isEmpty(EditTxtInscriptionLogin.getText()) && !TextUtils.isEmpty(EditTxtInscriptionPassword.getText())){
             UserDAO uDao = new UserDAO(this);
             User u = new User(EditTxtInscriptionLogin.getText().toString(), EditTxtInscriptionPassword.getText().toString());
-            uDao.ajouter(u);
+            uDao.insert(u);
             EditTxtInscriptionLogin.getText().clear();
             EditTxtInscriptionPassword.getText().clear();
 

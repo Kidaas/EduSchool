@@ -22,7 +22,7 @@ public class ResultatActivity extends Activity {
 
     private LinearLayout layoutScore;
 
-    private int score = 0;
+    private int score = 0, meilleurScore = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,12 @@ public class ResultatActivity extends Activity {
         // Récupère le caller
         String caller = getIntent().getStringExtra("caller");
 
-        if (caller.equals("Addition")){
+        if (caller.equals("Addition") || caller.equals("Soustraction") || caller.equals("Division")){
             score = getIntent().getIntExtra(MathActivity.MATH_SCORE, 0);
-        }else if (caller.equals("Soustraction")) {
-            score = getIntent().getIntExtra(MathActivity.MATH_SCORE, 0);
+            meilleurScore = getIntent().getIntExtra(MathActivity.MATH_MEILLEUR_SCORE, 0);
         }else if (caller.equals("Multiplication")) {
             score = getIntent().getIntExtra(MathActivity.MATH_SCORE, 0);
+            meilleurScore = getIntent().getIntExtra(MathActivity.MATH_MEILLEUR_SCORE, 0);
 
             // Ajout d'un bouton de choix de table
             layoutScore = (LinearLayout) findViewById(R.id.layoutScore);
@@ -48,15 +48,14 @@ public class ResultatActivity extends Activity {
                     onClickChoisirTable(v);
                 }
             });
-
-        }else if (caller.equals("Division")) {
-            score = getIntent().getIntExtra(MathActivity.MATH_SCORE, 0);
         }
 
         TextView txtScore = (TextView) findViewById(R.id.txtScore);
+        TextView txtMeilleurScore = (TextView) findViewById(R.id.txtMeilleurScore);
         RatingBar scoreBar = (RatingBar) findViewById(R.id.ScoreBar);
 
         txtScore.setText("Score : "+ score);
+        txtMeilleurScore.setText("Meilleur score : "+ meilleurScore);
         // Nombre d'étoile :
         int nbEtoiles = (int) Math.ceil(score/2);
         scoreBar.setNumStars(nbEtoiles);

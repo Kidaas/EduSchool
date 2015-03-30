@@ -16,7 +16,7 @@ public class ScoreDAO extends DAOBase {
     public static final String TABLE_NAME = "score";
     public static final String KEY = "id";
     public static final String IDUSER = "idUser";
-    public static final String IDMATIERE = "idMatière";
+    public static final String IDMATIERE = "idMatiere";
     public static final String SCORE = "score";
 
     public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ IDUSER + " INTEGER, " + IDMATIERE + " INTEGER, "+ SCORE + " INTEGER );";
@@ -32,7 +32,8 @@ public class ScoreDAO extends DAOBase {
     /**
      * @param s le score à ajouter en base de données
      */
-    public void ajouter(Score s) {
+    public void insert(Score s) {
+
         ContentValues value = new ContentValues();
         // Set les données
         value.put(IDUSER, s.getidUser());
@@ -54,11 +55,15 @@ public class ScoreDAO extends DAOBase {
      * @param s la question à modifié
      */
     public void update(Score s) {
-        ContentValues value = new ContentValues();
-        value.put(IDUSER, s.getidUser());
-        value.put(IDMATIERE, s.getIdMatiere());
-        value.put(SCORE, s.getScore());
-        mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(s.getId())});
+        if(getScore(s.getId()) ==  null){
+            insert(s);
+        }else {
+            ContentValues value = new ContentValues();
+            value.put(IDUSER, s.getidUser());
+            value.put(IDMATIERE, s.getIdMatiere());
+            value.put(SCORE, s.getScore());
+            mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(s.getId())});
+        }
     }
 
     /**
@@ -106,8 +111,29 @@ public class ScoreDAO extends DAOBase {
     /**
      * @param idMatiere l'identifiant du score à récupérer
      */
-    public Score getScoreByMatière(long idMatiere) {
+    public Score getScoreByMatiere(long idMatiere) {
         Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where idMatiere = ?", new String[] {String.valueOf(idMatiere)});
+
+        // Si il ne retourne rien, => retourne null
+        if (c.getCount() == 0) {
+            return null;
+        }else {
+            // On va sur le 1er élements
+            c.moveToFirst();
+            Score score = new Score();
+            score.setId(c.getLong(0));
+            score.setidUser(c.getLong(1));
+            score.setIdMatiere(c.getLong(2));
+            score.setScore(c.getInt(3));
+            return score;
+        }
+    }
+
+    /**
+     * @param idMatiere l'identifiant du score à récupérer
+     */
+    public Score getScoreByMatiereAndUser(long idMatiere, long idUser) {
+        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where idMatiere = ? AND idUser = ?", new String[] {String.valueOf(idMatiere), String.valueOf(idMatiere)});
 
         // Si il ne retourne rien, => retourne null
         if (c.getCount() == 0) {

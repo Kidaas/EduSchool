@@ -37,5 +37,6 @@
     <!-- Textes -->
     <string name="resultat">Resultat : </string>
     <string name="score">Score : </string>
+    <string name="meilleurScore">Meilleur score : </string>
 
 </resources>

@@ -52,7 +52,7 @@ public class UserDAO extends DAOBase {
     /**
      * @param u la question à ajouter à la base
      */
-    public void ajouter(User u) {
+    public void insert(User u) {
         ContentValues value = new ContentValues();
         // Set les données
         value.put(UserDAO.LOGIN, u.getLogin());
@@ -64,18 +64,22 @@ public class UserDAO extends DAOBase {
     /**
      * @param id l'identifiant de l'utilisateur
      */
-    public void supprimer(long id) {
+    public void delete(long id) {
         mDb.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
     }
 
     /**
      * @param u l'utilisateur modifié
      */
-    public void modifier(User  u) {
-        ContentValues value = new ContentValues();
-        value.put(LOGIN, u.getLogin());
-        value.put(PASSWORD, u.getPassword());
-        mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(u.getId())});
+    public void update(User  u) {
+        if(getUserById(u.getId()) == null){
+            insert(u);
+        }else {
+            ContentValues value = new ContentValues();
+            value.put(LOGIN, u.getLogin());
+            value.put(PASSWORD, u.getPassword());
+            mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(u.getId())});
+        }
     }
 
     /**

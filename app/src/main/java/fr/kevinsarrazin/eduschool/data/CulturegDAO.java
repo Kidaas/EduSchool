@@ -59,7 +59,8 @@ public class CulturegDAO extends DAOBase {
     /**
      * @param c la question à ajouter à la base
      */
-    public void ajouter(Cultureg c) {
+    public void insert(Cultureg c) {
+
         ContentValues value = new ContentValues();
         // Set les données
         value.put(CulturegDAO.TAG, c.getTag());
@@ -72,19 +73,23 @@ public class CulturegDAO extends DAOBase {
     /**
      * @param id l'identifiant de la question à supprimer
      */
-    public void supprimer(long id) {
+    public void delete(long id) {
         mDb.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
     }
 
     /**
      * @param c la question à modifié
      */
-    public void modifier(Cultureg c) {
-        ContentValues value = new ContentValues();
-        value.put(TAG, c.getTag());
-        value.put(QUESTION, c.getQuestion());
-        value.put(REPONSE, c.getReponse());
-        mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(c.getId())});
+    public void update(Cultureg c) {
+        if(getQuestion(c.getId()) == null){
+            insert(c);
+        }else {
+            ContentValues value = new ContentValues();
+            value.put(TAG, c.getTag());
+            value.put(QUESTION, c.getQuestion());
+            value.put(REPONSE, c.getReponse());
+            mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(c.getId())});
+        }
     }
 
     /**

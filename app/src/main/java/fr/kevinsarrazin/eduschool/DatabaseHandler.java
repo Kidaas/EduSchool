@@ -52,6 +52,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      *      Table QCM
      ********************************************/
     public static final String QCM_KEY = "id";
+    public static final String QCM_TAG = "tag";
     public static final String QCM_QUESTION = "question";
     public static final String QCM_REPONSE = "reponse";
     public static final String QCM_MAUVAISE_REPONSE = "mauvaise_reponse";
@@ -61,6 +62,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String QCM_TABLE_CREATE =
             "CREATE TABLE " + QCM_TABLE_NAME + " (" +
                     QCM_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    QCM_TAG + " TEXT, " +
                     QCM_QUESTION + " TEXT, " +
                     QCM_REPONSE + " TEXT, " +
                     QCM_MAUVAISE_REPONSE + " TEXT, " +

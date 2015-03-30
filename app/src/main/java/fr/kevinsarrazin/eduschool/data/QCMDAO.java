@@ -40,7 +40,7 @@ public class QcmDAO extends DAOBase {
     /**
      * @param a la question à ajouter à la base
      */
-    public void ajouter(Qcm a) {
+    public void insert(Qcm a) {
         ContentValues value = new ContentValues();
         // Set les données
         value.put(QcmDAO.TAG, a.getTag());
@@ -55,7 +55,7 @@ public class QcmDAO extends DAOBase {
     /**
      * @param id l'identifiant de la question à supprimer
      */
-    public void supprimer(long id) {
+    public void delete(long id) {
         mDb.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
     }
 
@@ -86,14 +86,18 @@ public class QcmDAO extends DAOBase {
     /**
      * @param a la question à modifié
      */
-    public void modifier(Qcm a) {
-        ContentValues value = new ContentValues();
-        value.put(TAG, a.getTag());
-        value.put(QUESTION, a.getQuestion());
-        value.put(REPONSE, a.getReponse());
-        value.put(MAUVAISE_REPONSE, a.getMauvaiseReponse());
-        value.put(MAUVAISE_REPONSE1, a.getMauvaiseReponse1());
-        mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(a.getId())});
+    public void update(Qcm a) {
+        if(getQuestion(a.getId()) == null){
+            insert(a);
+        }else{
+            ContentValues value = new ContentValues();
+            value.put(TAG, a.getTag());
+            value.put(QUESTION, a.getQuestion());
+            value.put(REPONSE, a.getReponse());
+            value.put(MAUVAISE_REPONSE, a.getMauvaiseReponse());
+            value.put(MAUVAISE_REPONSE1, a.getMauvaiseReponse1());
+            mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(a.getId())});
+        }
     }
 
     /**

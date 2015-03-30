@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,17 +17,24 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.kevinsarrazin.eduschool.GlobalClass;
 import fr.kevinsarrazin.eduschool.R;
+import fr.kevinsarrazin.eduschool.data.Matiere;
+import fr.kevinsarrazin.eduschool.data.MatiereDAO;
 import fr.kevinsarrazin.eduschool.data.ResultatActivity;
+import fr.kevinsarrazin.eduschool.data.Score;
+import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 
 
 public class MathActivity extends Activity {
 
     public static final String MATH_SCORE = "MathScore";
+    public static final String MATH_MEILLEUR_SCORE = "MathMeilleuScore";
 
     private int level, multiplicateur, i = 1;
     private int val1, val2, result;
-    private int fin = 1, bonnesReponses = 0, erreurs = 0;
+    private int fin = 1, bonnesReponses = 0, erreurs = 0, meilleurScore;
+    private String operateur;
     private TextView txtVal1;
     private TextView txtVal2;
     private EditText EditTxtResult;
@@ -51,16 +59,20 @@ public class MathActivity extends Activity {
 
         switch(level) {
             case 1:
+                operateur = "Addition";
                 txtOperateur.setText(" + ");
                 break;
             case 2:
+                operateur = "Soustraction";
                 txtOperateur.setText(" - ");
                 break;
             case 3:
                 multiplicateur = getIntent().getIntExtra(MultiplicationActivity.MULTIPLICATEUR_MULTIPLICATEUR, 1);
+                operateur = "Multiplication";
                 txtOperateur.setText(" x ");
                 break;
             case 4:
+                operateur = "Division";
                 txtOperateur.setText(" / ");
                 break;
         }
@@ -90,26 +102,14 @@ public class MathActivity extends Activity {
 
         // Si c'est la 10eme réponse, l'activité est fini
         if (fin >= 10){
-
+            //Enregistre le score
+            score();
             // Création d'un intention
             Intent intent = new Intent(this, ResultatActivity.class);
             // Ajout de la chaine de nom à l'intent
+            intent.putExtra(MATH_MEILLEUR_SCORE, meilleurScore);
             intent.putExtra(MATH_SCORE, bonnesReponses);
-
-            switch(level) {
-                case 1:
-                    intent.putExtra("caller", "Addition");
-                    break;
-                case 2:
-                    intent.putExtra("caller", "Soustraction");
-                    break;
-                case 3:
-                    intent.putExtra("caller", "Multiplication");
-                    break;
-                case 4:
-                    intent.putExtra("caller", "Division");
-                    break;
-            }
+            intent.putExtra("caller", operateur);
             // lancement de la demande de changement d'activité
             startActivity(intent);
 
@@ -134,9 +134,33 @@ public class MathActivity extends Activity {
         btnNext.setVisibility(View.INVISIBLE);
     }
 
+    public void score(){
+        GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+        MatiereDAO matiereDAO = new MatiereDAO(this);
+        long idMatiere = matiereDAO.getMatiereByLibelle(operateur).getId();
+        long idUser = globalVariable.getId();
+        ScoreDAO scoreDAO = new ScoreDAO(this);
+
+        if (scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser) != null) {
+            if(scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore() > bonnesReponses){
+                meilleurScore = scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore();
+            }else {
+                meilleurScore = bonnesReponses;
+            }
+        }else{
+            meilleurScore = bonnesReponses;
+        }
+
+
+        Score score = new Score();
+        score.setidUser(idUser);
+        score.setIdMatiere(idMatiere);
+        score.setScore(bonnesReponses);
+        scoreDAO.update(score);
+    }
 
     /**
-     * Créer un calcul en fonciton du niveau choisi
+     * Créer un calcul en fonction du niveau choisi
      */
     public void Calcul() {
         switch(level) {
