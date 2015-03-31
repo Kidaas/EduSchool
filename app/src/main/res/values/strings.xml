@@ -21,15 +21,24 @@
     <string name="valider">Valider</string>
 
     <!-- Menu -->
+    <string name="math">Math</string>
+    <string name="culture">Culture G</string>
+    <string name="qcm">QCM</string>
+
+    <string name="monCompte">Mon compte</string>
+
+    <!-- Niveau -->
     <string name="addition">Addition</string>
     <string name="soustraction">Soustraction</string>
     <string name="multiplication">Multiplication</string>
     <string name="division">Division</string>
-    <string name="math">Math</string>
+
     <string name="geographie">Geographie</string>
     <string name="francais">Français</string>
-    <string name="anglais">Anglais QCM</string>
-    <string name="monCompte">Mon compte</string>
+
+    <string name="anglais">Anglais</string>
+
+
 
     <!-- Textes -->
     <string name="resultat">Resultat : </string>

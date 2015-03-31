@@ -6,23 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import fr.kevinsarrazin.eduschool.activity.AdditionActivity;
 import fr.kevinsarrazin.eduschool.activity.NiveauActivity;
-import fr.kevinsarrazin.eduschool.activity.QcmActivity;
-import fr.kevinsarrazin.eduschool.activity.CulturegActivity;
-import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
 import fr.kevinsarrazin.eduschool.activity.UserActivity;
 import fr.kevinsarrazin.eduschool.data.User;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
@@ -31,11 +23,17 @@ import fr.kevinsarrazin.eduschool.data.UserDAO;
 public class MainActivity extends Activity {
 
     // ID REQUETES
-    public final static int MULTIPLICATION_ACTIVITY_REQUEST = 1;
-    public final static int ADDITION_ACTIVITY_REQUEST = 2;
-    public final static int CULTUREG_GEO_ACTIVITY_REQUEST = 3;
-    public final static int QCM_ANGLAIS_ACTIVITY_REQUEST = 4;
-    public final static int MATH_ACTIVITY_REQUEST = 5;
+    public final static int MATH_ACTIVITY_REQUEST = 1;
+    public final static int CULTUREG_ACTIVITY_REQUEST = 2;
+    public final static int QCM_ACTIVITY_REQUEST = 2;
+
+    // Caller
+    public static final String CALLER = "caller";
+
+    // Constante pur le caller
+    private String MATH = "Math";
+    private String CULTURE = "Culture";
+    private String QCM = "QCM";
 
     // Variable de stockage local
     SharedPreferences sharedpreferences;
@@ -203,79 +201,53 @@ public class MainActivity extends Activity {
         LinearLayout linearDeconnexion = (LinearLayout) findViewById(R.id.LinearDeconnexion);
         linearDeconnexion.setVisibility(LinearLayout.INVISIBLE);
     }
-    /**
-     * Lance l'activité multiplication
-     * @param view
-     */
-    public void onMultiplicationClick(View view) {
-        // Création d'une intention
-        Intent intent = new Intent(this, MultiplicationActivity.class);
-        // Lancement de la demande de changement d'activité + demande de retour
-        startActivityForResult(intent, MULTIPLICATION_ACTIVITY_REQUEST);
-    }
 
     /**
-     * Lance l'activité Addition
-     * @param view
-     */
-    public void onAdditionClick(View view) {
-        // Création d'une intention
-        Intent intent = new Intent(this, AdditionActivity.class);
-        // Lancement de la demande de changement d'activité + demande de retour
-        startActivityForResult(intent, ADDITION_ACTIVITY_REQUEST);
-    }
-
-    /**
-     * Lance l'activité cultureg -> Geographie
-     * @param view
-     */
-    public void onGeographieClick(View view) {
-        // Création d'une intention
-        Intent intent = new Intent(this, CulturegActivity.class);
-        // Lancement de la demande de changement d'activité + demande de retour
-        intent.putExtra("caller", "Geographie");
-        startActivityForResult(intent, CULTUREG_GEO_ACTIVITY_REQUEST);
-    }
-
-    /**
-     * Lance l'activité cultureg -> Français
-     * @param view
-     */
-    public void onFrançaisClick(View view) {
-        // Création d'une intention
-        Intent intent = new Intent(this, CulturegActivity.class);
-        // Lancement de la demande de changement d'activité + demande de retour
-        intent.putExtra("caller", "Français");
-        startActivityForResult(intent, CULTUREG_GEO_ACTIVITY_REQUEST);
-    }
-
-    /**
-     * Lance l'activité QCM anglais
-     * @param view
-     */
-    public void onQCMAnglaisClick(View view) {
-        // Création d'une intention
-        Intent intent = new Intent(this, QcmActivity.class);
-        // Lancement de la demande de changement d'activité + demande de retour
-        startActivityForResult(intent, QCM_ANGLAIS_ACTIVITY_REQUEST);
-    }
-
-    /**
-     * Lance l'activité mathematique
+     * Lance l'activité Math
      * @param view
      */
     public void onMathClick(View view) {
         // Création d'une intention
         Intent intent = new Intent(this, NiveauActivity.class);
+        intent.putExtra(CALLER, MATH);
         // Lancement de la demande de changement d'activité + demande de retour
         startActivityForResult(intent, MATH_ACTIVITY_REQUEST);
     }
 
+    /**
+     * Lance les questions de cultures générales
+     * @param view
+     */
+    public void onCulturegClick(View view) {
+        // Création d'une intention
+        Intent intent = new Intent(this, NiveauActivity.class);
+        intent.putExtra(CALLER, CULTURE);
+        // Lancement de la demande de changement d'activité + demande de retour
+        startActivityForResult(intent, CULTUREG_ACTIVITY_REQUEST);
+    }
 
+    /**
+     * Lance les questions de cultures générales
+     * @param view
+     */
+    public void onQcmClick(View view) {
+        // Création d'une intention
+        Intent intent = new Intent(this, NiveauActivity.class);
+        intent.putExtra(CALLER, QCM);
+        // Lancement de la demande de changement d'activité + demande de retour
+        startActivityForResult(intent, QCM_ACTIVITY_REQUEST);
+    }
+
+    /**
+     * Test le retour d'activité
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Vérification du retour à l'aide du code requête
-        if (requestCode == MULTIPLICATION_ACTIVITY_REQUEST || requestCode == ADDITION_ACTIVITY_REQUEST || requestCode == CULTUREG_GEO_ACTIVITY_REQUEST || requestCode == QCM_ANGLAIS_ACTIVITY_REQUEST) {
+        if (requestCode == MATH_ACTIVITY_REQUEST || requestCode == CULTUREG_ACTIVITY_REQUEST) {
             // Afficher une notification
             String notification =  "Retour à l'activité principale";
             Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();

@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import fr.kevinsarrazin.eduschool.ErreurActivity;
-import fr.kevinsarrazin.eduschool.FelicitationActivity;
 import fr.kevinsarrazin.eduschool.R;
 import fr.kevinsarrazin.eduschool.data.Cultureg;
 import fr.kevinsarrazin.eduschool.data.CulturegDAO;
@@ -88,7 +86,7 @@ public class CulturegActivity extends Activity {
             }
         }
 
-        if (erreur == 0){
+/*        if (erreur == 0){
             // Création d'un intention
             Intent intent = new Intent(this, FelicitationActivity.class);
             // lancement de la demande de changement d'activité
@@ -103,7 +101,7 @@ public class CulturegActivity extends Activity {
             // lancement de la demande de changement d'activité
             startActivity(intent);
             //startActivityForResult(intent, MULTIPLICATION_ERREUR_REQUEST);
-        }
+        }*/
     }
 
     /**

@@ -54,7 +54,7 @@
             android:layout_below="@+id/textViewPresentation"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            android:onClick="onQCMAnglaisClick"
+            android:onClick="onQcmClick"
             android:nestedScrollingEnabled="false">
 
             <ImageButton
@@ -63,7 +63,7 @@
                 android:id="@+id/imageButton9"
                 android:src="@drawable/btn"
                 android:layout_gravity="center_horizontal"
-                android:onClick="onQCMAnglaisClick"
+                android:onClick="onQcmClick"
                 android:nestedScrollingEnabled="false" />
 
             <TextView
@@ -79,7 +79,7 @@
             android:orientation="vertical"
             android:layout_width="110dip"
             android:layout_height="fill_parent"
-            android:onClick="onGeographieClick">
+            android:onClick="onCulturegClick">
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -87,13 +87,13 @@
                 android:id="@+id/imageButton3"
                 android:src="@drawable/btn"
                 android:layout_gravity="center_horizontal"
-                android:onClick="onGeographieClick" />
+                android:onClick="onCulturegClick" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/geographie"
+                android:text="@string/culture"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView"
                 />
@@ -101,14 +101,14 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+  <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/LinearLayoutMenu"
         android:layout_gravity="center"
         android:id="@+id/linearLayoutMenu2" >
-
+<!--
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="110dip"
@@ -184,7 +184,7 @@
                 android:text="@string/defaut"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView118" />
-        </LinearLayout>
+        </LinearLayout>-->
     </LinearLayout>
 
     <LinearLayout
