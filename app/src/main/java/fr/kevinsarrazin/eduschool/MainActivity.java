@@ -6,19 +6,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import fr.kevinsarrazin.eduschool.activity.AdditionActivity;
 import fr.kevinsarrazin.eduschool.activity.NiveauActivity;
 import fr.kevinsarrazin.eduschool.activity.QcmActivity;
 import fr.kevinsarrazin.eduschool.activity.CulturegActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
+import fr.kevinsarrazin.eduschool.activity.UserActivity;
 import fr.kevinsarrazin.eduschool.data.User;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
 
@@ -49,9 +54,8 @@ public class MainActivity extends Activity {
         if (sharedpreferences.contains(nom) && sharedpreferences.contains(mdp))
         {
             UserDAO userDAO = new UserDAO(this);
-            User u = new User();
             // Récupère l'user via son login stocké en local
-            u = userDAO.getUserByLogin(sharedpreferences.getString(nom, "login"));
+            User u = userDAO.getUserByLogin(sharedpreferences.getString(nom, "login"));
             // Créer une instance de la classe variable globale
             final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
             // Ajoute l'id de l'utilisateur à la variable globale
@@ -294,7 +298,11 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.compte) {
+            // Création d'une intention
+            Intent intent = new Intent(this, UserActivity.class);
+            // Lancement de la demande de changement d'activité + demande de retour
+            startActivity(intent);
             return true;
         }
 

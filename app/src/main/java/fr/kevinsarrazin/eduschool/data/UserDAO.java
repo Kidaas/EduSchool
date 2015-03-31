@@ -86,7 +86,7 @@ public class UserDAO extends DAOBase {
      * @param id l'identifiant de l'utilisateur
      */
     public User getUserById(long id) {
-        Cursor c = mDb.rawQuery("select " + LOGIN +", " + PASSWORD + " from " + TABLE_NAME + " where id = ?", new String[] {String.valueOf(id)});
+        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where id = ?", new String[] {String.valueOf(id)});
 
         // Si il ne retourne rien, => retourne null
         if (c.getCount() == 0) {
@@ -95,8 +95,9 @@ public class UserDAO extends DAOBase {
             // On va sur le 1er élements
             c.moveToFirst();
             User user = new User();
-            user.setLogin(c.getString(0));
-            user.setPassword(c.getString(1));
+            user.setId(c.getLong(0));
+            user.setLogin(c.getString(1));
+            user.setPassword(c.getString(2));
             return user;
         }
     }
@@ -106,7 +107,7 @@ public class UserDAO extends DAOBase {
      * @return User user
      */
     public User getUserByLogin(String login) {
-        Cursor c = mDb.rawQuery("select " + LOGIN +", " + PASSWORD + " from " + TABLE_NAME + " where login = ?", new String[] {login});
+        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where login = ?", new String[] {login});
 
         // Si il ne retourne rien, => retourne null
         if (c.getCount() == 0) {
@@ -115,8 +116,9 @@ public class UserDAO extends DAOBase {
             // On va sur le 1er élements
             c.moveToFirst();
             User user = new User();
-            user.setLogin(c.getString(0));
-            user.setPassword(c.getString(1));
+            user.setId(c.getLong(0));
+            user.setLogin(c.getString(1));
+            user.setPassword(c.getString(2));
             return user;
         }
     }

@@ -87,9 +87,9 @@ public class ScoreDAO extends DAOBase {
         }
     }
 
-    /**
+/*    *//**
      * @param idUser l'identifiant du score à récupérer
-     */
+     *//*
     public Score getScoreByUser(long idUser) {
         Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where idUser = ?", new String[] {String.valueOf(idUser)});
 
@@ -106,11 +106,11 @@ public class ScoreDAO extends DAOBase {
             score.setScore(c.getInt(3));
             return score;
         }
-    }
+    }*/
 
-    /**
+/*    *//**
      * @param idMatiere l'identifiant du score à récupérer
-     */
+     *//*
     public Score getScoreByMatiere(long idMatiere) {
         Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where idMatiere = ?", new String[] {String.valueOf(idMatiere)});
 
@@ -127,7 +127,7 @@ public class ScoreDAO extends DAOBase {
             score.setScore(c.getInt(3));
             return score;
         }
-    }
+    }*/
 
     /**
      * @param idMatiere l'identifiant du score à récupérer
@@ -153,11 +153,11 @@ public class ScoreDAO extends DAOBase {
     /**
      *
      */
-    public ArrayList<Score> getAllScore() {
+    public ArrayList<Score> getAllScoreByUser(long idUser) {
         ArrayList<Score> listScores = new ArrayList<Score>();
-        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME, null);
+        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where idUser = ?", new String[] {String.valueOf(idUser)});
 
-        // Si il ne retourne rien, => retourne null
+        // Si il ne retourne rien => retourne null
         if (c.getCount() == 0) {
             return null;
         }else {

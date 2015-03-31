@@ -32,10 +32,6 @@
             android:label="@string/title_activity_multiplication" >
         </activity>
         <activity
-            android:name=".activity.MultiplicationCalculActivity"
-            android:label="@string/title_activity_multiplication_calcul" >
-        </activity>
-        <activity
             android:name=".activity.AdditionActivity"
             android:label="@string/title_activity_addition" >
         </activity>
@@ -56,8 +52,12 @@
             android:label="@string/title_activity_niveau" >
         </activity>
         <activity
-            android:name=".data.ResultatActivity"
+            android:name=".ResultatActivity"
             android:label="@string/title_activity_resultat" >
+        </activity>
+        <activity
+            android:name=".activity.UserActivity"
+            android:label="@string/title_activity_user" >
         </activity>
     </application>
 
