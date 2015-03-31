@@ -4,16 +4,12 @@
     <string name="action_settings">Parametres</string>
     <string name="title_activity_erreur_multiplication">Erreur</string>
     <string name="title_activity_felicitation_multiplication">Felicitation !</string>
-    <string name="title_activity_multiplication">Multiplication</string>
-    <string name="title_activity_multiplication_calcul">MultiplicationCalcul</string>
-    <string name="title_activity_addition">AdditionA</string>
     <string name="title_activity_cultureg">Culture Générale</string>
-    <string name="title_activity_erreur">Erreur</string>
-    <string name="title_activity_felicitation">Felicitation !</string>
     <string name="title_activity_QCM">QCM</string>
     <string name="title_activity_niveau">Choisi ton niveau</string>
     <string name="title_activity_math">Math</string>
     <string name="title_activity_resultat">Resultat</string>
+    <string name="title_activity_user">Mon espaces</string>
 
     <!-- Defaut -->
     <string name="defaut">autre</string>
@@ -33,6 +29,7 @@
     <string name="geographie">Geographie</string>
     <string name="francais">Français</string>
     <string name="anglais">Anglais QCM</string>
+    <string name="monCompte">Mon compte</string>
 
     <!-- Textes -->
     <string name="resultat">Resultat : </string>

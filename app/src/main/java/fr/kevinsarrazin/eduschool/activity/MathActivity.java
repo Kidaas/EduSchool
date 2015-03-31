@@ -3,9 +3,7 @@ package fr.kevinsarrazin.eduschool.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +17,8 @@ import java.util.List;
 
 import fr.kevinsarrazin.eduschool.GlobalClass;
 import fr.kevinsarrazin.eduschool.R;
-import fr.kevinsarrazin.eduschool.data.Matiere;
 import fr.kevinsarrazin.eduschool.data.MatiereDAO;
-import fr.kevinsarrazin.eduschool.data.ResultatActivity;
+import fr.kevinsarrazin.eduschool.ResultatActivity;
 import fr.kevinsarrazin.eduschool.data.Score;
 import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 
@@ -134,6 +131,10 @@ public class MathActivity extends Activity {
         btnNext.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * Enregistre le score
+     * libelleMatiere, score
+     */
     public void score(){
         GlobalClass globalVariable = (GlobalClass) getApplicationContext();
         MatiereDAO matiereDAO = new MatiereDAO(this);
@@ -150,7 +151,6 @@ public class MathActivity extends Activity {
         }else{
             meilleurScore = bonnesReponses;
         }
-
 
         Score score = new Score();
         score.setidUser(idUser);

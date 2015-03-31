@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Bienvenu sur l&apos;application EduSchool, choisissez une activitée !"
+        android:text="Bienvenu, choisissez une activitée !"
         android:id="@+id/textViewPresentation"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -26,52 +26,53 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="110dip"
-            android:layout_height="wrap_content"
-            android:id="@+id/LinearLayoutMultiplication"
-            android:clickable="true"
-            android:onClick="onMultiplicationClick">
+            android:layout_height="fill_parent"
+            android:onClick="onMathClick" >
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageButton"
-                android:layout_gravity="center_horizontal"
+                android:id="@+id/imageButton6"
                 android:src="@drawable/btn"
-                android:onClick="onMultiplicationClick" />
+                android:layout_gravity="center_horizontal"
+                android:onClick="onMathClick" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/multiplication"
+                android:text="@string/math"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/textView2" />
+                android:id="@+id/textView8" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="110dip"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/LinearLayoutMultiplication"
+            android:layout_toRightOf="@+id/linearLayout"
             android:layout_below="@+id/textViewPresentation"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            android:onClick="onAdditionClick">
+            android:onClick="onQCMAnglaisClick"
+            android:nestedScrollingEnabled="false">
+
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageButton2"
+                android:id="@+id/imageButton9"
                 android:src="@drawable/btn"
                 android:layout_gravity="center_horizontal"
-                android:onClick="onAdditionClick" />
+                android:onClick="onQCMAnglaisClick"
+                android:nestedScrollingEnabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/addition"
+                android:text="@string/anglais"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/textView3" />
+                android:id="@+id/textView10" />
         </LinearLayout>
 
         <LinearLayout
@@ -141,7 +142,7 @@
             android:layout_below="@+id/textViewPresentation"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            android:onClick="onQCMAnglaisClick"
+            android:onClick=""
             android:nestedScrollingEnabled="false">
 
             <ImageButton
@@ -150,14 +151,14 @@
                 android:id="@+id/imageButton5"
                 android:src="@drawable/btn"
                 android:layout_gravity="center_horizontal"
-                android:onClick="onQCMAnglaisClick"
+                android:onClick=""
                 android:nestedScrollingEnabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/anglais"
+                android:text="@string/defaut"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView7" />
         </LinearLayout>
@@ -166,23 +167,23 @@
             android:orientation="vertical"
             android:layout_width="110dip"
             android:layout_height="fill_parent"
-            android:onClick="onMathClick" >
+            android:onClick="" >
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageButton6"
+                android:id="@+id/imageButton7"
                 android:src="@drawable/btn"
                 android:layout_gravity="center_horizontal"
-                android:onClick="onMathClick" />
+                android:onClick="" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/math"
+                android:text="@string/defaut"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/textView8" />
+                android:id="@+id/textView118" />
         </LinearLayout>
     </LinearLayout>
 
