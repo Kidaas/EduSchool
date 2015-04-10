@@ -134,21 +134,29 @@ public class CulturegActivity extends Activity {
         long idUser = globalVariable.getId();
         ScoreDAO scoreDAO = new ScoreDAO(this);
 
-        if (scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser) != null) {
-            if(scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore() > bonnesReponses){
+        if (scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser) != null) { // Si un score existe
+            if(scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore() > bonnesReponses){ // Si le score en BD est supérieur a l'actuel
                 meilleurScore = scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore();
-            }else {
+            }else { // Sinon Maj de la BD
                 meilleurScore = bonnesReponses;
+
+                Score score = new Score();
+                score.setidUser(idUser);
+                score.setIdMatiere(idMatiere);
+                score.setScore(bonnesReponses);
+                scoreDAO.update(score);
+
             }
         }else{
             meilleurScore = bonnesReponses;
+
+            Score score = new Score();
+            score.setidUser(idUser);
+            score.setIdMatiere(idMatiere);
+            score.setScore(bonnesReponses);
+            scoreDAO.insert(score);
         }
 
-        Score score = new Score();
-        score.setidUser(idUser);
-        score.setIdMatiere(idMatiere);
-        score.setScore(bonnesReponses);
-        scoreDAO.update(score);
     }
 
     @Override

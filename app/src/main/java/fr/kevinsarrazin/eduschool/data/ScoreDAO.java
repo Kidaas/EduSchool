@@ -133,7 +133,7 @@ public class ScoreDAO extends DAOBase {
      * @param idMatiere l'identifiant du score à récupérer
      */
     public Score getScoreByMatiereAndUser(long idMatiere, long idUser) {
-        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where idMatiere = ? AND idUser = ?", new String[] {String.valueOf(idMatiere), String.valueOf(idMatiere)});
+        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where idMatiere = ? AND idUser = ?", new String[] {String.valueOf(idMatiere), String.valueOf(idUser)});
 
         // Si il ne retourne rien, => retourne null
         if (c.getCount() == 0) {

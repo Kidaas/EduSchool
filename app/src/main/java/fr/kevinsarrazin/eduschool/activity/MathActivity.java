@@ -147,16 +147,22 @@ public class MathActivity extends Activity {
                 meilleurScore = scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore();
             }else {
                 meilleurScore = bonnesReponses;
+
+                Score score = new Score();
+                score.setidUser(idUser);
+                score.setIdMatiere(idMatiere);
+                score.setScore(bonnesReponses);
+                scoreDAO.update(score);
             }
         }else{
             meilleurScore = bonnesReponses;
-        }
 
-        Score score = new Score();
-        score.setidUser(idUser);
-        score.setIdMatiere(idMatiere);
-        score.setScore(bonnesReponses);
-        scoreDAO.update(score);
+            Score score = new Score();
+            score.setidUser(idUser);
+            score.setIdMatiere(idMatiere);
+            score.setScore(bonnesReponses);
+            scoreDAO.insert(score);
+        }
     }
 
     /**
