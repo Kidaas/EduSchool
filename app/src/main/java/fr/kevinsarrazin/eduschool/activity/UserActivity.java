@@ -69,8 +69,10 @@ public class UserActivity extends Activity {
             }
 
         }else {
-            String notification =  "Enregistrez/connectez vous pour profiter d'un compte";
-            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
+            txtViewName.setText("Enregistrez/connectez vous pour profiter des avantages liés au compte");
+            TextView txtViewMessage = new TextView(this);
+            txtViewMessage.setText("Aucun score pour le moment !");
+            layoutScore.addView(txtViewMessage);
         }
 
     }

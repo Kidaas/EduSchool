@@ -15,25 +15,8 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ErreurActivity"
-            android:label="@string/title_activity_erreur_multiplication" >
-        </activity>
-        <activity
-            android:name=".FelicitationActivity"
-            android:label="@string/title_activity_felicitation_multiplication" >
-        </activity>
-        <activity
-            android:name=".activity.MultiplicationActivity"
-            android:label="@string/title_activity_multiplication" >
-        </activity>
-        <activity
-            android:name=".activity.AdditionActivity"
-            android:label="@string/title_activity_addition" >
         </activity>
         <activity
             android:name=".activity.CulturegActivity"

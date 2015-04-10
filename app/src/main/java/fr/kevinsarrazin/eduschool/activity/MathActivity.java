@@ -26,7 +26,7 @@ import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 public class MathActivity extends Activity {
 
     public static final String MATH_SCORE = "MathScore";
-    public static final String MATH_MEILLEUR_SCORE = "MathMeilleuScore";
+    public static final String MATH_MEILLEUR_SCORE = "MathMeilleurScore";
 
     private int level, multiplicateur, i = 1;
     private int val1, val2, result;

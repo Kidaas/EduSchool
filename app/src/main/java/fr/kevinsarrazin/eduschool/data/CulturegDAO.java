@@ -3,6 +3,7 @@ package fr.kevinsarrazin.eduschool.data;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -21,13 +22,14 @@ public class CulturegDAO extends DAOBase {
 
     // Tableau de données (tag, question, reponse)
     private static final String[] DATA = new String[] {
-            "'geographie', 'Capitale de la France ? ', 'Paris'",
-            "'geographie', 'Capitale de l\''Espagne ? ', 'Madrid'",
-            "'geographie', 'Capitale de la Belgique ? ', 'Bruxelles'",
-            "'geographie', 'Capitale des Etats Unis ? ', 'Washington'",
-            "'geographie', 'Capitale de la Chine ? ', 'Pekin'",
-            "'geographie', 'Capitale du Japon ? ', 'Tokyo'",
-            "'geographie', 'Capitale de l\''Italie ? ', 'Rome'"
+            "'Geographie', 'Capitale de la France ? ', 'Paris'",
+            "'Geographie', 'Capitale de l\''Espagne ? ', 'Madrid'",
+            "'Geographie', 'Capitale de la Belgique ? ', 'Bruxelles'",
+            "'Geographie', 'Capitale des Etats Unis ? ', 'Washington'",
+            "'Geographie', 'Capitale de la Chine ? ', 'Pekin'",
+            "'Geographie', 'Capitale du Japon ? ', 'Tokyo'",
+            "'Geographie', 'Capitale de l\''Italie ? ', 'Rome'",
+            "'Français', 'test', 'test'"
     };
 
     public CulturegDAO(Context pContext) {
@@ -116,7 +118,7 @@ public class CulturegDAO extends DAOBase {
     /**
      *
      */
-    public ArrayList<Cultureg> getAllCultureg(String tag) {
+    public ArrayList<Cultureg> getAllCultureg() {
         ArrayList<Cultureg> listCultureg = new ArrayList<Cultureg>();
         Cursor c = mDb.rawQuery("select " + TAG +", " + QUESTION + ", " + REPONSE + " from " + TABLE_NAME, null);
 
@@ -140,7 +142,7 @@ public class CulturegDAO extends DAOBase {
 
     public ArrayList<Cultureg> getAllCulturegByTag(String tag) {
         ArrayList<Cultureg> listCultureg = new ArrayList<Cultureg>();
-        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME+ " where tag = ?", new String[] {tag});
+        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where tag = ?", new String[]{tag});
 
         // Si il ne retourne rien, => retourne null
         if (c.getCount() == 0) {
@@ -157,6 +159,26 @@ public class CulturegDAO extends DAOBase {
             }
 
             return listCultureg;
+        }
+    }
+
+    public Cultureg getQuestionRandom(String tag) {
+
+        //Récupère dans un Cursor les valeurs correspondants à une question au hasard
+        Cursor c = mDb.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE tag = ? ORDER BY RANDOM() LIMIT 1", new String[]{tag});
+
+        // Si il ne retourne rien, => retourne null
+        if (c.getCount() == 0) {
+            return null;
+        }else {
+            // On va sur le 1er élement
+            c.moveToFirst();
+            Cultureg Question = new Cultureg();
+            Question.setId(c.getLong(0));
+            Question.setTag(c.getString(1));
+            Question.setQuestion(c.getString(2));
+            Question.setReponse(c.getString(3));
+            return Question;
         }
     }
 }

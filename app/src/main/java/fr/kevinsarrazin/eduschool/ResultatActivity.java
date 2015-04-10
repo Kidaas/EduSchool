@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import fr.kevinsarrazin.eduschool.MainActivity;
 import fr.kevinsarrazin.eduschool.R;
+import fr.kevinsarrazin.eduschool.activity.CulturegActivity;
 import fr.kevinsarrazin.eduschool.activity.MathActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
+import fr.kevinsarrazin.eduschool.data.Cultureg;
 
 public class ResultatActivity extends Activity {
 
@@ -48,6 +50,9 @@ public class ResultatActivity extends Activity {
                     onClickChoisirTable(v);
                 }
             });
+        }else if(caller.equals("Cultureg")){
+            score = getIntent().getIntExtra(CulturegActivity.CULTUREG_SCORE, 0);
+            meilleurScore = getIntent().getIntExtra(CulturegActivity.CULTUREG_MEILLEUR_SCORE, 0);
         }
 
         TextView txtScore = (TextView) findViewById(R.id.txtScore);

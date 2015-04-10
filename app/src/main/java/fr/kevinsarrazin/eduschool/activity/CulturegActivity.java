@@ -3,32 +3,64 @@ package fr.kevinsarrazin.eduschool.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import fr.kevinsarrazin.eduschool.GlobalClass;
 import fr.kevinsarrazin.eduschool.R;
+import fr.kevinsarrazin.eduschool.ResultatActivity;
 import fr.kevinsarrazin.eduschool.data.Cultureg;
 import fr.kevinsarrazin.eduschool.data.CulturegDAO;
+import fr.kevinsarrazin.eduschool.data.MatiereDAO;
+import fr.kevinsarrazin.eduschool.data.Score;
+import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 
 public class CulturegActivity extends Activity {
 
+    public static final String CULTUREG_SCORE = "CulturegScore";
+    public static final String CULTUREG_MEILLEUR_SCORE = "CulturegMeilleurScore";
+
+    private int level;
     public static final String GEO_NBERREUR = "GeoErreurs";
-    public static String tag = "geographie";
-    public static final int nbQuestion = 2;
+    public static String tag = "Geographie";
+    private int fin = 1, bonnesReponses = 0, erreurs = 0, meilleurScore, nbTourDeJeu = 2;
+    private String result;
+
+    private TextView txtViewQuestion;
+    private EditText EditTxtResult;
+    private Button btnNext, btnValider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cultureg);
+
+        txtViewQuestion = (TextView) findViewById(R.id.txtViewQuestion);
+        EditTxtResult = (EditText) findViewById(R.id.editTxtResult);
+        btnNext = (Button) findViewById(R.id.btnNext);
+        btnValider = (Button) findViewById(R.id.btnValider);
+
+        EditTxtResult.setHint(" ? "); // = Placeholder
+
+        // Récupère le niveau choisis
+        level = getIntent().getIntExtra(NiveauActivity.NIVEAU_NUMBER, 1);
+        // Et affecte le tag correspondant
+        switch(level) {
+            case 1:
+                tag = "Geographie";
+                break;
+            case 2:
+                tag = "Français";
+                break;
+        }
+
         Question();
-        tag = getIntent().getStringExtra("caller");
     }
 
     /**
@@ -37,82 +69,86 @@ public class CulturegActivity extends Activity {
     public void Question(){
 
         CulturegDAO cDAO = new CulturegDAO(this);
-        //List<Cultureg> listQuestion = cDAO.getAllCulturegByTag(tag);
+        Cultureg question = cDAO.getQuestionRandom(tag);
+        result = question.getReponse();
 
-        LinearLayout firstlayout = (LinearLayout) findViewById(R.id.layoutquestion);
-
-        for (int i = 1; i<nbQuestion; i++){
-            LinearLayout lLayout = new LinearLayout(this);
-            TextView txtView = new TextView(this);
-            EditText editTextReponse = new EditText(this);
-
-            Cultureg c = cDAO.getQuestion(i);
-
-            txtView.setText(c.getQuestion());
-            editTextReponse.setHint(" ? "); // = Placeholder
-            editTextReponse.setInputType(InputType.TYPE_CLASS_TEXT);
-            lLayout.addView(txtView);
-            lLayout.addView(editTextReponse);
-            firstlayout.addView(lLayout);
-        }
+        // Affecte la valeur à son champs
+        txtViewQuestion.setText(question.getQuestion());
 
     }
 
-    public void validerResultat(View vue) {
-        CulturegDAO cDAO = new CulturegDAO(this);
-        //List<Cultureg> listQuestion = cDAO.getAllCulturegByTag(tag);
-
-        LinearLayout lLayoutNumber = (LinearLayout) findViewById(R.id.layoutquestion);
-        int erreur = 0;
-
-        for (int i = 0; i < lLayoutNumber.getChildCount(); i++){
-            // Récupère le layout i du layout principal
-            LinearLayout l = (LinearLayout)lLayoutNumber.getChildAt(i);
-            // Récupère le EditText du layout l, à la positon 1
-            EditText e = (EditText)l.getChildAt(1);
-
-            if (TextUtils.isEmpty(e.getText())){
-                erreur++;
-            }else {
-                String result = e.getText().toString().toLowerCase();
-                int j = i+1;
-                String q = cDAO.getQuestion(j).getReponse().toLowerCase();
-                if (q.equals(result)){
-                    Log.d("result", "ok");
-                }else {
-                    Log.d("result","ko");
-                    erreur++;
-                }
-            }
+    public void onClickValider(View vue) {
+        // Si le champ est vide ou différent du résultat attentendu => erreur +1
+        if(TextUtils.isEmpty(EditTxtResult.getText()) || !EditTxtResult.getText().toString().toLowerCase().equals(result.toLowerCase())){
+            erreurs++;
+            String notification =  "Erreur";
+            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
+            // Sinon, bonne réponse +1
+        }else {
+            bonnesReponses++;
+            String notification =  "Bonne réponse";
+            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
         }
 
-/*        if (erreur == 0){
+        // Si c'est la Xeme réponse, l'activité est fini
+        if (fin >= nbTourDeJeu){
+            //Enregistre le score
+            score();
             // Création d'un intention
-            Intent intent = new Intent(this, FelicitationActivity.class);
-            // lancement de la demande de changement d'activité
-            startActivity(intent);
-            //startActivityForResult(intent, MULTIPLICATION_FELICITATION_REQUEST);
-        }else {
-            // Création d'un intention
-            Intent intent = new Intent(this, ErreurActivity.class);
+            Intent intent = new Intent(this, ResultatActivity.class);
             // Ajout de la chaine de nom à l'intent
-            intent.putExtra(GEO_NBERREUR, erreur);
-            intent.putExtra("caller", "CulturegGeoActivity");
+            intent.putExtra(CULTUREG_MEILLEUR_SCORE, meilleurScore);
+            intent.putExtra(CULTUREG_SCORE, bonnesReponses);
+            intent.putExtra("caller", "Cultureg");
             // lancement de la demande de changement d'activité
             startActivity(intent);
-            //startActivityForResult(intent, MULTIPLICATION_ERREUR_REQUEST);
-        }*/
+        }
+
+        // Masque le bouton valider, affiche le bouton suivant
+        btnValider.setVisibility(View.INVISIBLE);
+        btnNext.setVisibility(View.VISIBLE);
+
+        fin++;
+
     }
 
     /**
-     * Renvoie un nombre aléatoire compris entre min et max
-     * @param min
-     * @param max
-     * @return int res
+     * Affiche le prochain calcul
+     * @param vue
      */
-    public int randNb(int min, int max) {
-        int res = min + (int)(Math.random() * ((max - min) + 1));
-        return res;
+    public void onClickSuivant(View vue) {
+        Question();
+        EditTxtResult.setText("");
+        btnValider.setVisibility(View.VISIBLE);
+        btnNext.setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     * Enregistre le score
+     * libelleMatiere, score
+     */
+    public void score(){
+        GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+        MatiereDAO matiereDAO = new MatiereDAO(this);
+        long idMatiere = matiereDAO.getMatiereByLibelle(tag).getId();
+        long idUser = globalVariable.getId();
+        ScoreDAO scoreDAO = new ScoreDAO(this);
+
+        if (scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser) != null) {
+            if(scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore() > bonnesReponses){
+                meilleurScore = scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore();
+            }else {
+                meilleurScore = bonnesReponses;
+            }
+        }else{
+            meilleurScore = bonnesReponses;
+        }
+
+        Score score = new Score();
+        score.setidUser(idUser);
+        score.setIdMatiere(idMatiere);
+        score.setScore(bonnesReponses);
+        scoreDAO.update(score);
     }
 
     @Override
