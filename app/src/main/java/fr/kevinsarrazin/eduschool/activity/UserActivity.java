@@ -47,7 +47,7 @@ public class UserActivity extends Activity {
             // Récupère les scores de l'utilisateurs
             List<Score> listeScores = scoreDAO.getAllScoreByUser(idUser);
 
-            txtViewName.setText(user.getLogin());
+            txtViewName.setText(""+user.getId());
 
             if (listeScores != null){
                 for(Score score : listeScores){

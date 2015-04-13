@@ -13,4 +13,6 @@
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
+    <color name="errorColor">#f00</color>
+
 </resources>

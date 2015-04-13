@@ -2,6 +2,8 @@ package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -9,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,13 +30,13 @@ public class CulturegActivity extends Activity {
     public static final String CULTUREG_MEILLEUR_SCORE = "CulturegMeilleurScore";
 
     private int level;
-    public static final String GEO_NBERREUR = "GeoErreurs";
     public static String tag = "Geographie";
-    private int fin = 1, bonnesReponses = 0, erreurs = 0, meilleurScore, nbTourDeJeu = 2;
+    private int fin = 1, bonnesReponses = 0, meilleurScore, nbTourDeJeu = 10;
     private String result;
 
-    private TextView txtViewQuestion;
+    private TextView txtViewQuestion, txtViewReponse;
     private EditText EditTxtResult;
+    private ImageView imgResult;
     private Button btnNext, btnValider;
 
     @Override
@@ -42,7 +45,9 @@ public class CulturegActivity extends Activity {
         setContentView(R.layout.activity_cultureg);
 
         txtViewQuestion = (TextView) findViewById(R.id.txtViewQuestion);
+        txtViewReponse = (TextView) findViewById(R.id.txtViewReponse);
         EditTxtResult = (EditText) findViewById(R.id.editTxtResult);
+        imgResult = (ImageView) findViewById(R.id.imgResult);
         btnNext = (Button) findViewById(R.id.btnNext);
         btnValider = (Button) findViewById(R.id.btnValider);
 
@@ -80,14 +85,14 @@ public class CulturegActivity extends Activity {
     public void onClickValider(View vue) {
         // Si le champ est vide ou différent du résultat attentendu => erreur +1
         if(TextUtils.isEmpty(EditTxtResult.getText()) || !EditTxtResult.getText().toString().toLowerCase().equals(result.toLowerCase())){
-            erreurs++;
-            String notification =  "Erreur";
-            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
+            txtViewReponse.setText(result);
+            Drawable myDrawable = getResources().getDrawable(R.drawable.ko);
+            imgResult.setImageDrawable(myDrawable);
             // Sinon, bonne réponse +1
         }else {
+            Drawable myDrawable = getResources().getDrawable(R.drawable.ok);
+            imgResult.setImageDrawable(myDrawable);
             bonnesReponses++;
-            String notification =  "Bonne réponse";
-            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
         }
 
         // Si c'est la Xeme réponse, l'activité est fini
@@ -113,19 +118,20 @@ public class CulturegActivity extends Activity {
     }
 
     /**
-     * Affiche le prochain calcul
+     * Affiche la prochaine question
      * @param vue
      */
     public void onClickSuivant(View vue) {
         Question();
         EditTxtResult.setText("");
+        txtViewReponse.setText("");
         btnValider.setVisibility(View.VISIBLE);
         btnNext.setVisibility(View.INVISIBLE);
+        imgResult.setImageDrawable(null);
     }
 
     /**
      * Enregistre le score
-     * libelleMatiere, score
      */
     public void score(){
         GlobalClass globalVariable = (GlobalClass) getApplicationContext();

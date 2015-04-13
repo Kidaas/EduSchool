@@ -41,10 +41,24 @@ public class MainActivity extends Activity {
     public static final String nom = "login";
     public static final String mdp = "mdp";
 
+    //Global class
+    private GlobalClass globalVariable;
+
+    private  EditText EditTxtLogin, EditTxtPassword, EditTxtInscriptionLogin, EditTxtInscriptionPassword;
+    private LinearLayout linearConnexion, linearDeconnexion, linearInscription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        linearConnexion = (LinearLayout) findViewById(R.id.LinearLogin);
+        linearInscription = (LinearLayout) findViewById(R.id.LinearInscription);
+        linearDeconnexion = (LinearLayout) findViewById(R.id.LinearDeconnexion);
+        EditTxtLogin = (EditText) findViewById(R.id.editTxtLogin);
+        EditTxtPassword = (EditText) findViewById(R.id.editTxtPassword);
+        EditTxtInscriptionLogin = (EditText) findViewById(R.id.editTxtInscriptionLogin);
+        EditTxtInscriptionPassword = (EditText) findViewById(R.id.editTxtInscriptionPassword);
 
         sharedpreferences = getSharedPreferences(MesPreferences, Context.MODE_PRIVATE);
         // Test si le login & mdp sont stocké en local, si c'est le cas, on n'affichera pas de champ login/inscription
@@ -55,15 +69,14 @@ public class MainActivity extends Activity {
             // Récupère l'user via son login stocké en local
             User u = userDAO.getUserByLogin(sharedpreferences.getString(nom, "login"));
             // Créer une instance de la classe variable globale
-            final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+            globalVariable = (GlobalClass) getApplicationContext();
             // Ajoute l'id de l'utilisateur à la variable globale
             globalVariable.setId(u.getId());
 
-            LinearLayout linearConnexion = (LinearLayout) findViewById(R.id.lLayoutCoIns);
-            // Masque le LinearLayout de connexion
+            // Masque le LinearLayout de connexion/inscription
             linearConnexion.setVisibility(LinearLayout.INVISIBLE);
-            // Récupère le LinearLayout de deconnexion
-            LinearLayout linearDeconnexion = (LinearLayout) findViewById(R.id.LinearDeconnexion);
+            linearInscription.setVisibility(LinearLayout.INVISIBLE);
+
             // Créer un bouton de deconnexion
             Button btnDeconnexion = new Button(this);
             btnDeconnexion.setText("Deconnexion " + sharedpreferences.getString(nom, "login"));
@@ -76,10 +89,6 @@ public class MainActivity extends Activity {
             linearDeconnexion.addView(btnDeconnexion);
         // Sinon affiche login/inscription (et place les placeholder)
         }else {
-            EditText EditTxtLogin = (EditText) findViewById(R.id.editTxtLogin);
-            EditText EditTxtPassword = (EditText) findViewById(R.id.editTxtPassword);
-            EditText EditTxtInscriptionLogin = (EditText) findViewById(R.id.editTxtInscriptionLogin);
-            EditText EditTxtInscriptionPassword = (EditText) findViewById(R.id.editTxtInscriptionPassword);
             EditTxtLogin.setHint("Login");
             EditTxtPassword.setHint("Password");
             EditTxtInscriptionLogin.setHint("Login");
@@ -93,8 +102,6 @@ public class MainActivity extends Activity {
      * @param view
      */
     public void onInscriptionClick(View view) {
-        EditText EditTxtInscriptionLogin = (EditText) findViewById(R.id.editTxtInscriptionLogin);
-        EditText EditTxtInscriptionPassword = (EditText) findViewById(R.id.editTxtInscriptionPassword);
 
         // Vérifie que les champs ne sont pas vident
         if (!TextUtils.isEmpty(EditTxtInscriptionLogin.getText()) && !TextUtils.isEmpty(EditTxtInscriptionPassword.getText())){
@@ -123,11 +130,6 @@ public class MainActivity extends Activity {
     public void onConnexionClick(View view) {
         sharedpreferences = getSharedPreferences(MesPreferences, Context.MODE_PRIVATE);
 
-        // Récupère le LinearLayout de connexion
-        LinearLayout linearConnexion = (LinearLayout) findViewById(R.id.lLayoutCoIns);
-        EditText EditTxtLogin = (EditText) findViewById(R.id.editTxtLogin);
-        EditText EditTxtPassword = (EditText) findViewById(R.id.editTxtPassword);
-
         String login = EditTxtLogin.getText().toString();
         String password = EditTxtPassword.getText().toString();
 
@@ -147,14 +149,14 @@ public class MainActivity extends Activity {
                 editor.commit();
 
                 // Créer une instance de la classe variable globale
-                final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+                globalVariable = (GlobalClass) getApplicationContext();
                 // Ajoute l'id de l'utilisateur à la variable globale
                 globalVariable.setId(user.getId());
 
-                // Masque le LinearLayout de connexion
+                // Masque le LinearLayout de connexion/inscription
                 linearConnexion.setVisibility(LinearLayout.INVISIBLE);
-                // Récupère le LinearLayout de deconnexion
-                LinearLayout linearDeconnexion = (LinearLayout) findViewById(R.id.LinearDeconnexion);
+                linearInscription.setVisibility(LinearLayout.INVISIBLE);
+
                 // Créer un bouton de deconnexion
                 Button btnDeconnexion = new Button(this);
                 btnDeconnexion.setOnClickListener(new Button.OnClickListener() {
@@ -194,11 +196,12 @@ public class MainActivity extends Activity {
         editor.clear();
         editor.commit();
 
-        LinearLayout linearConnexion = (LinearLayout) findViewById(R.id.lLayoutCoIns);
+        // Met l'id à zéro (signifie qu'il n'y a pas d'user enregistré)
+        globalVariable.setId(0);
+
         // Masque le LinearLayout de connexion
         linearConnexion.setVisibility(LinearLayout.VISIBLE);
-        // Récupère le LinearLayout de deconnexion
-        LinearLayout linearDeconnexion = (LinearLayout) findViewById(R.id.LinearDeconnexion);
+        linearInscription.setVisibility(LinearLayout.VISIBLE);
         linearDeconnexion.setVisibility(LinearLayout.INVISIBLE);
     }
 
@@ -251,7 +254,6 @@ public class MainActivity extends Activity {
             // Afficher une notification
             String notification =  "Retour à l'activité principale";
             Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
-
         }
     }
 

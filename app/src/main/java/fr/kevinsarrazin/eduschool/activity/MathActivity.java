@@ -2,6 +2,7 @@ package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +32,13 @@ public class MathActivity extends Activity {
 
     private int level, multiplicateur, i = 1;
     private int val1, val2, result;
-    private int fin = 1, bonnesReponses = 0, erreurs = 0, meilleurScore;
+    private int fin = 1, bonnesReponses = 0, meilleurScore, nbTourDeJeu = 10;
+
     private String operateur;
-    private TextView txtVal1;
-    private TextView txtVal2;
+    private TextView txtVal1, txtVal2, txtViewReponse;
     private EditText EditTxtResult;
     private Button btnNext, btnValider;
+    private ImageView imgResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +50,12 @@ public class MathActivity extends Activity {
         TextView txtOperateur = (TextView) findViewById(R.id.txtViewOperateur);
         txtVal1 = (TextView) findViewById(R.id.txtViewVal1);
         txtVal2 = (TextView) findViewById(R.id.txtViewVal2);
+        txtViewReponse = (TextView) findViewById(R.id.txtViewReponse);
         EditTxtResult = (EditText) findViewById(R.id.editTxtResult);
         btnNext = (Button) findViewById(R.id.btnNext);
         btnValider = (Button) findViewById(R.id.btnValider);
+        imgResult = (ImageView) findViewById(R.id.imgResult);
+
 
         EditTxtResult.setHint(" ? "); // = Placeholder
 
@@ -80,25 +86,25 @@ public class MathActivity extends Activity {
 
     /**
      * Vérifie le calcul
-     * Si c'est la 10eme reponses => Affiche la bin
+     * Si c'est la Xeme reponses => Affiche la bin
      * @param vue
      */
     public void onClickValider(View vue) {
 
         // Si le champ est vide ou différent du résultat attentendu => erreur +1
         if(TextUtils.isEmpty(EditTxtResult.getText()) || Integer.valueOf(EditTxtResult.getText().toString()) != result){
-            erreurs++;
-            String notification =  "Erreur";
-            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
-        // Sinon, bonne réponse +1
+            txtViewReponse.setText(result);
+            Drawable myDrawable = getResources().getDrawable(R.drawable.ko);
+            imgResult.setImageDrawable(myDrawable);
+            // Sinon, bonne réponse +1
         }else {
+            Drawable myDrawable = getResources().getDrawable(R.drawable.ok);
+            imgResult.setImageDrawable(myDrawable);
             bonnesReponses++;
-            String notification =  "Bonne réponse";
-            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
         }
 
         // Si c'est la 10eme réponse, l'activité est fini
-        if (fin >= 10){
+        if (fin >= nbTourDeJeu){
             //Enregistre le score
             score();
             // Création d'un intention

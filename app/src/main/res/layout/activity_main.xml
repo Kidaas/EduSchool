@@ -111,12 +111,12 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_weight="0.5"
             android:layout_height="fill_parent"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
-            android:layout_weight="0.5"
             android:gravity="center"
-            android:id="@+id/LinearLogin">
+            android:id="@+id/LinearLogin" >
 
             <TextView
                 android:layout_width="wrap_content"

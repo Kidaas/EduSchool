@@ -59,10 +59,28 @@
     </LinearLayout>
 
     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/layoutResultat"
+        android:layout_below="@+id/layoutCalcul"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/errorColor"
+            android:id="@+id/txtViewReponse" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutCalcul"
+        android:layout_below="@+id/layoutResultat"
         android:id="@+id/layoutBtn">
 
         <Button
