@@ -33,6 +33,7 @@ public class MathActivity extends Activity {
     private int level, multiplicateur, i = 1;
     private int val1, val2, result;
     private int fin = 1, bonnesReponses = 0, meilleurScore, nbTourDeJeu = 10;
+    private GlobalClass globalVariable;
 
     private String operateur;
     private TextView txtVal1, txtVal2, txtViewReponse;
@@ -46,6 +47,7 @@ public class MathActivity extends Activity {
         setContentView(R.layout.activity_math);
 
         level = getIntent().getIntExtra(NiveauActivity.NIVEAU_NUMBER, 1);
+        globalVariable = (GlobalClass) getApplicationContext();
 
         TextView txtOperateur = (TextView) findViewById(R.id.txtViewOperateur);
         txtVal1 = (TextView) findViewById(R.id.txtViewVal1);
@@ -105,8 +107,10 @@ public class MathActivity extends Activity {
 
         // Si c'est la 10eme réponse, l'activité est fini
         if (fin >= nbTourDeJeu){
-            //Enregistre le score
-            score();
+            if(globalVariable.getId() != 0){ // Si user est co
+                //Enregistre le score
+                score();
+            }
             // Création d'un intention
             Intent intent = new Intent(this, ResultatActivity.class);
             // Ajout de la chaine de nom à l'intent
@@ -142,7 +146,6 @@ public class MathActivity extends Activity {
      * libelleMatiere, score
      */
     public void score(){
-        GlobalClass globalVariable = (GlobalClass) getApplicationContext();
         MatiereDAO matiereDAO = new MatiereDAO(this);
         long idMatiere = matiereDAO.getMatiereByLibelle(operateur).getId();
         long idUser = globalVariable.getId();

@@ -102,8 +102,6 @@ public class NiveauActivity extends Activity {
             }
         }
 
-        // Création d'un intention
-        //Intent intent = new Intent(this, MathActivity.class);
         // Ajout du niveau d'exercice
         intent.putExtra(NIVEAU_NUMBER, level);
         // lancement de la demande de changement d'activité

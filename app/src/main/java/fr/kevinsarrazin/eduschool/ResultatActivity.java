@@ -2,6 +2,7 @@ package fr.kevinsarrazin.eduschool;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import fr.kevinsarrazin.eduschool.MainActivity;
 import fr.kevinsarrazin.eduschool.R;
@@ -23,16 +26,26 @@ public class ResultatActivity extends Activity {
     public final static int MULTIPLICATION_RETOUR_REQUEST = 0;
 
     private LinearLayout layoutScore;
+    private TextView txtMeilleurScore, txtScore;
+    private RatingBar scoreBar;
 
     private int score = 0, meilleurScore = 0;
+    private GlobalClass globalVariable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultat);
 
+        txtScore = (TextView) findViewById(R.id.txtScore);
+        txtMeilleurScore = (TextView) findViewById(R.id.txtMeilleurScore);
+        scoreBar = (RatingBar) findViewById(R.id.ScoreBar);
+        layoutScore = (LinearLayout) findViewById(R.id.layoutScore);
+
         // Récupère le caller
         String caller = getIntent().getStringExtra("caller");
+        globalVariable = (GlobalClass) getApplicationContext();
+
 
         if (caller.equals("Addition") || caller.equals("Soustraction") || caller.equals("Division")){
             score = getIntent().getIntExtra(MathActivity.MATH_SCORE, 0);
@@ -42,7 +55,6 @@ public class ResultatActivity extends Activity {
             meilleurScore = getIntent().getIntExtra(MathActivity.MATH_MEILLEUR_SCORE, 0);
 
             // Ajout d'un bouton de choix de table
-            layoutScore = (LinearLayout) findViewById(R.id.layoutScore);
             Button btnChoixTable = new Button(this);
             btnChoixTable.setText("Choisir une autre table");
             btnChoixTable.setOnClickListener(new Button.OnClickListener() {
@@ -55,9 +67,11 @@ public class ResultatActivity extends Activity {
             meilleurScore = getIntent().getIntExtra(CulturegActivity.CULTUREG_MEILLEUR_SCORE, 0);
         }
 
-        TextView txtScore = (TextView) findViewById(R.id.txtScore);
-        TextView txtMeilleurScore = (TextView) findViewById(R.id.txtMeilleurScore);
-        RatingBar scoreBar = (RatingBar) findViewById(R.id.ScoreBar);
+        if (globalVariable.getId() == 0){
+            TextView txtMessage = new TextView(this);
+            txtMessage.setText("Enregistrez vous pour sauvegarder vos scores");
+            layoutScore.addView(txtMessage);
+        }
 
         txtScore.setText("Score : "+ score);
         txtMeilleurScore.setText("Meilleur score : "+ meilleurScore);

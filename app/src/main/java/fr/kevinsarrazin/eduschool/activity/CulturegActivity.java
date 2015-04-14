@@ -33,6 +33,7 @@ public class CulturegActivity extends Activity {
     public static String tag = "Geographie";
     private int fin = 1, bonnesReponses = 0, meilleurScore, nbTourDeJeu = 10;
     private String result;
+    private  GlobalClass globalVariable;
 
     private TextView txtViewQuestion, txtViewReponse;
     private EditText EditTxtResult;
@@ -43,6 +44,8 @@ public class CulturegActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cultureg);
+
+        globalVariable = (GlobalClass) getApplicationContext();
 
         txtViewQuestion = (TextView) findViewById(R.id.txtViewQuestion);
         txtViewReponse = (TextView) findViewById(R.id.txtViewReponse);
@@ -97,8 +100,11 @@ public class CulturegActivity extends Activity {
 
         // Si c'est la Xeme réponse, l'activité est fini
         if (fin >= nbTourDeJeu){
-            //Enregistre le score
-            score();
+            //Enregistre le score si l'utilisateur est enregistré
+            if (globalVariable.getId() != 0){
+                score();
+            }
+
             // Création d'un intention
             Intent intent = new Intent(this, ResultatActivity.class);
             // Ajout de la chaine de nom à l'intent
@@ -134,7 +140,6 @@ public class CulturegActivity extends Activity {
      * Enregistre le score
      */
     public void score(){
-        GlobalClass globalVariable = (GlobalClass) getApplicationContext();
         MatiereDAO matiereDAO = new MatiereDAO(this);
         long idMatiere = matiereDAO.getMatiereByLibelle(tag).getId();
         long idUser = globalVariable.getId();
