@@ -14,15 +14,16 @@ public class UserDAO extends DAOBase {
     public static final String KEY = "id";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
+    public static final String PATHIMAGE = "pathImage";
 
-    public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LOGIN + " TEXT, "+ PASSWORD + " TEXT);";
+    public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LOGIN + " TEXT, "+ PASSWORD + " TEXT, "+ PATHIMAGE + " TEXT);";
 
     public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
     // Tableau de données (login, password)
     private static final String[] DATA = new String[] {
-            "'user', 'user'",
-            "'kidaas', 'kidaas'"
+            "'user', 'user', 'null'",
+            "'kidaas', 'kidaas', 'null'"
     };
 
     public UserDAO(Context pContext) {
@@ -37,7 +38,8 @@ public class UserDAO extends DAOBase {
     public static String[] getInsertSQL() {
         String insertSQL = "INSERT INTO " + TABLE_NAME + "("
                 + LOGIN + ", "
-                + PASSWORD + ") VALUES ";
+                + PASSWORD + ", "
+                + PATHIMAGE + ") VALUES ";
 
         String[] liste = new String[DATA.length];
         int i = 0;
@@ -57,6 +59,7 @@ public class UserDAO extends DAOBase {
         // Set les données
         value.put(UserDAO.LOGIN, u.getLogin());
         value.put(UserDAO.PASSWORD, u.getPassword());
+        value.put(UserDAO.PATHIMAGE, u.getPathImage());
         // Execute l'action
         mDb.insert(UserDAO.TABLE_NAME, null, value);
     }
@@ -78,6 +81,7 @@ public class UserDAO extends DAOBase {
             ContentValues value = new ContentValues();
             value.put(LOGIN, u.getLogin());
             value.put(PASSWORD, u.getPassword());
+            value.put(PATHIMAGE, u.getPathImage());
             mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(u.getId())});
         }
     }
@@ -98,6 +102,7 @@ public class UserDAO extends DAOBase {
             user.setId(c.getLong(0));
             user.setLogin(c.getString(1));
             user.setPassword(c.getString(2));
+            user.setPathImage(c.getString(3));
             return user;
         }
     }
@@ -119,6 +124,7 @@ public class UserDAO extends DAOBase {
             user.setId(c.getLong(0));
             user.setLogin(c.getString(1));
             user.setPassword(c.getString(2));
+            user.setPathImage(c.getString(3));
             return user;
         }
     }

@@ -23,57 +23,26 @@ import fr.kevinsarrazin.eduschool.data.UserDAO;
 
 public class UserActivity extends Activity {
 
+    private UserDAO userDAO;
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
         TextView txtViewName = (TextView) findViewById(R.id.txtViewName);
-        LinearLayout layoutScore = (LinearLayout) findViewById(R.id.layoutScore);
 
         // Récupère l'objet globale
         GlobalClass globalVariable = (GlobalClass) getApplicationContext();
         long idUser = globalVariable.getId();
 
-        if (idUser != 0){
+        userDAO = new UserDAO(this);
+        user = userDAO.getUserById(idUser);
 
-            // Initialise les DAO
-            UserDAO userDAO = new UserDAO(this);
-            MatiereDAO matiereDAO = new MatiereDAO(this);
-            ScoreDAO scoreDAO = new ScoreDAO(this);
 
-            // Récupère l'user via son id
-            User user = userDAO.getUserById(idUser);
-            // Récupère les scores de l'utilisateurs
-            List<Score> listeScores = scoreDAO.getAllScoreByUser(idUser);
+        txtViewName.setText(user.getLogin() + ": " + idUser);
 
-            txtViewName.setText(""+user.getId());
-
-            if (listeScores != null){
-                for(Score score : listeScores){
-                    LinearLayout layoutMatiere = new LinearLayout(this);
-                    TextView txtViewMatiere = new TextView(this);
-                    TextView txtViewScore = new TextView(this);
-
-                    txtViewMatiere.setText(matiereDAO.getMatiere(score.getIdMatiere()).getLibelle() + " : ");
-                    txtViewScore.setText("" + score.getScore());
-
-                    layoutMatiere.addView(txtViewMatiere);
-                    layoutMatiere.addView(txtViewScore);
-                    layoutScore.addView(layoutMatiere);
-                }
-            }else {
-                TextView txtViewMessage = new TextView(this);
-                txtViewMessage.setText("Aucun score pour le moment !");
-                layoutScore.addView(txtViewMessage);
-            }
-
-        }else {
-            txtViewName.setText("Enregistrez/connectez vous pour profiter des avantages liés au compte");
-            TextView txtViewMessage = new TextView(this);
-            txtViewMessage.setText("Aucun score pour le moment !");
-            layoutScore.addView(txtViewMessage);
-        }
 
     }
 

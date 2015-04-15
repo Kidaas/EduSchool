@@ -33,9 +33,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButton6"
-                android:src="@drawable/btn"
+                android:src="@drawable/math"
                 android:layout_gravity="center_horizontal"
-                android:onClick="onMathClick" />
+                android:onClick="onMathClick"
+                android:minHeight="55dp"
+                android:minWidth="55dp"
+                android:nestedScrollingEnabled="true" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,10 +64,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButton9"
-                android:src="@drawable/btn"
+                android:src="@drawable/qcm"
                 android:layout_gravity="center_horizontal"
                 android:onClick="onQcmClick"
-                android:nestedScrollingEnabled="false" />
+                android:nestedScrollingEnabled="false"
+                android:minHeight="55dp"
+                android:minWidth="55dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,9 +90,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButton3"
-                android:src="@drawable/btn"
+                android:src="@drawable/cultureg"
                 android:layout_gravity="center_horizontal"
-                android:onClick="onCulturegClick" />
+                android:onClick="onCulturegClick"
+                android:minHeight="55dp"
+                android:minWidth="55dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -178,6 +185,21 @@
                 android:inputType="textPassword"
                 android:ems="10"
                 android:id="@+id/editTxtInscriptionPassword"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgVPreview"
+                android:minHeight="50dp"
+                android:minWidth="50dp"
+                android:nestedScrollingEnabled="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="image"
+                android:id="@+id/button2"
+                android:onClick="onClickChoixImage" />
 
             <Button
                 android:layout_width="wrap_content"

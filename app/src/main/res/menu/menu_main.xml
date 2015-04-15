@@ -7,5 +7,10 @@
         android:showAsAction="ifRoom"
     />
 
+    <item android:id="@+id/score"
+        android:icon="@drawable/trophe"
+        android:title="score"
+        android:showAsAction="ifRoom"
+        />
 
 </menu>

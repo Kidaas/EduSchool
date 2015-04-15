@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.kevinsarrazin.eduschool" >
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".GlobalClass"
         android:allowBackup="true"
@@ -41,6 +45,10 @@
         <activity
             android:name=".activity.UserActivity"
             android:label="@string/title_activity_user" >
+        </activity>
+        <activity
+            android:name=".activity.ScoreActivity"
+            android:label="@string/title_activity_score" >
         </activity>
     </application>
 

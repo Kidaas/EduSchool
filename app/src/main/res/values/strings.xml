@@ -44,5 +44,6 @@
     <string name="resultat">Resultat : </string>
     <string name="score">Score : </string>
     <string name="meilleurScore">Meilleur score : </string>
+    <string name="title_activity_score">ScoreActivity</string>
 
 </resources>

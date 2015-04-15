@@ -8,6 +8,7 @@ import fr.kevinsarrazin.eduschool.data.CulturegDAO;
 import fr.kevinsarrazin.eduschool.data.MatiereDAO;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
 import fr.kevinsarrazin.eduschool.data.QcmDAO;
+import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 
 /**
  * Created by Administrateur on 09/03/2015.
@@ -38,13 +39,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String USER_KEY = "id";
     public static final String USER_LOGIN = "login";
     public static final String USER_PASSWORD = "password";
+    public static final String USER_PATHIMAGE = "pathImage";
 
     public static final String USER_TABLE_NAME = "user";
     public static final String USER_TABLE_CREATE =
             "CREATE TABLE " + USER_TABLE_NAME + " (" +
                     USER_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     USER_LOGIN + " TEXT, " +
-                    USER_PASSWORD + " TEXT);";
+                    USER_PASSWORD + " TEXT, " +
+                    USER_PATHIMAGE + " TEXT);";
 
     public static final String USER_TABLE_DROP = "DROP TABLE IF EXISTS " + USER_TABLE_NAME + ";";
 
@@ -139,6 +142,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         // Insérer les données de la table Matiere
         for (String insert : MatiereDAO.getInsertSQL()) {
+            db.execSQL(insert);
+        }
+        // Insérer les données de la table Score
+        for (String insert : ScoreDAO.getInsertSQL()) {
             db.execSQL(insert);
         }
     }

@@ -4,17 +4,23 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import fr.kevinsarrazin.eduschool.activity.NiveauActivity;
+import fr.kevinsarrazin.eduschool.activity.ScoreActivity;
 import fr.kevinsarrazin.eduschool.activity.UserActivity;
 import fr.kevinsarrazin.eduschool.data.User;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
@@ -25,7 +31,8 @@ public class MainActivity extends Activity {
     // ID REQUETES
     public final static int MATH_ACTIVITY_REQUEST = 1;
     public final static int CULTUREG_ACTIVITY_REQUEST = 2;
-    public final static int QCM_ACTIVITY_REQUEST = 2;
+    public final static int QCM_ACTIVITY_REQUEST = 3;
+    public final static int LOAD_IMAGE_ACTIVITY_REQUEST = 4;
 
     // Caller
     public static final String CALLER = "caller";
@@ -106,7 +113,7 @@ public class MainActivity extends Activity {
         // Vérifie que les champs ne sont pas vident
         if (!TextUtils.isEmpty(EditTxtInscriptionLogin.getText()) && !TextUtils.isEmpty(EditTxtInscriptionPassword.getText())){
             UserDAO uDao = new UserDAO(this);
-            User u = new User(EditTxtInscriptionLogin.getText().toString(), EditTxtInscriptionPassword.getText().toString());
+            User u = new User(EditTxtInscriptionLogin.getText().toString(), EditTxtInscriptionPassword.getText().toString(), null);
             uDao.insert(u);
             EditTxtInscriptionLogin.getText().clear();
             EditTxtInscriptionPassword.getText().clear();
@@ -206,6 +213,44 @@ public class MainActivity extends Activity {
     }
 
     /**
+     * Permet de choisir une image dans la gallerie
+     * @param view
+     */
+    public void onClickChoixImage(View view) {
+        Intent i = new Intent(
+        Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, LOAD_IMAGE_ACTIVITY_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MATH_ACTIVITY_REQUEST || requestCode == CULTUREG_ACTIVITY_REQUEST || requestCode == QCM_ACTIVITY_REQUEST) {
+            // Afficher une notification
+            String notification =  "Retour à l'activité principale";
+            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
+
+        }else if (requestCode == LOAD_IMAGE_ACTIVITY_REQUEST && resultCode == RESULT_OK && null != data){
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String pathImg = cursor.getString(columnIndex);
+            cursor.close();
+
+            // String picturePath contains the path of selected Image
+            ImageView imageView = (ImageView) findViewById(R.id.imgVPreview);
+            imageView.setImageBitmap(BitmapFactory.decodeFile(pathImg));
+
+            }
+        }
+
+    /**
      * Lance l'activité Math
      * @param view
      */
@@ -241,22 +286,6 @@ public class MainActivity extends Activity {
         startActivityForResult(intent, QCM_ACTIVITY_REQUEST);
     }
 
-    /**
-     * Test le retour d'activité
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Vérification du retour à l'aide du code requête
-        if (requestCode == MATH_ACTIVITY_REQUEST || requestCode == CULTUREG_ACTIVITY_REQUEST) {
-            // Afficher une notification
-            String notification =  "Retour à l'activité principale";
-            Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -278,6 +307,11 @@ public class MainActivity extends Activity {
             // Lancement de la demande de changement d'activité + demande de retour
             startActivity(intent);
             return true;
+        }else if(id == R.id.score){
+            // Création d'une intention
+            Intent intent = new Intent(this, ScoreActivity.class);
+            // Lancement de la demande de changement d'activité + demande de retour
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

@@ -23,10 +23,39 @@ public class ScoreDAO extends DAOBase {
 
     public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
+    // Tableau de données (idUser, idMatiere, score)
+    private static final String[] DATA = new String[] {
+            "'2', '1', '1'",
+            "'2', '2', '2'",
+            "'2', '3', '3'",
+            "'2', '4', '4'",
+            "'2', '5', '5'"
+    };
 
     public ScoreDAO(Context pContext) {
         super(pContext);
         open();
+    }
+
+    /**
+     *
+     * @return liste de chaînes de caractères représentant les instructions SQL d'insertion de données dans la table
+     */
+    public static String[] getInsertSQL() {
+        String insertSQL = "INSERT INTO " + TABLE_NAME + "("
+                + IDUSER + ", "
+                + IDMATIERE + ", "
+                + SCORE + ") VALUES ";
+
+        String[] liste = new String[DATA.length];
+        int i = 0;
+        for (String questionReponse : DATA) {
+            // Instruction SQL INSERT
+            liste[i] = insertSQL + "(" + questionReponse + ")";
+            i++;
+        }
+
+        return liste;
     }
 
     /**

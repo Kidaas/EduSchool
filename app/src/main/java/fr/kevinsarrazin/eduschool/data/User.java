@@ -7,20 +7,23 @@ public class User {
     private long id;
     private String login;
     private String password;
+    private String pathImage;
 
     public User() {
         super();
     }
 
-    public User(String login, String password) {
+    public User(String login, String password, String pathImage) {
         this.login = login;
         this.password = password;
+        this.pathImage = pathImage;
     }
 
-    public User(long id, String login, String password) {
+    public User(long id, String login, String password, String pathImage) {
         this.id = id;
         this.login = login;
         this.password = password;
+        this.pathImage = pathImage;
     }
 
     public long getId() {
@@ -45,5 +48,13 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
     }
 }
