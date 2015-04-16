@@ -13,11 +13,19 @@
         android:id="@+id/layoutUser"
         >
 
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imgAvatar"
+            android:minHeight="60dp"
+            android:minWidth="60dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/txtViewName" />
+
     </LinearLayout>
 
 

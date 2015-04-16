@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="fr.kevinsarrazin.eduschool.InscriptionActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:id="@+id/LinearInscription"
+        android:layout_width="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Inscription"
+            android:id="@+id/txtView" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/imgVPreview"
+            android:nestedScrollingEnabled="true"
+            android:contentDescription="@string/avatar" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Login"
+            android:ems="10"
+            android:id="@+id/editTxtLogin" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:ems="10"
+            android:id="@+id/editTxtPassword"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choixImage"
+            android:id="@+id/btnChoixAvatar"
+            android:onClick="onClickChoixImage" />
+
+        <Button
+            android:layout_width="161dp"
+            android:layout_height="wrap_content"
+            android:text="@string/inscription"
+            android:id="@+id/btnInscription"
+            android:onClick="onClickInscription" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,11 +1,13 @@
 package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ public class UserActivity extends Activity {
         setContentView(R.layout.activity_user);
 
         TextView txtViewName = (TextView) findViewById(R.id.txtViewName);
+        ImageView imgAvatar = (ImageView) findViewById(R.id.imgAvatar);
 
         // Récupère l'objet globale
         GlobalClass globalVariable = (GlobalClass) getApplicationContext();
@@ -40,9 +43,8 @@ public class UserActivity extends Activity {
         userDAO = new UserDAO(this);
         user = userDAO.getUserById(idUser);
 
-
+        imgAvatar.setImageBitmap(BitmapFactory.decodeFile(user.getPathImage()));
         txtViewName.setText(user.getLogin() + ": " + idUser);
-
 
     }
 
