@@ -43,9 +43,7 @@ public class InscriptionActivity extends Activity {
 
         // Vérifie que les champs login & password ne sont pas vident
         if (!TextUtils.isEmpty(EditTxtLogin.getText()) && !TextUtils.isEmpty(EditTxtPassword.getText())){
-            if (pathImg == null){
-                pathImg = "";
-            }
+
             UserDAO uDao = new UserDAO(this);
 
             if (uDao.getUserByLogin(EditTxtLogin.getText().toString()) == null){

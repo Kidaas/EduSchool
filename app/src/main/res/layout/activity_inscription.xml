@@ -27,7 +27,8 @@
             android:layout_height="200dp"
             android:id="@+id/imgVPreview"
             android:nestedScrollingEnabled="true"
-            android:contentDescription="@string/avatar" />
+            android:contentDescription="@string/avatar"
+            android:src="@drawable/default_icon" />
 
         <EditText
             android:layout_width="wrap_content"
