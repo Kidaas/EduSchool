@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import fr.kevinsarrazin.eduschool.activity.NiveauActivity;
@@ -183,6 +185,17 @@ public class MainActivity extends Activity {
             }
         });
 
+        // Ajoute un margin right au 1er bouton (sinon collé)
+        RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
+                RadioGroup.LayoutParams.WRAP_CONTENT,
+                RadioGroup.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 0, 25, 0);
+        btnLogin.setLayoutParams(params);
+
+        btnLogin.setMinWidth(250);
+        btnInscription.setMinWidth(250);
+
         layoutBtn.addView(btnLogin);
         layoutBtn.addView(btnInscription);
     }
@@ -201,6 +214,7 @@ public class MainActivity extends Activity {
                 onDeconnexionClick(v);
             }
         });
+        btnDeconnexion.setMinWidth(500);
         // Ajoute le btn de deconnexion au linearLayout de deconnexion
         layoutBtn.addView(btnDeconnexion);
     }
@@ -236,4 +250,5 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

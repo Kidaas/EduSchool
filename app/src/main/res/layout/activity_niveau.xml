@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:text="@string/addition"
             android:id="@+id/btn1"
-            android:onClick="onClick" />
+            android:onClick="onClick"
+            />
 
         <Button
             android:layout_width="fill_parent"

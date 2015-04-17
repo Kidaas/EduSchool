@@ -8,12 +8,11 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginBottom="20dp"
         android:text="Bienvenu, choisissez une activitée !"
         android:id="@+id/textViewPresentation"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+         />
 
     <LinearLayout
         android:orientation="horizontal"
