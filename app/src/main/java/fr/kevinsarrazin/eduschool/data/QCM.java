@@ -1,7 +1,11 @@
 package fr.kevinsarrazin.eduschool.data;
 
 /**
- * Created by Administrateur on 23/03/2015.
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file Qcm.java
+ *
+ * Class QCM
+ *
  */
 public class Qcm {
 

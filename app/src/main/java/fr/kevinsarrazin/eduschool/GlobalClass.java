@@ -3,7 +3,10 @@ package fr.kevinsarrazin.eduschool;
 import android.app.Application;
 
 /**
- * Created by Administrateur on 26/03/2015.
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file GlobalClass.java
+ *
+ * Sert de stockage en session pour les données réutilisable
  */
 public class GlobalClass extends Application{
     private long id;

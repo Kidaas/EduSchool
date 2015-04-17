@@ -5,10 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
-import android.widget.TableLayout;
 import android.widget.TextView;
-
 import java.util.List;
 
 import fr.kevinsarrazin.eduschool.GlobalClass;
@@ -18,6 +15,14 @@ import fr.kevinsarrazin.eduschool.data.Score;
 import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 import fr.kevinsarrazin.eduschool.data.User;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
+
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file ScoreActivity.java
+ *
+ * Class gérant l'affichage des scores de l'user
+ * Récupère et affiche les scores de l'user courant
+ */
 
 public class ScoreActivity extends Activity {
 

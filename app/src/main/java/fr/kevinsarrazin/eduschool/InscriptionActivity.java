@@ -18,7 +18,15 @@ import android.widget.Toast;
 import fr.kevinsarrazin.eduschool.data.User;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
 
-
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file InscriptionActivity.java
+ *
+ * Class gérant l'activité Inscription
+ * Récupère le login/mdp/avatar
+ * Si le login est déjà pris / non renseigné : message d'erreur
+ * Sinon : enregistre le login en base
+ */
 public class InscriptionActivity extends Activity {
 
     public final static int LOAD_IMAGE_ACTIVITY_REQUEST = 1;

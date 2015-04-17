@@ -11,7 +11,12 @@ import fr.kevinsarrazin.eduschool.data.QcmDAO;
 import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 
 /**
- * Created by Administrateur on 09/03/2015.
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file DatabaseHandler.java
+ *
+ * Class gérant la création de la bdd
+ * Créer la bdd et insère les données
+ * update la bdd
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 

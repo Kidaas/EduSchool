@@ -3,8 +3,6 @@ package fr.kevinsarrazin.eduschool.data;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
-
 import java.util.ArrayList;
 
 import fr.kevinsarrazin.eduschool.DAOBase;

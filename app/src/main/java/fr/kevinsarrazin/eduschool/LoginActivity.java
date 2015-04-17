@@ -8,15 +8,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import fr.kevinsarrazin.eduschool.R;
 import fr.kevinsarrazin.eduschool.data.User;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
 
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file LoginActivity.java
+ *
+ * Class gérant l'activité Login
+ * Récupère le login/mdp, les test,
+ * si ok : enregistrement de l'id user dans la GlobalClass, stock le login en sharedPreference & retour à l'activité principale
+ * Si ko : Affichage d'un message d'erreur
+ */
 public class LoginActivity extends Activity {
 
     // Variable de stockage local

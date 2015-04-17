@@ -7,6 +7,13 @@ import android.view.MenuItem;
 
 import fr.kevinsarrazin.eduschool.R;
 
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file QcmActivity.java
+ *
+ * Class gérant l'activité QCM
+ * Génère les question, les valides et enregistre le score
+ */
 public class QcmActivity extends Activity {
 
     @Override

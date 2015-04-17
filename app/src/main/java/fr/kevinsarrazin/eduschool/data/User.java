@@ -1,7 +1,11 @@
 package fr.kevinsarrazin.eduschool.data;
 
 /**
- * Created by Administrateur on 10/03/2015.
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file User.java
+ *
+ * Class User
+ *
  */
 public class User {
     private long id;

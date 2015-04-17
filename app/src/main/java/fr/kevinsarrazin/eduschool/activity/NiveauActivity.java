@@ -1,19 +1,23 @@
 package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.NumberPicker;
 
 import fr.kevinsarrazin.eduschool.R;
-import fr.kevinsarrazin.eduschool.activity.MathActivity;
 
-
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file NiveauActivity.java
+ *
+ * Class gérant le choix de niveau
+ * Créer les boutons de niveau en fonction de la matière choisi
+ * Envoie le niveau au activité de matière
+ */
 public class NiveauActivity extends Activity {
 
     public static final String NIVEAU_NUMBER = "level";

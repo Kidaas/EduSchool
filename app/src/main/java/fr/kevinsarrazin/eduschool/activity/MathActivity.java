@@ -24,7 +24,13 @@ import fr.kevinsarrazin.eduschool.ResultatActivity;
 import fr.kevinsarrazin.eduschool.data.Score;
 import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 
-
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file MathActivity.java
+ *
+ * Class gérant l'activité Math
+ * Génère les calcul, les valides et enregistre le score
+ */
 public class MathActivity extends Activity {
 
     public static final String MATH_SCORE = "MathScore";

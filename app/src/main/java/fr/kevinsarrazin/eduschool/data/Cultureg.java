@@ -1,7 +1,11 @@
 package fr.kevinsarrazin.eduschool.data;
 
 /**
- * Created by Administrateur on 09/03/2015.
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file Cultureg.java
+ *
+ * Class Cultureg
+ *
  */
 public class Cultureg {
 

@@ -10,7 +10,13 @@ import android.widget.NumberPicker;
 
 import fr.kevinsarrazin.eduschool.R;
 
-
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file MathActivity.java
+ *
+ *
+ * Créer un numberPicker pour choisir la table et l'envoi à l'activité MathActivity
+ */
 public class MultiplicationActivity extends Activity {
 
     public static final String MULTIPLICATEUR_MULTIPLICATEUR = "multiplicateur";

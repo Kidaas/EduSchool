@@ -3,25 +3,23 @@ package fr.kevinsarrazin.eduschool.activity;
 import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
 
 import fr.kevinsarrazin.eduschool.GlobalClass;
 import fr.kevinsarrazin.eduschool.R;
-import fr.kevinsarrazin.eduschool.data.Matiere;
-import fr.kevinsarrazin.eduschool.data.MatiereDAO;
-import fr.kevinsarrazin.eduschool.data.Score;
-import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 import fr.kevinsarrazin.eduschool.data.User;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
+
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file UserActivity.java
+ *
+ * Class gérant l'affichage des données de l'utilisateur
+ * Récupère le nom et l'avatar de l'utilisateur
+ */
 
 public class UserActivity extends Activity {
 

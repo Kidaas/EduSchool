@@ -2,7 +2,6 @@ package fr.kevinsarrazin.eduschool;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,14 +11,17 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import fr.kevinsarrazin.eduschool.MainActivity;
-import fr.kevinsarrazin.eduschool.R;
 import fr.kevinsarrazin.eduschool.activity.CulturegActivity;
 import fr.kevinsarrazin.eduschool.activity.MathActivity;
 import fr.kevinsarrazin.eduschool.activity.MultiplicationActivity;
-import fr.kevinsarrazin.eduschool.data.Cultureg;
+
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file ResultatActivity.java
+ *
+ * Class gérant l'affichage du résultat
+ * Affiche le résultat de l'activité terminé et le meilleur score
+ */
 
 public class ResultatActivity extends Activity {
 

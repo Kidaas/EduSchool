@@ -2,8 +2,13 @@ package fr.kevinsarrazin.eduschool;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file DAOBase.java
+ *
+ *
+ */
 public abstract class DAOBase {
     // Nous sommes à la première version de la base
     // Si je décide de la mettre à jour, il faudra changer cet attribut

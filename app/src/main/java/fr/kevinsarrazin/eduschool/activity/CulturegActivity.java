@@ -3,7 +3,6 @@ package fr.kevinsarrazin.eduschool.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import fr.kevinsarrazin.eduschool.GlobalClass;
 import fr.kevinsarrazin.eduschool.R;
@@ -24,6 +22,13 @@ import fr.kevinsarrazin.eduschool.data.MatiereDAO;
 import fr.kevinsarrazin.eduschool.data.Score;
 import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 
+/**
+ * @author ksarrazin <kevin.sarrazin@live.fr>
+ * @file CulturegActivity.java
+ *
+ * Class gérant l'activité culture G
+ * Génère les questions, les valides et enregistre le score
+ */
 public class CulturegActivity extends Activity {
 
     public static final String CULTUREG_SCORE = "CulturegScore";
@@ -72,19 +77,22 @@ public class CulturegActivity extends Activity {
     }
 
     /**
-     * Renvoie l'activité de question sur la catégorie données
+     * Renvoie la question sur la catégorie données
      */
     public void Question(){
-
         CulturegDAO cDAO = new CulturegDAO(this);
         Cultureg question = cDAO.getQuestionRandom(tag);
         result = question.getReponse();
 
         // Affecte la valeur à son champs
         txtViewQuestion.setText(question.getQuestion());
-
     }
 
+    /**
+     * Valide la question
+     * Si c'est la Xeme question, termine l'activité
+     * @param vue
+     */
     public void onClickValider(View vue) {
         // Si le champ est vide ou différent du résultat attentendu => erreur +1
         if(TextUtils.isEmpty(EditTxtResult.getText()) || !EditTxtResult.getText().toString().toLowerCase().equals(result.toLowerCase())){
