@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import fr.kevinsarrazin.eduschool.GlobalClass;
@@ -33,16 +34,24 @@ public class UserActivity extends Activity {
 
         TextView txtViewName = (TextView) findViewById(R.id.txtViewName);
         ImageView imgAvatar = (ImageView) findViewById(R.id.imgAvatar);
+        LinearLayout layoutUser = (LinearLayout) findViewById(R.id.layoutUser);
 
         // Récupère l'objet globale
         GlobalClass globalVariable = (GlobalClass) getApplicationContext();
         long idUser = globalVariable.getId();
 
-        userDAO = new UserDAO(this);
-        user = userDAO.getUserById(idUser);
+        if (idUser != 0){
+            userDAO = new UserDAO(this);
+            user = userDAO.getUserById(idUser);
 
-        imgAvatar.setImageBitmap(BitmapFactory.decodeFile(user.getPathImage()));
-        txtViewName.setText(user.getLogin() + ": " + idUser);
+            imgAvatar.setImageBitmap(BitmapFactory.decodeFile(user.getPathImage()));
+            txtViewName.setText(user.getLogin() + ": " + idUser);
+        }else {
+            TextView txtViewMessage = new TextView(this);
+            txtViewMessage.setText("Enregistrez/connectez vous pour profiter des avantages liés au compte");
+            txtViewMessage.setTextColor(getResources().getColor(R.color.errorColor));
+            layoutUser.addView(txtViewMessage);
+        }
 
     }
 
@@ -54,18 +63,4 @@ public class UserActivity extends Activity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

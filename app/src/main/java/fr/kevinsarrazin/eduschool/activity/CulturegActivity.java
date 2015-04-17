@@ -40,7 +40,7 @@ public class CulturegActivity extends Activity {
     private String result;
     private  GlobalClass globalVariable;
 
-    private TextView txtViewQuestion, txtViewReponse;
+    private TextView txtViewQuestion, txtViewReponse, nbPartie;
     private EditText EditTxtResult;
     private ImageView imgResult;
     private Button btnNext, btnValider;
@@ -54,12 +54,13 @@ public class CulturegActivity extends Activity {
 
         txtViewQuestion = (TextView) findViewById(R.id.txtViewQuestion);
         txtViewReponse = (TextView) findViewById(R.id.txtViewReponse);
+        nbPartie = (TextView) findViewById(R.id.nbPartie);
         EditTxtResult = (EditText) findViewById(R.id.editTxtResult);
         imgResult = (ImageView) findViewById(R.id.imgResult);
         btnNext = (Button) findViewById(R.id.btnNext);
         btnValider = (Button) findViewById(R.id.btnValider);
 
-        EditTxtResult.setHint(" ? "); // = Placeholder
+        nbPartie.setText("0/10");
 
         // Récupère le niveau choisis
         level = getIntent().getIntExtra(NiveauActivity.NIVEAU_NUMBER, 1);
@@ -127,6 +128,7 @@ public class CulturegActivity extends Activity {
         btnValider.setVisibility(View.INVISIBLE);
         btnNext.setVisibility(View.VISIBLE);
 
+        nbPartie.setText(fin + "/10");
         fin++;
 
     }
@@ -185,18 +187,4 @@ public class CulturegActivity extends Activity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
