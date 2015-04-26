@@ -32,9 +32,15 @@ public class UserActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        TextView txtViewName = (TextView) findViewById(R.id.txtViewName);
+        TextView txtViewPseudo = (TextView) findViewById(R.id.txtViewPseudo);
+        TextView txtViewNom = (TextView) findViewById(R.id.txtViewNom);
+        TextView txtViewPrenom = (TextView) findViewById(R.id.txtViewPrenom);
         ImageView imgAvatar = (ImageView) findViewById(R.id.imgAvatar);
         LinearLayout layoutUser = (LinearLayout) findViewById(R.id.layoutUser);
+
+        txtViewPseudo.setText("");
+        txtViewNom.setText("");
+        txtViewPrenom.setText("");
 
         // Récupère l'objet globale
         GlobalClass globalVariable = (GlobalClass) getApplicationContext();
@@ -45,7 +51,10 @@ public class UserActivity extends Activity {
             user = userDAO.getUserById(idUser);
 
             imgAvatar.setImageBitmap(BitmapFactory.decodeFile(user.getPathImage()));
-            txtViewName.setText(user.getLogin() + ": " + idUser);
+            txtViewPseudo.setText(user.getLogin());
+            txtViewNom.setText(user.getNom());
+            txtViewPrenom.setText(user.getPrenom());
+
         }else {
             TextView txtViewMessage = new TextView(this);
             txtViewMessage.setText("Enregistrez/connectez vous pour profiter des avantages liés au compte");
@@ -54,7 +63,6 @@ public class UserActivity extends Activity {
         }
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -35,10 +35,14 @@ public class MathActivity extends Activity {
 
     public static final String MATH_SCORE = "MathScore";
     public static final String MATH_MEILLEUR_SCORE = "MathMeilleurScore";
+    static final String STATE_SCORE = "score";
+    static final String STATE_LEVEL = "level";
+    static final String STATE_NBTOUR = "nbTour";
+    static final String STATE_MULTIPLICATION = "i";
 
     private int level, multiplicateur, i = 1;
     private int val1, val2, result;
-    private int fin = 1, bonnesReponses = 0, meilleurScore, nbTourDeJeu = 10;
+    private int tour = 0, bonnesReponses = 0, meilleurScore, nbTourDeJeu = 10;
     private GlobalClass globalVariable;
 
     private String operateur;
@@ -52,7 +56,6 @@ public class MathActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math);
 
-        level = getIntent().getIntExtra(NiveauActivity.NIVEAU_NUMBER, 1);
         globalVariable = (GlobalClass) getApplicationContext();
 
         TextView txtOperateur = (TextView) findViewById(R.id.txtViewOperateur);
@@ -64,9 +67,18 @@ public class MathActivity extends Activity {
         btnValider = (Button) findViewById(R.id.btnValider);
         imgResult = (ImageView) findViewById(R.id.imgResult);
 
+        if (savedInstanceState != null) {
+            // Récupère les données
+            bonnesReponses = savedInstanceState.getInt(STATE_SCORE);
+            level = savedInstanceState.getInt(STATE_LEVEL);
+            tour = savedInstanceState.getInt(STATE_NBTOUR);
+            i = savedInstanceState.getInt(STATE_MULTIPLICATION);
+            i--; // Ré-équilibre le i++ de la fonction Calcul()
+        }else {
+            level = getIntent().getIntExtra(NiveauActivity.NIVEAU_NUMBER, 1);
+        }
 
         EditTxtResult.setHint(" ? "); // = Placeholder
-
 
         switch(level) {
             case 1:
@@ -99,9 +111,11 @@ public class MathActivity extends Activity {
      */
     public void onClickValider(View vue) {
 
+        tour++;// Incrémente le nb de tour
+
         // Si le champ est vide ou différent du résultat attentendu => erreur +1
         if(TextUtils.isEmpty(EditTxtResult.getText()) || Integer.valueOf(EditTxtResult.getText().toString()) != result){
-            txtViewReponse.setText(result);
+            txtViewReponse.setText(""+result);
             Drawable myDrawable = getResources().getDrawable(R.drawable.ko);
             imgResult.setImageDrawable(myDrawable);
             // Sinon, bonne réponse +1
@@ -112,7 +126,7 @@ public class MathActivity extends Activity {
         }
 
         // Si c'est la 10eme réponse, l'activité est fini
-        if (fin >= nbTourDeJeu){
+        if (tour >= nbTourDeJeu){
             if(globalVariable.getId() != 0){ // Si user est co
                 //Enregistre le score
                 score();
@@ -131,8 +145,6 @@ public class MathActivity extends Activity {
         btnValider.setVisibility(View.INVISIBLE);
         btnNext.setVisibility(View.VISIBLE);
 
-        fin++;
-
     }
 
     /**
@@ -142,6 +154,7 @@ public class MathActivity extends Activity {
     public void onClickSuivant(View vue) {
         Calcul();
         EditTxtResult.setText("");
+        txtViewReponse.setText("");
         btnValider.setVisibility(View.VISIBLE);
         btnNext.setVisibility(View.INVISIBLE);
     }
@@ -155,22 +168,17 @@ public class MathActivity extends Activity {
         long idMatiere = matiereDAO.getMatiereByLibelle(operateur).getId();
         long idUser = globalVariable.getId();
         ScoreDAO scoreDAO = new ScoreDAO(this);
+        Score scoreBD = scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser);
+        meilleurScore = bonnesReponses;
 
-        if (scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser) != null) {
-            if(scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore() > bonnesReponses){
-                meilleurScore = scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore();
-            }else {
-                meilleurScore = bonnesReponses;
-
-                Score score = new Score();
-                score.setidUser(idUser);
-                score.setIdMatiere(idMatiere);
-                score.setScore(bonnesReponses);
-                scoreDAO.update(score);
+        if (scoreBD != null) { // Si un score existe
+            if(scoreBD.getScore() > bonnesReponses){ // Si le score en BD est supérieur a l'actuel
+                meilleurScore = scoreBD.getScore();
+            }else { // Sinon Maj de la BD
+                scoreBD.setScore(bonnesReponses);
+                scoreDAO.update(scoreBD);
             }
         }else{
-            meilleurScore = bonnesReponses;
-
             Score score = new Score();
             score.setidUser(idUser);
             score.setIdMatiere(idMatiere);
@@ -200,7 +208,7 @@ public class MathActivity extends Activity {
                 result = val1 * val2;
                 break;
             case 4:
-                val1 = randNb(1,20);
+                val1 = randNb(1,100);
                 List diviseurs = new ArrayList<Integer>();
                 for(int i=1;i<=val1;i++) {
                     if(val1%i==0){
@@ -227,6 +235,20 @@ public class MathActivity extends Activity {
     public int randNb(int min, int max) {
         int res = min + (int)(Math.random() * ((max - min) + 1));
         return res;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        // Save les données de jeu
+        savedInstanceState.putInt(STATE_SCORE, bonnesReponses);
+        savedInstanceState.putInt(STATE_LEVEL, level);
+        savedInstanceState.putInt(STATE_NBTOUR, tour);
+        if (operateur.equals("Multiplication")){
+            savedInstanceState.putInt(STATE_MULTIPLICATION, i);
+        }
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override

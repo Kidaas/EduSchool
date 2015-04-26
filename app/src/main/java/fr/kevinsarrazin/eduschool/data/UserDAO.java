@@ -14,16 +14,17 @@ public class UserDAO extends DAOBase {
     public static final String KEY = "id";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
+    public static final String NOM = "nom";
+    public static final String PRENOM = "prenom";
     public static final String PATHIMAGE = "pathImage";
 
-    public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LOGIN + " TEXT, "+ PASSWORD + " TEXT, "+ PATHIMAGE + " TEXT);";
+    public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" + KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + LOGIN + " TEXT, "+ PASSWORD + " TEXT, "+ NOM + " TEXT, "+ PRENOM + " TEXT, "+ PATHIMAGE + " TEXT);";
 
     public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
 
     // Tableau de données (login, password)
     private static final String[] DATA = new String[] {
-            "'user', 'user', 'null'",
-            "'kidaas', 'kidaas', 'null'"
+            "'kidaas', 'kidaas', 'Sarrazin', 'kevin', 'null'"
     };
 
     public UserDAO(Context pContext) {
@@ -39,6 +40,8 @@ public class UserDAO extends DAOBase {
         String insertSQL = "INSERT INTO " + TABLE_NAME + "("
                 + LOGIN + ", "
                 + PASSWORD + ", "
+                + NOM + ", "
+                + PRENOM + ", "
                 + PATHIMAGE + ") VALUES ";
 
         String[] liste = new String[DATA.length];
@@ -59,6 +62,8 @@ public class UserDAO extends DAOBase {
         // Set les données
         value.put(UserDAO.LOGIN, u.getLogin());
         value.put(UserDAO.PASSWORD, u.getPassword());
+        value.put(UserDAO.NOM, u.getNom());
+        value.put(UserDAO.PRENOM, u.getPrenom());
         value.put(UserDAO.PATHIMAGE, u.getPathImage());
         // Execute l'action
         mDb.insert(UserDAO.TABLE_NAME, null, value);
@@ -82,6 +87,8 @@ public class UserDAO extends DAOBase {
             value.put(LOGIN, u.getLogin());
             value.put(PASSWORD, u.getPassword());
             value.put(PATHIMAGE, u.getPathImage());
+            value.put(UserDAO.PRENOM, u.getPrenom());
+            value.put(UserDAO.PATHIMAGE, u.getPathImage());
             mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(u.getId())});
         }
     }
@@ -102,7 +109,9 @@ public class UserDAO extends DAOBase {
             user.setId(c.getLong(0));
             user.setLogin(c.getString(1));
             user.setPassword(c.getString(2));
-            user.setPathImage(c.getString(3));
+            user.setNom(c.getString(3));
+            user.setPrenom(c.getString(4));
+            user.setPathImage(c.getString(5));
             return user;
         }
     }
@@ -124,7 +133,9 @@ public class UserDAO extends DAOBase {
             user.setId(c.getLong(0));
             user.setLogin(c.getString(1));
             user.setPassword(c.getString(2));
-            user.setPathImage(c.getString(3));
+            user.setNom(c.getString(3));
+            user.setPrenom(c.getString(4));
+            user.setPathImage(c.getString(5));
             return user;
         }
     }

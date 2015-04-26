@@ -3,6 +3,7 @@ package fr.kevinsarrazin.eduschool;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.File;
 
 import fr.kevinsarrazin.eduschool.data.User;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
@@ -30,8 +33,10 @@ import fr.kevinsarrazin.eduschool.data.UserDAO;
 public class InscriptionActivity extends Activity {
 
     public final static int LOAD_IMAGE_ACTIVITY_REQUEST = 1;
+    public final static int REQUEST_IMAGE_CAPTURE = 2;
 
-    private EditText EditTxtLogin, EditTxtPassword;
+    private EditText EditTxtLogin, EditTxtPassword, EditTxtNom, EditTxtPrenom;
+    private ImageView imgVPreview;
     private String pathImg;
 
     @Override
@@ -41,6 +46,9 @@ public class InscriptionActivity extends Activity {
 
         EditTxtLogin = (EditText) findViewById(R.id.editTxtLogin);
         EditTxtPassword = (EditText) findViewById(R.id.editTxtPassword);
+        EditTxtNom = (EditText) findViewById(R.id.editTxtNom);
+        EditTxtPrenom = (EditText) findViewById(R.id.editTxtPrenom);
+        imgVPreview = (ImageView) findViewById(R.id.imgVPreview);
     }
 
     /**
@@ -50,17 +58,19 @@ public class InscriptionActivity extends Activity {
     public void onClickInscription(View view) {
 
         // Vérifie que les champs login & password ne sont pas vident
-        if (!TextUtils.isEmpty(EditTxtLogin.getText()) && !TextUtils.isEmpty(EditTxtPassword.getText())){
+        if (!TextUtils.isEmpty(EditTxtLogin.getText()) && !TextUtils.isEmpty(EditTxtPassword.getText()) && !TextUtils.isEmpty(EditTxtNom.getText()) && !TextUtils.isEmpty(EditTxtPrenom.getText())){
             if (pathImg == null){
                 pathImg = "";
             }
             UserDAO uDao = new UserDAO(this);
 
             if (uDao.getUserByLogin(EditTxtLogin.getText().toString()) == null){
-                User u = new User(EditTxtLogin.getText().toString(), EditTxtPassword.getText().toString(), pathImg);
+                User u = new User(EditTxtLogin.getText().toString(), EditTxtPassword.getText().toString(), EditTxtNom.getText().toString(), EditTxtPrenom.getText().toString(), pathImg);
                 uDao.insert(u);
                 EditTxtLogin.getText().clear();
                 EditTxtPassword.getText().clear();
+                EditTxtNom.getText().clear();
+                EditTxtPrenom.getText().clear();
 
                 // Affiche une notification
                 String notification =  "Vous pouvez désormais vous authentifier";
@@ -73,6 +83,7 @@ public class InscriptionActivity extends Activity {
             }else {
                 // Affiche une notification
                 String notification =  "Nom d'utilisateur indisponible";
+                EditTxtLogin.getText().clear();
                 Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
             }
 
@@ -87,13 +98,23 @@ public class InscriptionActivity extends Activity {
 
     /**
      * Permet de choisir une image dans la gallerie
-     *
-     * @param view
      */
-    public void onClickChoixImage(View view) {
+    public void onClickChoixImage() {
         Intent i = new Intent(
                 Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, LOAD_IMAGE_ACTIVITY_REQUEST);
+    }
+
+    /**
+     * Lance l'appareil photo
+     *
+     * @param view
+     */
+    public void onClickPhoto(View view) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
     }
 
     @Override
@@ -113,9 +134,13 @@ public class InscriptionActivity extends Activity {
             pathImg = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView imgVPreview = (ImageView) findViewById(R.id.imgVPreview);
             imgVPreview.setImageBitmap(BitmapFactory.decodeFile(pathImg));
 
+        }
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            // Renvoi ver la galerie
+            onClickChoixImage();
         }
     }
 

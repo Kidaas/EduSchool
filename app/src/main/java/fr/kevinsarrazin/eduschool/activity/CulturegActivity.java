@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,10 +34,13 @@ public class CulturegActivity extends Activity {
 
     public static final String CULTUREG_SCORE = "CulturegScore";
     public static final String CULTUREG_MEILLEUR_SCORE = "CulturegMeilleurScore";
+    static final String STATE_SCORE = "score";
+    static final String STATE_LEVEL = "level";
+    static final String STATE_NBTOUR = "nbTour";
 
     private int level;
     public static String tag = "Geographie";
-    private int fin = 1, bonnesReponses = 0, meilleurScore, nbTourDeJeu = 10;
+    private int tour = 0, bonnesReponses = 0, meilleurScore, nbTourDeJeu = 10;
     private String result;
     private  GlobalClass globalVariable;
 
@@ -60,10 +64,18 @@ public class CulturegActivity extends Activity {
         btnNext = (Button) findViewById(R.id.btnNext);
         btnValider = (Button) findViewById(R.id.btnValider);
 
-        nbPartie.setText("0/10");
+        if (savedInstanceState != null) {
+            // Récupère les données
+            bonnesReponses = savedInstanceState.getInt(STATE_SCORE);
+            level = savedInstanceState.getInt(STATE_LEVEL);
+            tour = savedInstanceState.getInt(STATE_NBTOUR);
+        }else {
+            // Récupère le niveau choisis
+            level = getIntent().getIntExtra(NiveauActivity.NIVEAU_NUMBER, 1);
+        }
 
-        // Récupère le niveau choisis
-        level = getIntent().getIntExtra(NiveauActivity.NIVEAU_NUMBER, 1);
+        nbPartie.setText(tour + "/10");
+
         // Et affecte le tag correspondant
         switch(level) {
             case 1:
@@ -95,6 +107,7 @@ public class CulturegActivity extends Activity {
      * @param vue
      */
     public void onClickValider(View vue) {
+        tour++; // Incremente le nb de tour
         // Si le champ est vide ou différent du résultat attentendu => erreur +1
         if(TextUtils.isEmpty(EditTxtResult.getText()) || !EditTxtResult.getText().toString().toLowerCase().equals(result.toLowerCase())){
             txtViewReponse.setText(result);
@@ -108,7 +121,7 @@ public class CulturegActivity extends Activity {
         }
 
         // Si c'est la Xeme réponse, l'activité est fini
-        if (fin >= nbTourDeJeu){
+        if (tour >= nbTourDeJeu){
             //Enregistre le score si l'utilisateur est enregistré
             if (globalVariable.getId() != 0){
                 score();
@@ -128,8 +141,7 @@ public class CulturegActivity extends Activity {
         btnValider.setVisibility(View.INVISIBLE);
         btnNext.setVisibility(View.VISIBLE);
 
-        nbPartie.setText(fin + "/10");
-        fin++;
+        nbPartie.setText(tour + "/10");
 
     }
 
@@ -150,27 +162,22 @@ public class CulturegActivity extends Activity {
      * Enregistre le score
      */
     public void score(){
+
         MatiereDAO matiereDAO = new MatiereDAO(this);
         long idMatiere = matiereDAO.getMatiereByLibelle(tag).getId();
         long idUser = globalVariable.getId();
         ScoreDAO scoreDAO = new ScoreDAO(this);
+        Score scoreBD = scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser);
+        meilleurScore = bonnesReponses;
 
-        if (scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser) != null) { // Si un score existe
-            if(scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore() > bonnesReponses){ // Si le score en BD est supérieur a l'actuel
-                meilleurScore = scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore();
+        if (scoreBD != null) { // Si un score existe
+            if(scoreBD.getScore() > bonnesReponses){ // Si le score en BD est supérieur a l'actuel
+                meilleurScore = scoreBD.getScore();
             }else { // Sinon Maj de la BD
-                meilleurScore = bonnesReponses;
-
-                Score score = new Score();
-                score.setidUser(idUser);
-                score.setIdMatiere(idMatiere);
-                score.setScore(bonnesReponses);
-                scoreDAO.update(score);
-
+                scoreBD.setScore(bonnesReponses);
+                scoreDAO.update(scoreBD);
             }
         }else{
-            meilleurScore = bonnesReponses;
-
             Score score = new Score();
             score.setidUser(idUser);
             score.setIdMatiere(idMatiere);
@@ -178,6 +185,17 @@ public class CulturegActivity extends Activity {
             scoreDAO.insert(score);
         }
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        // Save les données de jeu
+        savedInstanceState.putInt(STATE_SCORE, bonnesReponses);
+        savedInstanceState.putInt(STATE_LEVEL, level);
+        savedInstanceState.putInt(STATE_NBTOUR, tour);
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override

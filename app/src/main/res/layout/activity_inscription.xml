@@ -27,7 +27,8 @@
             android:layout_height="200dp"
             android:id="@+id/imgVPreview"
             android:nestedScrollingEnabled="true"
-            android:contentDescription="@string/avatar" />
+            android:contentDescription="@string/avatar"
+            android:src="@drawable/default_icon" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -45,20 +46,60 @@
             android:ems="10"
             android:id="@+id/editTxtPassword"/>
 
-        <Button
-            android:layout_width="200dp"
+        <EditText
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="@string/choixImage"
-            android:id="@+id/btnChoixAvatar"
-            android:onClick="onClickChoixImage" />
+            android:inputType="textPersonName"
+            android:hint="Nom"
+            android:ems="10"
+            android:id="@+id/editTxtNom" />
 
-        <Button
-            android:layout_width="200dp"
+        <EditText
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/inscription"
-            android:id="@+id/btnInscription"
-            android:onClick="onClickInscription" />
+            android:inputType="textPersonName"
+            android:hint="Prenom"
+            android:ems="10"
+            android:id="@+id/editTxtPrenom" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/imgViewGallery"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/gallery"
+                android:focusableInTouchMode="false"
+                android:onClick="onClickChoixImage"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageViewPhoto"
+                android:src="@drawable/photo"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:onClick="onClickPhoto" />
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/imgViewSave"
+                android:src="@drawable/save"
+                android:layout_gravity="right"
+                android:onClick="onClickInscription"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

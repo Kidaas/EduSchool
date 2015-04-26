@@ -11,21 +11,27 @@ public class User {
     private long id;
     private String login;
     private String password;
+    private String nom;
+    private String prenom;
     private String pathImage;
 
     public User() {
         super();
     }
 
-    public User(String login, String password, String pathImage) {
+    public User(String login, String password, String nom, String prenom,  String pathImage) {
         this.login = login;
         this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
         this.pathImage = pathImage;
     }
 
-    public User(long id, String login, String password, String pathImage) {
+    public User(long id, String login, String password, String nom, String prenom, String pathImage) {
         this.id = id;
         this.login = login;
+        this.nom = nom;
+        this.prenom = prenom;
         this.password = password;
         this.pathImage = pathImage;
     }
@@ -52,6 +58,22 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
     public String getPathImage() {

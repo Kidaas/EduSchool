@@ -2,14 +2,16 @@
     <string name="app_name">EduSchool</string>
 
     <string name="action_settings">Parametres</string>
-    <string name="title_activity_erreur_multiplication">Erreur</string>
-    <string name="title_activity_felicitation_multiplication">Felicitation !</string>
     <string name="title_activity_cultureg">Culture Générale</string>
     <string name="title_activity_QCM">QCM</string>
     <string name="title_activity_niveau">Choisi ton niveau</string>
+    <string name="title_activity_score">ScoreActivity</string>
     <string name="title_activity_math">Math</string>
+    <string name="title_activity_multiplication">Multiplication</string>
     <string name="title_activity_resultat">Resultat</string>
-    <string name="title_activity_user">Mon espaces</string>
+    <string name="title_activity_user">Mon espace</string>
+    <string name="title_activity_login">loginActivity</string>
+    <string name="title_activity_inscription">InscriptionActivity</string>
 
     <!-- Defaut -->
     <string name="defaut">autre</string>
@@ -24,8 +26,6 @@
     <!-- Menu -->
     <string name="math">Math</string>
     <string name="culture">Culture G</string>
-    <string name="qcm">QCM</string>
-
     <string name="monCompte">Mon compte</string>
 
     <!-- Niveau -->
@@ -41,9 +41,7 @@
     <string name="resultat">Resultat : </string>
     <string name="score">Score : </string>
     <string name="meilleurScore">Meilleur score : </string>
-    <string name="title_activity_score">ScoreActivity</string>
     <string name="avatar">Avatar</string>
-    <string name="title_activity_login">loginActivity</string>
-    <string name="title_activity_inscription">InscriptionActivity</string>
+
 
 </resources>

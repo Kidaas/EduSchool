@@ -51,11 +51,6 @@ public class NiveauActivity extends Activity {
             btn2.setText(R.string.francais);
             btn3.setVisibility(View.INVISIBLE);
             btn4.setVisibility(View.INVISIBLE);
-        }else if(caller.equals(QCM)){
-            btn1.setText(R.string.anglais);
-            btn2.setVisibility(View.INVISIBLE);
-            btn3.setVisibility(View.INVISIBLE);
-            btn4.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -95,13 +90,6 @@ public class NiveauActivity extends Activity {
                 case (R.id.btn2):
                     intent = new Intent(this, CulturegActivity.class);
                     level = 2;
-                    break;
-            }
-        }else if(caller.equals(QCM)){
-            switch (v.getId()) {
-                case (R.id.btn1):
-                    intent = new Intent(this, QcmActivity.class);
-                    level = 1;
                     break;
             }
         }

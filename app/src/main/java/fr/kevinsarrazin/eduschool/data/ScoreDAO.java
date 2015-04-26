@@ -84,15 +84,11 @@ public class ScoreDAO extends DAOBase {
      * @param s la question à modifié
      */
     public void update(Score s) {
-        if(getScore(s.getId()) ==  null){
-            insert(s);
-        }else {
-            ContentValues value = new ContentValues();
-            value.put(IDUSER, s.getidUser());
-            value.put(IDMATIERE, s.getIdMatiere());
-            value.put(SCORE, s.getScore());
-            mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(s.getId())});
-        }
+        ContentValues value = new ContentValues();
+        value.put(IDUSER, s.getidUser());
+        value.put(IDMATIERE, s.getIdMatiere());
+        value.put(SCORE, s.getScore());
+        mDb.update(TABLE_NAME, value, KEY  + " = ?", new String[] {String.valueOf(s.getId())});
     }
 
     /**

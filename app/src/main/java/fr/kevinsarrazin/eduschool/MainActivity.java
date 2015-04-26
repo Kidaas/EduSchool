@@ -26,7 +26,6 @@ public class MainActivity extends Activity {
     // ID REQUETES
     public final static int MATH_ACTIVITY_REQUEST = 1;
     public final static int CULTUREG_ACTIVITY_REQUEST = 2;
-    public final static int QCM_ACTIVITY_REQUEST = 3;
 
     // Caller
     public static final String CALLER = "caller";
@@ -34,7 +33,6 @@ public class MainActivity extends Activity {
     // Constante pur le caller
     private String MATH = "Math";
     private String CULTURE = "Culture";
-    private String QCM = "QCM";
 
     // Variable de stockage local
     SharedPreferences sharedpreferences;
@@ -119,9 +117,9 @@ public class MainActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Test le bouton de retour provenant des activités
-        if (requestCode == MATH_ACTIVITY_REQUEST || requestCode == CULTUREG_ACTIVITY_REQUEST || requestCode == QCM_ACTIVITY_REQUEST) {
+        if (requestCode == MATH_ACTIVITY_REQUEST || requestCode == CULTUREG_ACTIVITY_REQUEST) {
             // Afficher une notification
-            String notification = "Retour à l'activité principale";
+            String notification = "Retour au menu";
             Toast.makeText(this, notification, Toast.LENGTH_SHORT).show();
         }
     }
@@ -148,18 +146,6 @@ public class MainActivity extends Activity {
         intent.putExtra(CALLER, CULTURE);
         // Lancement de la demande de changement d'activité + demande de retour
         startActivityForResult(intent, CULTUREG_ACTIVITY_REQUEST);
-    }
-
-    /**
-     * Lance les questions de cultures générales
-     * @param view
-     */
-    public void onQcmClick(View view) {
-        // Création d'une intention
-        Intent intent = new Intent(this, NiveauActivity.class);
-        intent.putExtra(CALLER, QCM);
-        // Lancement de la demande de changement d'activité + demande de retour
-        startActivityForResult(intent, QCM_ACTIVITY_REQUEST);
     }
 
     /**

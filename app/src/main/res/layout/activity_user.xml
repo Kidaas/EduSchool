@@ -10,23 +10,89 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/layoutUser"
         >
 
-        <ImageView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/imgAvatar"
-            android:minHeight="60dp"
-            android:minWidth="60dp" />
+            android:id="@+id/layoutAvatar"
+            >
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/imgAvatar"
+                android:minHeight="60dp"
+                android:minWidth="60dp"
+                android:src="@drawable/default_icon" />
+        </LinearLayout>
 
-        <TextView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/txtViewName" />
+            android:layout_marginLeft="20dp"
+            android:id="@+id/layoutUser"
+           >
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pseudo : "
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="pseudo"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/txtViewPseudo" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nom : "
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="nom"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/txtViewNom" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Prénom : "
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="prenom"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/txtViewPrenom" />
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
-
-
 </RelativeLayout>
