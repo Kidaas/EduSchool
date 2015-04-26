@@ -54,37 +54,6 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="110dip"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/linearLayout"
-            android:layout_below="@+id/textViewPresentation"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:onClick="onQcmClick"
-            android:nestedScrollingEnabled="false">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton9"
-                android:src="@drawable/qcm"
-                android:layout_gravity="center_horizontal"
-                android:onClick="onQcmClick"
-                android:nestedScrollingEnabled="false"
-                android:minHeight="55dp"
-                android:minWidth="55dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/qcm"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/textView10" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="110dip"
             android:layout_height="fill_parent"
             android:onClick="onCulturegClick">
 
