@@ -16,6 +16,7 @@
 
     <!-- Defaut -->
     <string name="defaut">autre</string>
+    <string name="vide"></string>
     <string name="hello_world">Hello world!</string>
 
     <!-- Boutons -->
@@ -40,11 +41,18 @@
     <string name="anglais">Anglais</string>
     <string name="departement">Departement</string>
 
+    <string name="NiveauOk">Niveau réussi</string>
+    <string name="NiveauEnCour">Niveau en cour</string>
+    <string name="NiveauKo">Niveau non débloqué</string>
+
     <!-- Textes -->
     <string name="resultat">Resultat : </string>
     <string name="score">Score : </string>
     <string name="meilleurScore">Meilleur score : </string>
     <string name="avatar">Avatar</string>
 
+    <string name="consigne_math">Saisissez le résultat du calcul</string>
+    <string name="consigne_cultureg">Saisissez la réponse à la question</string>
+    <string name="consigne_qcm">Cliquer sur la bonne réponse</string>
 
 </resources>

@@ -6,13 +6,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +37,9 @@ public class MathActivity extends Activity {
     static final String STATE_LEVEL = "level";
     static final String STATE_NBTOUR = "nbTour";
     static final String STATE_MULTIPLICATION = "i";
+    static final String STATE_VAL1 = "val1";
+    static final String STATE_VAL2= "val2";
+    static final String STATE_RESULT= "result";
 
     private int level, multiplicateur, i = 1;
     private int val1, val2, result;
@@ -72,8 +73,14 @@ public class MathActivity extends Activity {
             bonnesReponses = savedInstanceState.getInt(STATE_SCORE);
             level = savedInstanceState.getInt(STATE_LEVEL);
             tour = savedInstanceState.getInt(STATE_NBTOUR);
-            i = savedInstanceState.getInt(STATE_MULTIPLICATION);
-            i--; // Ré-équilibre le i++ de la fonction Calcul()
+            if (level != 3){
+                val1 = savedInstanceState.getInt(STATE_VAL1);
+                val2 = savedInstanceState.getInt(STATE_VAL2);
+                result = savedInstanceState.getInt(STATE_RESULT);
+            }else {
+                i = savedInstanceState.getInt(STATE_MULTIPLICATION);
+                i--; // Ré-équilibre le i++ de la fonction Calcul()
+            }
         }else {
             level = getIntent().getIntExtra(NiveauActivity.NIVEAU_NUMBER, 1);
         }
@@ -100,8 +107,14 @@ public class MathActivity extends Activity {
                 break;
         }
         btnNext.setVisibility(View.INVISIBLE);
-        Calcul();
 
+        if (savedInstanceState == null || level == 3) {
+            Calcul();
+        }else{
+            // Affecte les valeurs aux champs
+            txtVal1.setText("" + val1);
+            txtVal2.setText("" + val2);
+        }
     }
 
     /**
@@ -247,8 +260,11 @@ public class MathActivity extends Activity {
         savedInstanceState.putInt(STATE_NBTOUR, tour);
         if (operateur.equals("Multiplication")){
             savedInstanceState.putInt(STATE_MULTIPLICATION, i);
+        }else {
+            savedInstanceState.putInt(STATE_VAL1, val1);
+            savedInstanceState.putInt(STATE_VAL2, val2);
+            savedInstanceState.putInt(STATE_RESULT, result);
         }
-
         super.onSaveInstanceState(savedInstanceState);
     }
 

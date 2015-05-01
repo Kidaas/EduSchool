@@ -8,10 +8,26 @@
 
 
     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/consigne_cultureg"
+            android:id="@+id/textView15" />
+    </LinearLayout>
+
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_below="@+id/linearLayout"
         android:id="@+id/layoutQuestion"
         >
 
@@ -77,4 +93,5 @@
             android:onClick="onClickSuivant"
             android:id="@+id/btnNext" />
     </LinearLayout>
+
 </RelativeLayout>

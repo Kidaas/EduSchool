@@ -25,12 +25,13 @@ public class ScoreDAO extends DAOBase {
 
     // Tableau de données (idUser, idMatiere, score)
     private static final String[] DATA = new String[] {
-            "'1', '1', '1'",
-            "'1', '2', '2'",
-            "'1', '3', '3'",
-            "'1', '4', '6'",
-            "'1', '5', '5'"
+            "'1', '1', '1'", // Anglais
+            "'1', '7', '2'", // Geographie
+            "'1', '3', '6'", // Addition
+            "'1', '4', '5'", // Soustraction
+            "'1', '5', '0'"  // Multiplication
     };
+
 
     public ScoreDAO(Context pContext) {
         super(pContext);

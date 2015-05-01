@@ -8,10 +8,26 @@
 
 
     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/layoutConsigne"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/consigne_math"
+            android:id="@+id/textView14"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="40dp"
         android:id="@+id/layoutCalcul"
        >
 
@@ -94,6 +110,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="Suivant"
+            android:layout_marginTop="10dp"
             android:onClick="onClickSuivant"
             android:id="@+id/btnNext" />
     </LinearLayout>

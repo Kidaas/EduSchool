@@ -27,43 +27,44 @@
         </activity>
         <activity
             android:name=".activity.CulturegActivity"
-            android:label="@string/title_activity_cultureg" >
+            android:label="@string/vide" >
         </activity>
         <activity
             android:name=".activity.MathActivity"
-            android:label="@string/title_activity_math" >
+            android:label="@string/vide" >
         </activity>
         <activity
             android:name=".activity.MultiplicationActivity"
-            android:label="@string/title_activity_multiplication" >
+            android:label="@string/vide" >
         </activity>
         <activity
             android:name=".activity.NiveauActivity"
-            android:label="@string/title_activity_niveau" >
+            android:label="@string/vide" >
         </activity>
         <activity
             android:name=".ResultatActivity"
-            android:label="@string/title_activity_resultat" >
+            android:label="@string/vide" >
         </activity>
         <activity
             android:name=".activity.UserActivity"
-            android:label="@string/title_activity_user" >
+            android:label="@string/vide" >
         </activity>
         <activity
             android:name=".activity.ScoreActivity"
-            android:label="@string/title_activity_score" >
+            android:label="@string/vide" >
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/vide" >
         </activity>
         <activity
             android:name=".InscriptionActivity"
-            android:label="@string/title_activity_inscription" >
+            android:label="@string/vide" >
         </activity>
         <activity
             android:name=".activity.QCMActivity"
-            android:label="@string/title_activity_qcm" >
+            android:label="@string/vide"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

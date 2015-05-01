@@ -2,13 +2,17 @@ package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import fr.kevinsarrazin.eduschool.GlobalClass;
 import fr.kevinsarrazin.eduschool.R;
+import fr.kevinsarrazin.eduschool.data.MatiereDAO;
+import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 
 /**
  * @author ksarrazin <kevin.sarrazin@live.fr>
@@ -31,7 +35,7 @@ public class NiveauActivity extends Activity {
     private String QCM = "Culture";
 
     private Button btn1, btn2, btn3, btn4;
-    //private ImageView ImageViewbtn1, ImageViewbtn2, ImageViewbtn3, ImageViewbtn4;
+    private ImageView ImageViewbtn1, ImageViewbtn2, ImageViewbtn3, ImageViewbtn4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +44,19 @@ public class NiveauActivity extends Activity {
 
         globalVariable = (GlobalClass) getApplicationContext();
 
+
+        Button[] tabButton = new Button[4];
+        ImageView[] tabImage = new ImageView[4];
+
         btn1 = (Button) findViewById(R.id.btn1);
         btn2 = (Button) findViewById(R.id.btn2);
         btn3 = (Button) findViewById(R.id.btn3);
         btn4 = (Button) findViewById(R.id.btn4);
-/*        ImageViewbtn1 = (ImageView) findViewById(R.id.imageViewbtn1);
+
+        ImageViewbtn1 = (ImageView) findViewById(R.id.imageViewbtn1);
         ImageViewbtn2 = (ImageView) findViewById(R.id.imageViewbtn2);
         ImageViewbtn3 = (ImageView) findViewById(R.id.imageViewbtn3);
-        ImageViewbtn4 = (ImageView) findViewById(R.id.imageViewbtn4);*/
+        ImageViewbtn4 = (ImageView) findViewById(R.id.imageViewbtn4);
 
         caller = getIntent().getStringExtra("caller");
 
@@ -60,17 +69,68 @@ public class NiveauActivity extends Activity {
         }else if(caller.equals(CULTURE)) {
             btn1.setText(R.string.geographie);
             btn2.setText(R.string.francais);
+
             btn3.setVisibility(View.INVISIBLE);
+            ImageViewbtn3.setVisibility(View.INVISIBLE);
             btn4.setVisibility(View.INVISIBLE);
+            ImageViewbtn4.setVisibility(View.INVISIBLE);
         }else {
             btn1.setText(R.string.departement);
+
             btn2.setVisibility(View.INVISIBLE);
+            ImageViewbtn2.setVisibility(View.INVISIBLE);
             btn3.setVisibility(View.INVISIBLE);
+            ImageViewbtn3.setVisibility(View.INVISIBLE);
             btn4.setVisibility(View.INVISIBLE);
+            ImageViewbtn4.setVisibility(View.INVISIBLE);
+        }
+
+        tabButton[0] = btn1;
+        tabButton[1] = btn2;
+        tabButton[2] = btn3;
+        tabButton[3] = btn4;
+
+        tabImage[0] = ImageViewbtn1;
+        tabImage[1] = ImageViewbtn2;
+        tabImage[2] = ImageViewbtn3;
+        tabImage[3] = ImageViewbtn4;
+
+        niveauDebloque(tabButton, tabImage);
+    }
+
+    private void niveauDebloque(Button[] tabButton, ImageView[] tabImage){
+
+        MatiereDAO matiereDAO = new MatiereDAO(this);
+        ScoreDAO scoreDAO = new ScoreDAO(this);
+        long idUser = globalVariable.getId();
+
+        if (idUser != 0){ // Si utilisateur est connecté
+            for(int i = 0; i < tabButton.length; i++){ // Parcour tous les boutons
+                long idMatiere = matiereDAO.getMatiereByLibelle(tabButton[i].getText().toString()).getId();
+                if (scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser) != null) { // Si le score de cette matière existe
+                    if (scoreDAO.getScoreByMatiereAndUser(idMatiere, idUser).getScore() >= 5) { // Si ce score est supérieur a 5, valide le bouton
+                        Drawable myDrawable = getResources().getDrawable(R.drawable.ok);
+                        tabImage[i].setImageDrawable(myDrawable);
+                    }else{ // Sinon invalide le bouton et desactive ses suivants
+                        Drawable myDrawable = getResources().getDrawable(R.drawable.en_cour);
+                        tabImage[i].setImageDrawable(myDrawable);
+                        tabImage[i+1].setImageDrawable(myDrawable);
+                        tabButton[i+1].setEnabled(false);
+                    }
+                }else{ // Sinon desactive le bouton si il est différent du 1er boutons
+                    Drawable myDrawable = getResources().getDrawable(R.drawable.ko);
+                    tabImage[i].setImageDrawable(myDrawable);
+                    if (tabButton[i] != btn1){
+                        tabButton[i].setEnabled(false);
+                    }else{
+                        Drawable myDrawable2 = getResources().getDrawable(R.drawable.en_cour);
+                        tabImage[i].setImageDrawable(myDrawable2);
+                    }
+                }
+            }
         }
 
     }
-
     /**
      * Ecoute sur les boutons
      * @param v

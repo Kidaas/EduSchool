@@ -2,10 +2,9 @@ package fr.kevinsarrazin.eduschool.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,12 +33,15 @@ public class QCMActivity extends Activity {
     static final String STATE_SCORE = "score";
     static final String STATE_LEVEL = "level";
     static final String STATE_NBTOUR = "nbTour";
+    static final String STATE_QUESTION = "IdQestion";
 
     private int level;
     public static String tag = "Departement";
     private int tour = 0, bonnesReponses = 0, meilleurScore, nbTourDeJeu = 10;
     private String result;
     private GlobalClass globalVariable;
+    private Qcm question;
+    private Long idQuestion = 0L;
 
     private TextView txtViewQuestion, txtViewReponse;
     private ImageView imgResult;
@@ -64,6 +66,7 @@ public class QCMActivity extends Activity {
             bonnesReponses = savedInstanceState.getInt(STATE_SCORE);
             level = savedInstanceState.getInt(STATE_LEVEL);
             tour = savedInstanceState.getInt(STATE_NBTOUR);
+            idQuestion = savedInstanceState.getLong(STATE_QUESTION);
         }else {
             // Récupère le niveau choisis
             level = getIntent().getIntExtra(NiveauActivity.NIVEAU_NUMBER, 1);
@@ -84,8 +87,13 @@ public class QCMActivity extends Activity {
      * Renvoie la question sur la catégorie données
      */
     public void Question(){
+        btnNext.setVisibility(View.INVISIBLE);
         QcmDAO qDAO = new QcmDAO(this);
-        Qcm question = qDAO.getQcmRandom(tag);
+        if (idQuestion > 0L){
+            question = qDAO.getQuestion(idQuestion);
+        }else{
+            question = qDAO.getQcmRandom(tag);
+        }
         result = question.getReponse();
 
         // Affecte la valeur à son champs
@@ -221,24 +229,20 @@ public class QCMActivity extends Activity {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        // Save les données de jeu
+        savedInstanceState.putLong(STATE_QUESTION, question.getId());
+        savedInstanceState.putInt(STATE_LEVEL, level);
+        savedInstanceState.putInt(STATE_NBTOUR, tour);
+
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_qcm, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
