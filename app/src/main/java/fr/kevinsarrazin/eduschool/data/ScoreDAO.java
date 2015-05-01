@@ -25,11 +25,11 @@ public class ScoreDAO extends DAOBase {
 
     // Tableau de données (idUser, idMatiere, score)
     private static final String[] DATA = new String[] {
-            "'2', '1', '1'",
-            "'2', '2', '2'",
-            "'2', '3', '3'",
-            "'2', '4', '4'",
-            "'2', '5', '5'"
+            "'1', '1', '1'",
+            "'1', '2', '2'",
+            "'1', '3', '3'",
+            "'1', '4', '6'",
+            "'1', '5', '5'"
     };
 
     public ScoreDAO(Context pContext) {
@@ -79,7 +79,6 @@ public class ScoreDAO extends DAOBase {
         mDb.delete(TABLE_NAME, KEY + " = ?", new String[] {String.valueOf(id)});
     }
 
-
     /**
      * @param s la question à modifié
      */
@@ -111,48 +110,6 @@ public class ScoreDAO extends DAOBase {
             return score;
         }
     }
-
-/*    *//**
-     * @param idUser l'identifiant du score à récupérer
-     *//*
-    public Score getScoreByUser(long idUser) {
-        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where idUser = ?", new String[] {String.valueOf(idUser)});
-
-        // Si il ne retourne rien, => retourne null
-        if (c.getCount() == 0) {
-            return null;
-        }else {
-            // On va sur le 1er élements
-            c.moveToFirst();
-            Score score = new Score();
-            score.setId(c.getLong(0));
-            score.setidUser(c.getLong(1));
-            score.setIdMatiere(c.getLong(2));
-            score.setScore(c.getInt(3));
-            return score;
-        }
-    }*/
-
-/*    *//**
-     * @param idMatiere l'identifiant du score à récupérer
-     *//*
-    public Score getScoreByMatiere(long idMatiere) {
-        Cursor c = mDb.rawQuery("select * from " + TABLE_NAME + " where idMatiere = ?", new String[] {String.valueOf(idMatiere)});
-
-        // Si il ne retourne rien, => retourne null
-        if (c.getCount() == 0) {
-            return null;
-        }else {
-            // On va sur le 1er élements
-            c.moveToFirst();
-            Score score = new Score();
-            score.setId(c.getLong(0));
-            score.setidUser(c.getLong(1));
-            score.setIdMatiere(c.getLong(2));
-            score.setScore(c.getInt(3));
-            return score;
-        }
-    }*/
 
     /**
      * @param idMatiere l'identifiant du score à récupérer

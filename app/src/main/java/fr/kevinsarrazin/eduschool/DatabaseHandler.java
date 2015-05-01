@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import fr.kevinsarrazin.eduschool.data.CulturegDAO;
 import fr.kevinsarrazin.eduschool.data.MatiereDAO;
+import fr.kevinsarrazin.eduschool.data.QcmDAO;
 import fr.kevinsarrazin.eduschool.data.UserDAO;
 import fr.kevinsarrazin.eduschool.data.ScoreDAO;
 
@@ -19,82 +20,6 @@ import fr.kevinsarrazin.eduschool.data.ScoreDAO;
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    /*********************************************
-     *      Table Culture Genérale
-     ********************************************/
-    public static final String CULTUREG_KEY = "id";
-    public static final String CULTUREG_TAG = "tag";
-    public static final String CULTUREG_QUESTION = "question";
-    public static final String CULTUREG_REPONSE = "reponse";
-
-    public static final String CULTUREG_TABLE_NAME = "cultureg";
-    public static final String CULTUREG_TABLE_CREATE =
-                        "CREATE TABLE " + CULTUREG_TABLE_NAME + " (" +
-                        CULTUREG_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        CULTUREG_TAG + " TEXT, " +
-                        CULTUREG_QUESTION + " TEXT, " +
-                        CULTUREG_REPONSE + " TEXT);";
-
-    public static final String CULTUREG_TABLE_DROP = "DROP TABLE IF EXISTS " + CULTUREG_TABLE_NAME + ";";
-
-    /*********************************************
-     *      Table User
-     ********************************************/
-    public static final String USER_KEY = "id";
-    public static final String USER_LOGIN = "login";
-    public static final String USER_PASSWORD = "password";
-    public static final String USER_NOM = "nom";
-    public static final String USER_PRENOM = "prenom";
-    public static final String USER_PATHIMAGE = "pathImage";
-
-    public static final String USER_TABLE_NAME = "user";
-    public static final String USER_TABLE_CREATE =
-            "CREATE TABLE " + USER_TABLE_NAME + " (" +
-                    USER_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    USER_LOGIN + " TEXT, " +
-                    USER_PASSWORD + " TEXT, " +
-                    USER_NOM + " TEXT, " +
-                    USER_PRENOM + " TEXT, " +
-                    USER_PATHIMAGE + " TEXT);";
-
-    public static final String USER_TABLE_DROP = "DROP TABLE IF EXISTS " + USER_TABLE_NAME + ";";
-
-    /*********************************************
-     *      Table Score
-     ********************************************/
-    public static final String SCORE_KEY = "id";
-    public static final String SCORE_IDUSER = "idUser";
-    public static final String SCORER_IDMATIERE = "idMatiere";
-    public static final String SCORE_SCORE = "score";
-
-    public static final String SCORE_TABLE_NAME = "score";
-    public static final String SCORE_TABLE_CREATE =
-            "CREATE TABLE " + SCORE_TABLE_NAME + " (" +
-                    SCORE_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    SCORE_IDUSER + " INTEGER, " +
-                    SCORER_IDMATIERE + " INTEGER, " +
-                    SCORE_SCORE + " INTEGER);";
-
-    public static final String SCORE_TABLE_DROP = "DROP TABLE IF EXISTS " + SCORE_TABLE_NAME + ";";
-
-    /*********************************************
-     *      Table Matiere
-     ********************************************/
-    public static final String MATIERE_KEY = "id";
-    public static final String MATIERE_LIBELLE = "libelle";
-
-    public static final String MATIERE_TABLE_NAME = "matiere";
-    public static final String MATIERE_TABLE_CREATE =
-            "CREATE TABLE " + MATIERE_TABLE_NAME + " (" +
-                    MATIERE_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    MATIERE_LIBELLE + " TEXT);";
-
-    public static final String MATIERE_TABLE_DROP = "DROP TABLE IF EXISTS " + MATIERE_TABLE_NAME + ";";
-
-    /*********************************************
-     *      DatabaseHandler
-     ********************************************/
-
     public DatabaseHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -106,10 +31,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Création des tables
-        db.execSQL(CULTUREG_TABLE_CREATE);
-        db.execSQL(USER_TABLE_CREATE);
-        db.execSQL(SCORE_TABLE_CREATE);
-        db.execSQL(MATIERE_TABLE_CREATE);
+        db.execSQL(CulturegDAO.TABLE_CREATE);
+        db.execSQL(QcmDAO.TABLE_CREATE);
+        db.execSQL(UserDAO.TABLE_CREATE);
+        db.execSQL(ScoreDAO.TABLE_CREATE);
+        db.execSQL(MatiereDAO.TABLE_CREATE);
+
+
+        // Insérer les données de la table CultureG
+        for (String insert : QcmDAO.getInsertSQL()) {
+            db.execSQL(insert);
+        }
 
         // Insérer les données de la table CultureG
         for (String insert : CulturegDAO.getInsertSQL()) {
@@ -133,10 +65,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(CULTUREG_TABLE_DROP);
-        db.execSQL(USER_TABLE_DROP);
-        db.execSQL(SCORE_TABLE_DROP);
-        db.execSQL(MATIERE_TABLE_DROP);
+        db.execSQL(CulturegDAO.TABLE_DROP);
+        db.execSQL(QcmDAO.TABLE_DROP);
+        db.execSQL(UserDAO.TABLE_DROP);
+        db.execSQL(ScoreDAO.TABLE_DROP);
+        db.execSQL(MatiereDAO.TABLE_DROP);
         onCreate(db);
     }
 }

@@ -99,6 +99,14 @@ public class InscriptionActivity extends Activity {
     /**
      * Permet de choisir une image dans la gallerie
      */
+    public void onClickChoixImage(View view) {
+        Intent i = new Intent(
+                Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, LOAD_IMAGE_ACTIVITY_REQUEST);
+    }
+    /**
+     * Permet de choisir une image dans la gallerie
+     */
     public void onClickChoixImage() {
         Intent i = new Intent(
                 Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

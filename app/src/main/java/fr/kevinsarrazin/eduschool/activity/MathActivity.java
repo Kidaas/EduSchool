@@ -155,6 +155,7 @@ public class MathActivity extends Activity {
         Calcul();
         EditTxtResult.setText("");
         txtViewReponse.setText("");
+        imgResult.setImageDrawable(null);
         btnValider.setVisibility(View.VISIBLE);
         btnNext.setVisibility(View.INVISIBLE);
     }

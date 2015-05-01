@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
     // ID REQUETES
     public final static int MATH_ACTIVITY_REQUEST = 1;
     public final static int CULTUREG_ACTIVITY_REQUEST = 2;
+    public final static int QCM_ACTIVITY_REQUEST = 3;
 
     // Caller
     public static final String CALLER = "caller";
@@ -33,6 +34,7 @@ public class MainActivity extends Activity {
     // Constante pur le caller
     private String MATH = "Math";
     private String CULTURE = "Culture";
+    private String QCM = "Qcm";
 
     // Variable de stockage local
     SharedPreferences sharedpreferences;
@@ -53,14 +55,15 @@ public class MainActivity extends Activity {
         layoutBtn = (LinearLayout) findViewById(R.id.LinearBtn);
 
         sharedpreferences = getSharedPreferences(MesPreferences, Context.MODE_PRIVATE);
+        // Créer une instance de la classe variable globale
+        globalVariable = (GlobalClass) getApplicationContext();
+
         // Test si le login & mdp sont stocké en local, si c'est le cas, on n'affichera pas de champ login/inscription
         // Et on le connectera automatiquement
         if (sharedpreferences.contains(nom) && sharedpreferences.contains(mdp)) {
             UserDAO userDAO = new UserDAO(this);
             // Récupère l'user via son login stocké en local
             User u = userDAO.getUserByLogin(sharedpreferences.getString(nom, "login"));
-            // Créer une instance de la classe variable globale
-            globalVariable = (GlobalClass) getApplicationContext();
             // Ajoute l'id de l'utilisateur à la variable globale
             globalVariable.setId(u.getId());
             // Créer le bouton de deconnexion
@@ -68,6 +71,7 @@ public class MainActivity extends Activity {
 
         }else { // Sinon affiche login/inscription (et place les placeholder)
             createBtnLoginInscription();
+            globalVariable.setId(0); // Met à 0
         }
     }
 
@@ -147,6 +151,19 @@ public class MainActivity extends Activity {
         // Lancement de la demande de changement d'activité + demande de retour
         startActivityForResult(intent, CULTUREG_ACTIVITY_REQUEST);
     }
+
+    /**
+     * Lance l'activité Math
+     * @param view
+     */
+    public void onQcmClick(View view) {
+        // Création d'une intention
+        Intent intent = new Intent(this, NiveauActivity.class);
+        intent.putExtra(CALLER, QCM);
+        // Lancement de la demande de changement d'activité + demande de retour
+        startActivityForResult(intent, QCM_ACTIVITY_REQUEST);
+    }
+
 
     /**
      * Fonction de Création des boutons login/inscription

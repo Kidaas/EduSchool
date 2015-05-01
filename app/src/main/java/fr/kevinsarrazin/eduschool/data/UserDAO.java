@@ -24,7 +24,7 @@ public class UserDAO extends DAOBase {
 
     // Tableau de données (login, password)
     private static final String[] DATA = new String[] {
-            "'kidaas', 'kidaas', 'Sarrazin', 'kevin', 'null'"
+            "'kidaas', 'kidaas', 'Sarrazin', 'kevin', null"
     };
 
     public UserDAO(Context pContext) {

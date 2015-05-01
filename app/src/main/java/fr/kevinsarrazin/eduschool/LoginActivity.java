@@ -82,6 +82,7 @@ public class LoginActivity extends Activity {
 
                 // Création d'une intention
                 Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
                 // Sinon averti l'utilisateur

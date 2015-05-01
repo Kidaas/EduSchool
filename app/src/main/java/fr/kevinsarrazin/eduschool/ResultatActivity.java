@@ -29,7 +29,6 @@ public class ResultatActivity extends Activity {
 
     private LinearLayout layoutScore;
     private TextView txtMeilleurScore, txtScore;
-    private RatingBar scoreBar;
 
     private int score = 0, meilleurScore = 0;
     private GlobalClass globalVariable;
@@ -41,7 +40,6 @@ public class ResultatActivity extends Activity {
 
         txtScore = (TextView) findViewById(R.id.txtScore);
         txtMeilleurScore = (TextView) findViewById(R.id.txtMeilleurScore);
-        scoreBar = (RatingBar) findViewById(R.id.ScoreBar);
         layoutScore = (LinearLayout) findViewById(R.id.layoutScore);
 
         // Récupère le caller
@@ -77,10 +75,6 @@ public class ResultatActivity extends Activity {
 
         txtScore.setText("Score : "+ score);
         txtMeilleurScore.setText("Meilleur score : "+ meilleurScore);
-        // Nombre d'étoile :
-        int nbEtoiles = (int) Math.ceil(score/2);
-        scoreBar.setNumStars(nbEtoiles);
-
     }
 
     /**

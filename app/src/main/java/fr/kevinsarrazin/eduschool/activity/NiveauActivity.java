@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import fr.kevinsarrazin.eduschool.GlobalClass;
 import fr.kevinsarrazin.eduschool.R;
 
 /**
@@ -23,21 +23,31 @@ public class NiveauActivity extends Activity {
     public static final String NIVEAU_NUMBER = "level";
     private int level = 1;
     private String caller;
+    private GlobalClass globalVariable;
 
     // Constante pur le caller
     private String MATH = "Math";
     private String CULTURE = "Culture";
-    private String QCM = "QCM";
+    private String QCM = "Culture";
+
+    private Button btn1, btn2, btn3, btn4;
+    //private ImageView ImageViewbtn1, ImageViewbtn2, ImageViewbtn3, ImageViewbtn4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_niveau);
 
-        Button btn1 = (Button) findViewById(R.id.btn1);
-        Button btn2 = (Button) findViewById(R.id.btn2);
-        Button btn3 = (Button) findViewById(R.id.btn3);
-        Button btn4 = (Button) findViewById(R.id.btn4);
+        globalVariable = (GlobalClass) getApplicationContext();
+
+        btn1 = (Button) findViewById(R.id.btn1);
+        btn2 = (Button) findViewById(R.id.btn2);
+        btn3 = (Button) findViewById(R.id.btn3);
+        btn4 = (Button) findViewById(R.id.btn4);
+/*        ImageViewbtn1 = (ImageView) findViewById(R.id.imageViewbtn1);
+        ImageViewbtn2 = (ImageView) findViewById(R.id.imageViewbtn2);
+        ImageViewbtn3 = (ImageView) findViewById(R.id.imageViewbtn3);
+        ImageViewbtn4 = (ImageView) findViewById(R.id.imageViewbtn4);*/
 
         caller = getIntent().getStringExtra("caller");
 
@@ -46,9 +56,15 @@ public class NiveauActivity extends Activity {
             btn2.setText(R.string.soustraction);
             btn3.setText(R.string.multiplication);
             btn4.setText(R.string.division);
+
         }else if(caller.equals(CULTURE)) {
             btn1.setText(R.string.geographie);
             btn2.setText(R.string.francais);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+        }else {
+            btn1.setText(R.string.departement);
+            btn2.setVisibility(View.INVISIBLE);
             btn3.setVisibility(View.INVISIBLE);
             btn4.setVisibility(View.INVISIBLE);
         }
@@ -92,6 +108,13 @@ public class NiveauActivity extends Activity {
                     level = 2;
                     break;
             }
+        }else{
+            switch (v.getId()) {
+                case (R.id.btn1):
+                    intent = new Intent(this, QCMActivity.class);
+                    level = 1;
+                    break;
+            }
         }
 
         // Ajout du niveau d'exercice
@@ -100,7 +123,6 @@ public class NiveauActivity extends Activity {
         startActivity(intent);
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

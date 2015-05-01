@@ -65,7 +65,8 @@
                 android:layout_gravity="center_horizontal"
                 android:onClick="onCulturegClick"
                 android:minHeight="55dp"
-                android:minWidth="55dp" />
+                android:minWidth="55dp"
+                android:nestedScrollingEnabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -77,6 +78,32 @@
                 />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="110dip"
+            android:layout_height="fill_parent"
+            android:onClick="onQcmClick" >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:src="@drawable/qcm"
+                android:layout_gravity="center_horizontal"
+                android:onClick="onQcmClick"
+                android:minHeight="55dp"
+                android:minWidth="55dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/qcm"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/textView2" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

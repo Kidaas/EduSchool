@@ -12,39 +12,94 @@
         android:layout_height="fill_parent"
         android:id="@+id/layoutNiveau">
 
-        <Button
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/addition"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/btn1"
-            android:onClick="onClick"
-            />
+            android:id="@+id/linearLayoutBtn1">
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="@string/soustraction"
-            android:id="@+id/btn2"
-            android:onClick="onClick" />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageViewbtn1" />
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="@string/multiplication"
-            android:id="@+id/btn3"
-            android:onClick="onClick"
-            />
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="@string/addition"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/btn1"
+                android:onClick="onClick"
+                />
+        </LinearLayout>
 
-        <Button
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/division"
-            android:id="@+id/btn4"
-            android:onClick="onClick"
-            />
+            android:id="@+id/linearLayoutBtn2"
+            android:layout_below="@+id/linearLayoutBtn1"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageViewbtn2" />
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/soustraction"
+                android:id="@+id/btn2"
+                android:onClick="onClick" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutBtn3"
+            android:layout_below="@+id/linearLayoutBtn2"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageViewbtn3" />
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/multiplication"
+                android:id="@+id/btn3"
+                android:onClick="onClick"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutBtn4"
+            android:layout_below="@+id/linearLayoutBtn3"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageViewbtn4" />
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="@string/division"
+                android:id="@+id/btn4"
+                android:onClick="onClick"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

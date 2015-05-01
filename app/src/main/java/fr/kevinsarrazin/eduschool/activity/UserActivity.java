@@ -49,8 +49,12 @@ public class UserActivity extends Activity {
         if (idUser != 0){
             userDAO = new UserDAO(this);
             user = userDAO.getUserById(idUser);
+            if (user.getPathImage() != null){
+                imgAvatar.setImageBitmap(BitmapFactory.decodeFile(user.getPathImage()));
+            }else {
+                imgAvatar.setImageDrawable(getResources().getDrawable(R.drawable.default_icon));
+            }
 
-            imgAvatar.setImageBitmap(BitmapFactory.decodeFile(user.getPathImage()));
             txtViewPseudo.setText(user.getLogin());
             txtViewNom.setText(user.getNom());
             txtViewPrenom.setText(user.getPrenom());

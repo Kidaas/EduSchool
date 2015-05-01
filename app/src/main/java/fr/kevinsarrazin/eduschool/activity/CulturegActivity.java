@@ -42,9 +42,9 @@ public class CulturegActivity extends Activity {
     public static String tag = "Geographie";
     private int tour = 0, bonnesReponses = 0, meilleurScore, nbTourDeJeu = 10;
     private String result;
-    private  GlobalClass globalVariable;
+    private GlobalClass globalVariable;
 
-    private TextView txtViewQuestion, txtViewReponse, nbPartie;
+    private TextView txtViewQuestion, txtViewReponse;
     private EditText EditTxtResult;
     private ImageView imgResult;
     private Button btnNext, btnValider;
@@ -58,7 +58,6 @@ public class CulturegActivity extends Activity {
 
         txtViewQuestion = (TextView) findViewById(R.id.txtViewQuestion);
         txtViewReponse = (TextView) findViewById(R.id.txtViewReponse);
-        nbPartie = (TextView) findViewById(R.id.nbPartie);
         EditTxtResult = (EditText) findViewById(R.id.editTxtResult);
         imgResult = (ImageView) findViewById(R.id.imgResult);
         btnNext = (Button) findViewById(R.id.btnNext);
@@ -73,8 +72,6 @@ public class CulturegActivity extends Activity {
             // Récupère le niveau choisis
             level = getIntent().getIntExtra(NiveauActivity.NIVEAU_NUMBER, 1);
         }
-
-        nbPartie.setText(tour + "/10");
 
         // Et affecte le tag correspondant
         switch(level) {
@@ -140,9 +137,6 @@ public class CulturegActivity extends Activity {
         // Masque le bouton valider, affiche le bouton suivant
         btnValider.setVisibility(View.INVISIBLE);
         btnNext.setVisibility(View.VISIBLE);
-
-        nbPartie.setText(tour + "/10");
-
     }
 
     /**

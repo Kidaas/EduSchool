@@ -28,7 +28,8 @@ public class MatiereDAO extends DAOBase {
             "'Soustraction'",
             "'Multiplication'",
             "'Division'",
-            "'Geographie'"
+            "'Geographie'",
+            "'Departement'"
     };
 
 
